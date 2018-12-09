@@ -61,11 +61,19 @@ private:
 };
 
 struct IPv4FormatException : public std::runtime_error {
-    const std::string m_address;
+    const std::string m_source;
 
-    IPv4FormatException(std::string message, std::string address) :
+    explicit IPv4FormatException(std::string message, std::string source) :
         std::runtime_error(std::move(message)),
-        m_address(std::move(address)) {
+        m_source(std::move(source)) {
     }
+};
+
+struct IPv4AddressFormatException : public IPv4FormatException {
+    using IPv4FormatException::IPv4FormatException;
+};
+
+struct IPv4NetmaskFormatException : public IPv4FormatException {
+    using IPv4FormatException::IPv4FormatException;
 };
 }
