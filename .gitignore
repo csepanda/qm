@@ -1,5 +1,6 @@
-build/
+*build*/
 
 # vim swap files
 .*.sw?
 
+.idea
