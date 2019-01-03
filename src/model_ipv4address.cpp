@@ -15,10 +15,10 @@ IPv4Address::IPv4Address(const std::string& address) {
 }
 
 IPv4Address::IPv4Address(const uint32_t raw) {
-    std::array<uint8_t, 4> address;
+    std::array<uint8_t, 4> address{};
 
     for (int i = 0; i < 4; i++) {
-        address[i] = raw >> (8 * (3 - i)) & 0xFF;
+        address[i] = static_cast<unsigned char>(raw >> (8 * (3 - i)) & 0xFF);
     }
 
     m_address = address;
@@ -58,7 +58,7 @@ IPAddress* IPv4Network::GetRawNetmask() {
 }
 
 uint32_t IPv4Network::GetNetmaskPrefixLength() {
-    uint32_t mask = m_mask.GetRaw();
+    uint32_t mask = static_cast<uint32_t>(m_mask.GetRaw());
 
     uint32_t result = 0;
     do {
@@ -83,7 +83,7 @@ std::string IPv4Network::GetAddressWithMaskStr() {
     return ss.str();
 }
 
-static const std::regex ipv4Validator {"^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$"};
+static const std::regex ipv4Validator {R"(^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$)"};
 static void parseIpv4Address(const std::string& address, std::array<uint8_t, 4>& out) {
 	if (!std::regex_match(address, ipv4Validator)) {
 		throw IPv4FormatException(
@@ -105,8 +105,8 @@ static void parseIpv4Address(const std::string& address, std::array<uint8_t, 4>&
 					address);
 			}
 
-			out[index] = val;
-		} catch (std::invalid_argument e) {
+			out[index] = static_cast<unsigned char>(val);
+		} catch (std::invalid_argument& e) {
 			throw IPv4AddressFormatException(
 				"not a number",
 				address);
@@ -117,17 +117,17 @@ static void parseIpv4Address(const std::string& address, std::array<uint8_t, 4>&
 static const std::regex ipv4MaskValidator {"^\\d{1,3}$"};
 static IPv4Address parseIpv4Mask(const std::string& mask) {
     if (std::regex_match(mask, ipv4MaskValidator)) {
-        uint32_t prefix_len = std::stoi(mask);
+        const auto prefix_len = static_cast<uint32_t>(std::stoi(mask));
         
         if (prefix_len > 31) {
-            throw new IPv4NetmaskFormatException("invalid mask", mask);
+            throw IPv4NetmaskFormatException("invalid mask", mask);
         }
 
-        int raw = ~((int) pow(2.0, 32 - prefix_len) - 1); 
+        const auto raw = static_cast<const uint32_t>(~((int) pow(2.0, 32 - prefix_len) - 1));
 
-        return IPv4Address(raw);
+        return IPv4Address{raw};
     } else if (std::regex_match(mask, ipv4Validator)) {
-        std::array<uint8_t, 4> mask_address;
+        std::array<uint8_t, 4> mask_address{};
 
         try {
             parseIpv4Address(mask, mask_address);
@@ -146,7 +146,7 @@ static IPv4Address parseIpv4Mask(const std::string& mask) {
 
         return IPv4Address(int_mask);
     } else {
-        throw new IPv4NetmaskFormatException("invalid mask", mask);
+        throw IPv4NetmaskFormatException("invalid mask", mask);
     }
 }
 }
