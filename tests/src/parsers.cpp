@@ -61,3 +61,27 @@ TEST_CASE("parseIPv4/Wrong IPv4 components", "[parsers]") {
     REQUIRE_THROWS_WITH(qm::parsers::parseIPv4("127.256.0.1"), expectedMessage);
     REQUIRE_THROWS_WITH(qm::parsers::parseIPv4("127.512.0.1"), expectedMessage);
 }
+
+TEST_CASE("determineIPVersion/IPv4 input", "[parsers]") {
+    REQUIRE(qm::parsers::determineIPVersion("0.0.0.0") == qm::models::IPv4);
+    REQUIRE(qm::parsers::determineIPVersion("8.8.8.8") == qm::models::IPv4);
+    REQUIRE(qm::parsers::determineIPVersion("127.0.0.1") == qm::models::IPv4);
+    REQUIRE(qm::parsers::determineIPVersion("176.16.1.2") == qm::models::IPv4);
+    REQUIRE(qm::parsers::determineIPVersion("255.255.255.255") == qm::models::IPv4);
+}
+
+TEST_CASE("determineIPVersion/Invalid input", "[parsers]") {
+    const auto expectedMessage = "Unknown IP address protocol version";
+
+    REQUIRE_THROWS_AS(qm::parsers::determineIPVersion("127..0.1"), qm::parsers::ParseException);
+    REQUIRE_THROWS_WITH(qm::parsers::determineIPVersion(".56.0.1"), expectedMessage);
+    REQUIRE_THROWS_WITH(qm::parsers::determineIPVersion("foobar"), expectedMessage);
+}
+
+TEST_CASE("determineIPVersion/IPv6 input", "[parsers]") {
+    REQUIRE(qm::parsers::determineIPVersion("::") == qm::models::IPv6);
+    REQUIRE(qm::parsers::determineIPVersion("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff") == qm::models::IPv6);
+    REQUIRE(qm::parsers::determineIPVersion("::1") == qm::models::IPv6);
+    REQUIRE(qm::parsers::determineIPVersion("::ffff:0.0.0.0") == qm::models::IPv6);
+    REQUIRE(qm::parsers::determineIPVersion("2001:db8::") == qm::models::IPv6);
+}
