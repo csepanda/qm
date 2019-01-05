@@ -1,5 +1,5 @@
 set(tests
-        src/parsers.cpp)
+        src/parsers_ip_from_string.cpp)
 
 add_subdirectory(lib/Catch2)
 add_executable(qm_test test_base.cpp ${tests})
