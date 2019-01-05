@@ -1,10 +1,9 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cert-err58-cpp"
 #include <regex>
-#include <boost/token_functions.hpp>
 #include <boost/tokenizer.hpp>
 
-#include "parsers.hpp"
+#include <qm/parsers.hpp>
 
 namespace qm::parsers {
 
@@ -22,21 +21,15 @@ std::array<uint8_t, 4> parseIPv4(const std::string &address) {
     int index = 0;
     std::array<uint8_t, 4> out{};
     for (auto it = tokens.begin(); it != tokens.end(); ++it, ++index) {
-        try {
-            int val = std::stoi(*it);
+        int val = std::stoi(*it);
 
-            if (val > 255 || val < 0) {
-                throw ParseException(
-                  "IPv4 component cannot contain numbers greater than 255 or less than zero",
-                  address);
-            }
-
-            out[index] = static_cast<unsigned char>(val);
-        } catch (std::invalid_argument& e) {
+        if (val > 255 || val < 0) {
             throw ParseException(
-              "not a number",
+              "IPv4 component cannot contain numbers greater than 255 or less than zero",
               address);
         }
+
+        out[index] = static_cast<unsigned char>(val);
     }
 
     return out;

@@ -1,4 +1,4 @@
-#include "model.hpp"
+#include <qm/model.hpp>
 
 #include <array>
 #include <boost/tokenizer.hpp>
