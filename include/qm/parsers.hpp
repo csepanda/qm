@@ -12,7 +12,7 @@ struct IPAddressYamlDTO {
 };
 }
 
-qm::models::IPVersion determineProtocolVersion(const std::string& address);
+qm::models::IPVersion determineIPVersion(const std::string &address);
 std::array<uint8_t, 4> parseIPv4(const std::string& address);
 std::array<uint8_t, 16> parseIPv6(const std::string& address);
 
