@@ -1,6 +1,5 @@
 set(tests
-    src/basic_test.cpp
-)
+        src/parsers.cpp)
 
 add_subdirectory(lib/Catch2)
 add_executable(qm_test test_base.cpp ${tests})
