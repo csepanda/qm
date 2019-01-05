@@ -1,3 +1,4 @@
+#pragma once
 #include <array>
 #include <cstdint>
 #include <stdexcept>
@@ -7,9 +8,15 @@ namespace qm::models {
 class    Node {
 };
 
+enum IPVersion {
+    IPv4,
+    IPv6
+};
+
 class IPAddress {
 public:
     virtual std::string GetAddressStr() const = 0;
+    virtual IPVersion GetProtocolVersion() const = 0;
 };
 
 class IPNetwork {
@@ -22,17 +29,16 @@ public:
     virtual uint32_t GetCidrMask() const = 0;
 
     virtual std::string GetNetworkStr() const = 0;
+
+    virtual IPVersion GetProtocolVersion() const = 0;
 };
-
-
-const std::string IPv4_VERSION = "IPv4";
 
 class IPv4Address : public IPAddress {
 public:
     void SetAddress(std::array<uint8_t, 4> address);
 
     std::string GetAddressStr() const override;
-    std::string GetProtocolVersion() const { return IPv4_VERSION; }
+    IPVersion GetProtocolVersion() const override { return IPv4; }
 
 private:
     std::array<uint8_t, 4> m_address;
@@ -48,7 +54,7 @@ public:
 
     std::string GetNetworkStr() const override;
 
-    std::string GetProtocolVersion() const { return IPv4_VERSION; }
+    IPVersion GetProtocolVersion() const override { return IPv4; }
 
 private:
     IPv4Address m_address;
