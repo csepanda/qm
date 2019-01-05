@@ -1,6 +1,8 @@
+#ifndef QM_PARSERS_IP_H_
+#define QM_PARSERS_IP_H_
 #include <yaml-cpp/yaml.h>
-#include <qm/model.hpp>
-#include <qm/parsers.hpp>
+#include "../model.hpp"
+#include "../parsers.hpp"
 
 namespace YAML {
 template<>
@@ -19,7 +21,7 @@ struct convert<qm::parsers::yaml::IPAddressYamlDTO> {
         return node;
     }
 
-    static bool decode(const Node &node, qm::parsers::yaml::IPAddressYamlDTO addressDto) {
+    static bool decode(const Node &node, qm::parsers::yaml::IPAddressYamlDTO& addressDto) {
         const auto inputAddress = node.as<std::string>();
         const auto protocolVersion = qm::parsers::determineIPVersion(inputAddress);
 
@@ -39,3 +41,4 @@ struct convert<qm::parsers::yaml::IPAddressYamlDTO> {
 };
 }
 
+#endif

@@ -22,6 +22,8 @@ std::string IPv4Address::GetAddressStr() const {
 	return ss.str();
 }
 
+IPv4Address::IPv4Address() {}
+
 void IPv4Network::SetAddress(std::array<uint8_t, 4> address) {
     m_address.SetAddress(address);
 }

@@ -1,6 +1,8 @@
-#pragma once
-#include <cstdint>
+#ifndef QM_PARSERS_H_
+#define QM_PARSERS_H_
+
 #include <array>
+#include <cstdint>
 #include "model.hpp"
 
 namespace qm::parsers {
@@ -27,3 +29,6 @@ struct ParseException : public std::runtime_error {
     }
 };
 }
+
+#endif
+#include "yaml-parsers/ip.hpp"

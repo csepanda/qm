@@ -35,6 +35,8 @@ public:
 
 class IPv4Address : public IPAddress {
 public:
+    IPv4Address();
+
     void SetAddress(std::array<uint8_t, 4> address);
 
     std::string GetAddressStr() const override;
