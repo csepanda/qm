@@ -8,6 +8,7 @@ qm_test
 .idea
 
 # CMake
+*.cbp
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
