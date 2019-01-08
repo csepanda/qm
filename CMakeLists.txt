@@ -9,9 +9,11 @@ include_directories(include)
 
 add_library(qm
         src/model_ipv4address.cpp
-        src/parsers.cpp)
+        src/parsers.cpp src/model_p2p_connection.cpp src/yaml-parsers/p2p_connection.cpp src/yaml-parsers/ip.cpp)
 
-target_include_directories(qm PUBLIC include)
+link_directories($ENV{DCE_ROOT}/lib)
+target_include_directories(qm PUBLIC include $ENV{DCE_ROOT}/include)
+target_link_libraries(qm PUBLIC ns3.28-core-debug yaml-cpp)
 
 if (BUILD_TESTS)
     add_subdirectory(tests)
