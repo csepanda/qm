@@ -8,9 +8,14 @@
 namespace qm::parsers {
 namespace yaml {
 struct IPAddressYamlDTO {
-    qm::models::IPVersion ProtocolVersion;
+    qm::models::IPVersion ProtocolVersion {};
     qm::models::IPv4Address IPv4;
     //qm::models::IPv6Address IPv6;
+};
+
+struct ConnectionYamlDTO {
+    qm::models::ConnectionType type;
+    qm::models::PointToPointConnection p2p;
 };
 }
 
@@ -32,3 +37,4 @@ struct ParseException : public std::runtime_error {
 
 #endif
 #include "yaml-parsers/ip.hpp"
+#include "yaml-parsers/p2p_connection.hpp"

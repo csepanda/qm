@@ -1,12 +1,46 @@
 #pragma once
+
+#include <memory>
 #include <array>
+#include <map>
 #include <cstdint>
 #include <stdexcept>
 #include <string>
+#include <ns3/attribute.h>
+#include <ns3/data-rate.h>
+#include <ns3/uinteger.h>
 
 namespace qm::models {
-class    Node {
+class Node {
 };
+
+enum class ConnectionType {
+    P2P
+};
+
+class Connection {
+public:
+    virtual ConnectionType GetConnectionType() const = 0;
+    virtual std::map<std::string, std::unique_ptr<ns3::AttributeValue> > GetChannelAttributes() const = 0;
+    virtual std::map<std::string, std::unique_ptr<ns3::AttributeValue> > GetDeviceAttributes() const = 0;
+};
+
+class PointToPointConnection : public Connection {
+private:
+    ns3::UintegerValue m_mtu{};
+    ns3::DataRateValue m_dataRate{};
+    ns3::TimeValue m_delay{};
+public:
+    PointToPointConnection() = default;
+    void setMtu(uint16_t t_mtu);
+    void setDataRate(std::string t_dataRate);
+    void setDelay(std::string t_delay);
+
+    ConnectionType GetConnectionType() const override { return ConnectionType::P2P; };
+    std::map<std::string, std::unique_ptr<ns3::AttributeValue> > GetChannelAttributes() const override;
+    std::map<std::string, std::unique_ptr<ns3::AttributeValue> > GetDeviceAttributes() const override;
+};
+
 
 enum IPVersion {
     IPv4,
