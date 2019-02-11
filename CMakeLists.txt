@@ -9,7 +9,7 @@ include_directories(include)
 
 add_library(qm
         src/model_ipv4address.cpp
-        src/parsers.cpp src/model_p2p_connection.cpp src/yaml-parsers/p2p_connection.cpp src/yaml-parsers/ip.cpp)
+        src/parsers.cpp src/model_p2p_connection.cpp src/yaml-parsers/p2p_connection.cpp src/yaml-parsers/ip.cpp src/model_network.cpp include/qm/model/network.hpp src/model_node.cpp include/qm/exceptions.hpp)
 
 link_directories($ENV{DCE_ROOT}/lib)
 target_include_directories(qm PUBLIC include $ENV{DCE_ROOT}/include)
