@@ -13,6 +13,7 @@
 #include <ns3/ptr.h>
 #include <ns3/uinteger.h>
 
+#include "identifiable.hpp"
 #include "connections.hpp"
 #include "ip.hpp"
 
@@ -25,10 +26,11 @@ class IpConfig {
     std::unique_ptr<IPNetwork> address;
 };
 
-class Node {
+class Node : public Identifiable {
     ns3::Ptr<ns3::Node> ns3_node;
     std::vector<IpConfig> m_ip_configs;
 public:
+
     void setNS3Node(ns3::Ptr<ns3::Node> node);
     ns3::Ptr<ns3::Node> getNS3Node();
 };

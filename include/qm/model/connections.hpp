@@ -13,13 +13,15 @@
 #include <ns3/ptr.h>
 #include <ns3/uinteger.h>
 
+#include "identifiable.hpp"
+
 namespace qm::models {
 class Node;
 enum class ConnectionType {
     P2P
 };
 
-class Connection {
+class Connection : public Identifiable {
 public:
     virtual ConnectionType GetConnectionType() const = 0;
     virtual std::map<std::string, std::unique_ptr<ns3::AttributeValue> > GetChannelAttributes() const = 0;
