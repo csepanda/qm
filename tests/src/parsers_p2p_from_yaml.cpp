@@ -18,8 +18,8 @@ mtu: 1500
 delay: 100ms
 )");
         const auto actual = node.as<qm::parsers::yaml::ConnectionYamlDTO>();
-        const auto deviceAttributes = actual.p2p.GetDeviceAttributes();
-        const auto channelAttributes = actual.p2p.GetChannelAttributes();
+        const auto deviceAttributes = actual.p2p->GetDeviceAttributes();
+        const auto channelAttributes = actual.p2p->GetChannelAttributes();
 
         SECTION("data rate") {
             const ns3::DataRateValue *dataRateValue = dynamic_cast<ns3::DataRateValue *>(deviceAttributes.at(
