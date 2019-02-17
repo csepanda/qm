@@ -5,10 +5,14 @@
 
 namespace qm::models {
 class Identifiable {
-    const std::string m_id;
+    std::string m_id;
 public:
     virtual std::string GetId() final {
         return m_id;
+    }
+
+    virtual void SetId(std::string id) final {
+        m_id = std::move(id);
     }
 };
 }

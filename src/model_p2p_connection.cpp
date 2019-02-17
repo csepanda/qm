@@ -37,7 +37,7 @@ std::map<std::string, std::unique_ptr<ns3::AttributeValue>> PointToPointConnecti
     return attributesMap;
 }
 
-std::vector<std::shared_ptr<Node>> PointToPointConnection::GetNodes() const {
+std::vector<std::shared_ptr<Node>> &PointToPointConnection::GetNodes() {
     return m_nodes;
 };
 }

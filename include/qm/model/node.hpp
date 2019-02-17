@@ -21,18 +21,23 @@ namespace qm::models {
 
 class Connection;
 
-class IpConfig {
-    std::shared_ptr<Connection> connection;
-    std::unique_ptr<IPNetwork> address;
+struct IpConfig {
+    std::shared_ptr<IPNetwork> Address;
+    std::shared_ptr<Connection> BindConnection;
 };
 
 class Node : public Identifiable {
-    ns3::Ptr<ns3::Node> ns3_node;
-    std::vector<IpConfig> m_ip_configs;
-public:
+    ns3::Ptr<ns3::Node> m_ns3_node;
+    std::vector<IpConfig> m_ipConfigs{};
 
-    void setNS3Node(ns3::Ptr<ns3::Node> node);
-    ns3::Ptr<ns3::Node> getNS3Node();
+public:
+    const ns3::Ptr<ns3::Node> &GetNS3Node() const;
+
+    void SetNS3Node(const ns3::Ptr<ns3::Node> &NS3Node);
+
+    const std::vector<IpConfig> &GetIpConfigs() const;
+
+    void AddIpConfig(IpConfig ipConfig);
 };
 
 }
