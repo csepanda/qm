@@ -10,7 +10,7 @@ YamlReference parseYamlReference(const std::string &reference) {
     if (std::regex_match(reference, m, std::regex {R"(^Ref!\s+(\w+)$)"})) {
         YamlReference ref;
 
-        ref.Id = m[0];
+        ref.Id = m[1].str();
         ref.Resolved = false;
 
         return ref;
