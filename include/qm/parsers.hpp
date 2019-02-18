@@ -49,6 +49,8 @@ struct YamlContextDTO {
 
     void ResolveContext();
 };
+
+YamlReference parseYamlReference(const std::string& reference);
 }
 
 qm::models::IPVersion determineIPVersion(const std::string &address);
