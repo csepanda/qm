@@ -4,8 +4,8 @@
 namespace YAML {
 
 static const qm::models::ConnectionType DEFAULT_TYPE = qm::models::ConnectionType::P2P;
-static const std::unordered_map<std::string, qm::models::ConnectionType> typeMapper {
-  {"p2p", qm::models::ConnectionType::P2P},
+static const std::unordered_map<std::string, qm::models::ConnectionType> typeMapper{
+  {"p2p",          qm::models::ConnectionType::P2P},
   {"PointToPoint", qm::models::ConnectionType::P2P}
 };
 
@@ -35,9 +35,14 @@ bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
         case qm::models::ConnectionType::P2P: {
             connectionDTO.p2p = std::make_shared<qm::models::PointToPointConnection>();
 
+            const auto id = node["id"];
             const auto mtuNode = node["mtu"];
             const auto dataRateNode = node["dataRate"];
             const auto delayNode = node["delay"];
+
+            if (id.IsDefined()) {
+                connectionDTO.p2p->SetId(id.as<std::string>());
+            }
 
             if (mtuNode.IsDefined()) {
                 connectionDTO.p2p->setMtu(mtuNode.as<uint16_t>());
