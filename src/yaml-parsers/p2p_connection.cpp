@@ -55,6 +55,20 @@ bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
             if (delayNode.IsDefined()) {
                 connectionDTO.p2p->setDelay(delayNode.as<std::string>());
             }
+
+            const auto targets = node["targets"];
+
+            if (targets.IsDefined()) {
+                if (!targets.IsSequence()) {
+                    throw qm::parsers::ParseException("Connection's targets should be a sequence", "Connection");
+                }
+
+                for (const auto& target : targets) {
+                    const auto ref = qm::parsers::yaml::parseYamlReference(target.as<std::string>());
+
+                    connectionDTO.TargetsRefs.push_back(ref);
+                }
+            }
             break;
         }
         default:

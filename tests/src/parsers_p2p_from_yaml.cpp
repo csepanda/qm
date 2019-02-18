@@ -16,6 +16,8 @@ type: p2p
 dataRate: 1Mbps
 mtu: 1500
 delay: 100ms
+targets:
+  - Ref! node01
 )");
         const auto actual = node.as<qm::parsers::yaml::ConnectionYamlDTO>();
         const auto deviceAttributes = actual.p2p->GetDeviceAttributes();
@@ -39,5 +41,31 @@ delay: 100ms
 
             REQUIRE(delay->Get().GetMilliSeconds() == 100);
         }
+
+        SECTION("targets") {
+            REQUIRE(actual.TargetsRefs.size() == 1);
+            REQUIRE(actual.TargetsRefs[0].Id == "node01");
+        }
+    }
+}
+
+TEST_CASE("parse P2P connection from yaml with invalid targets", "[parsers][yaml]") {
+    SECTION("targets are not sequence") {
+        const YAML::Node node = YAML::Load(R"(
+type: p2p
+targets: 0
+)");
+        REQUIRE_THROWS_AS(node.as<qm::parsers::yaml::ConnectionYamlDTO>(), qm::parsers::ParseException);
+        REQUIRE_THROWS_WITH(node.as<qm::parsers::yaml::ConnectionYamlDTO>(), "Connection's targets should be a sequence");
+    }
+
+    SECTION("targets illegal format") {
+        const YAML::Node node = YAML::Load(R"(
+type: p2p
+targets:
+ - ref node01 123
+)");
+        REQUIRE_THROWS_AS(node.as<qm::parsers::yaml::ConnectionYamlDTO>(), qm::parsers::ParseException);
+        REQUIRE_THROWS_WITH(node.as<qm::parsers::yaml::ConnectionYamlDTO>(), "Expected reference, but reference format is not matched");
     }
 }
