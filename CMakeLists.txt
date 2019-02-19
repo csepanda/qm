@@ -7,7 +7,7 @@ include_directories(include)
 
 add_library(qm
         src/models/ipv4.cpp
-        src/models/p2p_connection.cpp src/yaml/p2p_connection.cpp src/yaml/ip.cpp src/models/network.cpp include/qm/model/network.hpp src/models/node.cpp include/qm/exceptions.hpp include/qm/model/identifiable.hpp src/yaml/reference_resolve.cpp src/yaml/reference_parse.cpp src/yaml/node.cpp include/qm/yaml/yaml_reference.hpp include/qm/yaml/dto.h)
+        src/models/p2p_connection.cpp src/yaml/p2p_connection.cpp src/yaml/ip.cpp src/models/network.cpp include/qm/model/network.hpp src/models/node.cpp include/qm/exceptions.hpp include/qm/model/identifiable.hpp src/yaml/reference_resolve.cpp src/yaml/reference_parse.cpp src/yaml/node.cpp include/qm/yaml/yaml_reference.hpp include/qm/yaml/dto.h include/qm/yaml/network.hpp src/yaml/network.cpp)
 
 set_property(TARGET qm PROPERTY CXX_STANDARD 17)
 set_property(TARGET qm PROPERTY CXX_STANDARD_REQUIRED ON)

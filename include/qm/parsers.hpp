@@ -23,4 +23,6 @@ struct ParseException : public std::runtime_error {
 #include "yaml/p2p_connection.hpp"
 #include "yaml/node.hpp"
 #include "yaml/yaml_reference.hpp"
+#include "yaml/network.hpp"
 #include "yaml/dto.h"
+
