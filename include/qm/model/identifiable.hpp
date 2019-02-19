@@ -7,7 +7,7 @@ namespace qm::models {
 class Identifiable {
     std::string m_id;
 public:
-    virtual std::string GetId() final {
+    virtual const std::string& GetId() final {
         return m_id;
     }
 
