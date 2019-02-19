@@ -12,5 +12,9 @@ struct InitializationException : public std::runtime_error {
       m_source(std::move(source)) {
     }
 };
+
+struct UninitializedException : public std::runtime_error {
+    explicit UninitializedException(const std::string &message) : std::runtime_error(message) { }
+};
 }
 #endif //QM_EXCEPTIONS_H
