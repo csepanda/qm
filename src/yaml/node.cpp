@@ -38,7 +38,7 @@ Node convert<qm::parsers::yaml::IpConfigYamlDTO>::encode(const qm::parsers::yaml
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::parsers::yaml::IpConfigYamlDTO>::decode(const Node &node, qm::parsers::yaml::IpConfigYamlDTO &) {
+bool convert<qm::parsers::yaml::IpConfigYamlDTO>::decode(const Node &node, qm::parsers::yaml::IpConfigYamlDTO &ipConfigYamlDTO) {
     const auto addressYaml = node["address"];
     const auto connectionYaml = node["connection"];
 
@@ -50,9 +50,21 @@ bool convert<qm::parsers::yaml::IpConfigYamlDTO>::decode(const Node &node, qm::p
         throw qm::parsers::ParseException("IpConfig require connection reference", node.as<std::string>());
     }
 
-    const auto address = addressYaml.as<qm::parsers::yaml::IPNetworkYamlDTO>();
-    const auto connection = connectionYaml.as<qm::parsers::yaml::YamlReference>();
-    return false;
+    const auto parsedNetwork = addressYaml.as<qm::parsers::yaml::IPNetworkYamlDTO>();
+    const auto parsedConnection = connectionYaml.as<qm::parsers::yaml::YamlReference>();
+
+    ipConfigYamlDTO.ConnectionRef = parsedConnection;
+    switch (parsedNetwork.ProtocolVersion) {
+        case qm::models::IPv4: {
+            ipConfigYamlDTO.IpConfig.Address = std::make_shared<qm::models::IPv4Network>(parsedNetwork.IPv4);
+            break;
+        }
+        case qm::models::IPv6: {
+            throw std::logic_error("Not implemented");
+        }
+    }
+
+    return true;
 }
 }
 
