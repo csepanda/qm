@@ -19,6 +19,12 @@ struct IPAddressYamlDTO {
     //qm::models::IPv6Address IPv6;
 };
 
+struct IPNetworkYamlDTO {
+    qm::models::IPVersion ProtocolVersion {};
+    qm::models::IPv4Network IPv4 {};
+    // qm::models::IPv6Address IPv6;
+};
+
 struct IpConfigYamlDTO {
     YamlReference ConnectionRef;
     qm::models::IpConfig IpConfig;
@@ -72,3 +78,4 @@ struct ParseException : public std::runtime_error {
 #endif
 #include "yaml-parsers/ip.hpp"
 #include "yaml-parsers/p2p_connection.hpp"
+#include "yaml-parsers/node.hpp"
