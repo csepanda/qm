@@ -6,6 +6,7 @@ namespace YAML {
 static const qm::models::ConnectionType DEFAULT_TYPE = qm::models::ConnectionType::P2P;
 static const std::unordered_map<std::string, qm::models::ConnectionType> typeMapper{
   {"p2p",          qm::models::ConnectionType::P2P},
+  {"P2P",          qm::models::ConnectionType::P2P},
   {"PointToPoint", qm::models::ConnectionType::P2P}
 };
 
@@ -17,8 +18,6 @@ Node convert<qm::parsers::yaml::ConnectionYamlDTO>::encode(const qm::parsers::ya
         default:
             throw std::logic_error("Not implemented");
     }
-
-    return node;
 }
 
 bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
@@ -26,7 +25,13 @@ bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
     const auto typeNode = node["type"];
 
     if (typeNode.IsDefined()) {
-        connectionDTO.type = typeMapper.at(node["type"].as<std::string>());
+        const auto type = typeNode.as<std::string>();
+
+        try {
+            connectionDTO.type = typeMapper.at(type);
+        } catch (std::out_of_range&) {
+            throw qm::parsers::ParseException("Unknown connection type: '" + type + "'", "Parse Connection from yaml");
+        }
     } else {
         connectionDTO.type = DEFAULT_TYPE;
     }
