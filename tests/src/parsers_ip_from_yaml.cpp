@@ -80,21 +80,3 @@ TEST_CASE("try to parse IPv4 Network from invalid yaml", "[parsers][yaml]") {
         }
     }
 }
-
-TEST_CASE("parse IPv4 Network from invalid format string", "[parsers][yaml]") {
-    const YAML::Node yaml = YAML::Load("192.168.0.1");
-
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::IPNetworkYamlDTO>(), qm::parsers::ParseException);
-}
-
-TEST_CASE("parse IPv4 Network from string with invalid cidr value", "[parsers][yaml]") {
-    const YAML::Node yaml = YAML::Load("192.168.0.1/64");
-
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::IPNetworkYamlDTO>(), std::invalid_argument);
-}
-
-TEST_CASE("parse IPv4 Network from string with invalid cidr", "[parsers][yaml]") {
-    const YAML::Node yaml = YAML::Load("192.168.0.1/dasd");
-
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::IPNetworkYamlDTO>(), qm::parsers::ParseException);
-}
