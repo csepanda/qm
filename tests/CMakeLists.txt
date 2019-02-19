@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 set(tests
-        src/parsers/ip_from_string.cpp src/parsers/ip_from_yaml.cpp src/parsers/p2p_from_yaml.cpp src/parsers/resolve_context.cpp src/parsers/ipconfig_yaml.cpp)
+        src/parsers/ip_from_string.cpp src/parsers/ip_from_yaml.cpp src/parsers/p2p_from_yaml.cpp src/parsers/resolve_context.cpp src/parsers/ipconfig_yaml.cpp src/parsers/node_from_yaml.cpp)
 
 add_subdirectory(lib/Catch2)
 add_executable(qm_test test_base.cpp ${tests})
