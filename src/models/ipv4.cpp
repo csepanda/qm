@@ -40,6 +40,11 @@ const IPAddress* IPv4Network::GetRawAddress() const {
     return &m_address;
 }
 
+IPv4Network::IPv4Network(const IPv4Network& source) {
+    m_address = source.m_address;
+    m_cidr_mask = source.m_cidr_mask;
+}
+
 const uint32_t IPv4Network::GetCidrMask() const {
     return m_cidr_mask;
 }

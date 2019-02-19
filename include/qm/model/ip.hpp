@@ -51,6 +51,7 @@ private:
 class IPv4Network : public IPNetwork {
 public:
     IPv4Network() = default;
+    IPv4Network(const IPv4Network& source);
 
     void SetAddress(std::array<uint8_t, 4> address);
     void SetCIDRMask(uint32_t cidr);
