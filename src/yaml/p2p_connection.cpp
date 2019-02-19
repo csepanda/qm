@@ -64,7 +64,7 @@ bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
                 }
 
                 for (const auto& target : targets) {
-                    const auto ref = qm::parsers::yaml::parseYamlReference(target.as<std::string>());
+                    const auto ref = target.as<qm::parsers::yaml::YamlReference>();
 
                     connectionDTO.TargetsRefs.push_back(ref);
                 }

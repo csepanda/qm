@@ -1,6 +1,5 @@
 #include <qm/parsers.hpp>
 #include <unordered_map>
-#include <qm/yaml-parsers/node.hpp>
 
 namespace YAML {
 
