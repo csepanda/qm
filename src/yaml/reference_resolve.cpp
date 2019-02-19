@@ -11,7 +11,7 @@ inverseResolve(std::string &referrerId, std::string &targetId, std::vector<YamlR
 static ConnectionPtr
 resolveConnectionRef(std::string &referrerId, YamlReference &reference, ConnectionsDictionary &connectionsDTO);
 
-void YamlContextDTO::ResolveContext() {
+void NetworkYamlDTO::ResolveContext() {
     // resolve references between ip-configs and connections
     // in terms of network it's actually resolving network interface and corresponding channel
     for (auto& [id, nodeDTO] : NodesDTO) {

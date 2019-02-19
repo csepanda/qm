@@ -48,7 +48,7 @@ struct NodeYamlDTO {
 };
 
 
-struct YamlContextDTO {
+struct NetworkYamlDTO {
     std::unordered_map<std::string, NodeYamlDTO> NodesDTO{};
     std::unordered_map<std::string, ConnectionYamlDTO> ConnectionsDTO{};
 

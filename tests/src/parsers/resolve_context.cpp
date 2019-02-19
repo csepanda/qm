@@ -2,7 +2,7 @@
 #include <qm/parsers.hpp>
 #include <yaml-cpp/yaml.h>
 
-using Context = qm::parsers::yaml::YamlContextDTO;
+using Context = qm::parsers::yaml::NetworkYamlDTO;
 using NodeDTO = qm::parsers::yaml::NodeYamlDTO;
 using ConnectionDTO = qm::parsers::yaml::ConnectionYamlDTO;
 using IpConfigDTO = qm::parsers::yaml::IpConfigYamlDTO;
