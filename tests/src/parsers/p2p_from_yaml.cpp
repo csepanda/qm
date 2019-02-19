@@ -17,7 +17,7 @@ dataRate: 1Mbps
 mtu: 1500
 delay: 100ms
 targets:
-  - Ref! node01
+  - !Ref node01
 )");
         const auto actual = node.as<qm::parsers::yaml::ConnectionYamlDTO>();
         const auto deviceAttributes = actual.p2p->GetDeviceAttributes();
@@ -63,9 +63,9 @@ targets: 0
         const YAML::Node node = YAML::Load(R"(
 type: p2p
 targets:
- - ref node01 123
+ - !ref node01 123
 )");
         REQUIRE_THROWS_AS(node.as<qm::parsers::yaml::ConnectionYamlDTO>(), qm::parsers::ParseException);
-        REQUIRE_THROWS_WITH(node.as<qm::parsers::yaml::ConnectionYamlDTO>(), "Expected reference, but reference format is not matched");
+        REQUIRE_THROWS_WITH(node.as<qm::parsers::yaml::ConnectionYamlDTO>(), "Expected reference with !Ref tag, got: '!ref'");
     }
 }

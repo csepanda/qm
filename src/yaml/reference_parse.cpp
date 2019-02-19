@@ -1,7 +1,4 @@
-#include <regex>
-
 #include <qm/parsers.hpp>
-
 
 namespace YAML {
 
@@ -11,16 +8,15 @@ Node convert<qm::parsers::yaml::YamlReference>::encode(const qm::parsers::yaml::
 
 bool
 convert<qm::parsers::yaml::YamlReference>::decode(const Node &node, qm::parsers::yaml::YamlReference &yamlReference) {
-    const auto referenceYamlString = node.as<std::string>();
+    const auto id = node.as<std::string>();
+    const auto &type = node.Tag();
 
-    std::smatch m;
-
-    if (std::regex_match(referenceYamlString, m, std::regex{R"(^Ref!\s+(\w+)$)"})) {
-        yamlReference.Id = m[1].str();
+    if (type == "!Ref") {
+        yamlReference.Id = id;
         yamlReference.Resolved = false;
         return true;
     } else {
-        throw qm::parsers::ParseException("Expected reference, but reference format is not matched", referenceYamlString);
+        throw qm::parsers::ParseException("Expected reference with !Ref tag, got: '" + type + "'", "");
     }
 }
 }
