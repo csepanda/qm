@@ -28,11 +28,7 @@ public:
 class IPNetwork {
 public:
     virtual const IPAddress* GetRawAddress() const = 0;
-    virtual const IPAddress* GetRawNetmask() const = 0;
-    virtual uint32_t GetNetmaskPrefixLength() const = 0;
-
-    virtual std::string GetAddressWithMaskStr() const = 0;
-    virtual uint32_t GetCidrMask() const = 0;
+    virtual const uint32_t GetCidrMask() const = 0;
 
     virtual std::string GetNetworkStr() const = 0;
 
@@ -41,7 +37,7 @@ public:
 
 class IPv4Address : public IPAddress {
 public:
-    IPv4Address();
+    IPv4Address() = default;
 
     void SetAddress(std::array<uint8_t, 4> address);
 
@@ -49,23 +45,30 @@ public:
     IPVersion GetProtocolVersion() const override { return IPv4; }
 
 private:
-    std::array<uint8_t, 4> m_address;
+    std::array<uint8_t, 4> m_address {};
 };
 
 class IPv4Network : public IPNetwork {
 public:
+    IPv4Network() = default;
+
     void SetAddress(std::array<uint8_t, 4> address);
     void SetCIDRMask(uint32_t cidr);
 
     const IPAddress* GetRawAddress() const override;
-    uint32_t GetCidrMask() const override;
+    const uint32_t GetCidrMask() const override;
 
     std::string GetNetworkStr() const override;
 
     IPVersion GetProtocolVersion() const override { return IPv4; }
 
+
 private:
-    IPv4Address m_address;
-    uint32_t m_cidr_mask;
+    IPv4Address m_address {};
+    uint32_t m_cidr_mask {};
+};
+
+struct foo {
+    IPv4Network bar;
 };
 }
