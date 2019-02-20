@@ -41,7 +41,7 @@ struct ConnectionYamlDTO : public IdentifiableDTO {
     qm::models::ConnectionType type;
     std::shared_ptr<qm::models::PointToPointConnection> p2p;
 
-    std::shared_ptr<qm::models::Connection> GetConnection() {
+    std::shared_ptr<qm::models::Connection> GetConnection() const {
         switch (type) {
             case models::ConnectionType::P2P:
                 return p2p;
