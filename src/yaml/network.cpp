@@ -50,6 +50,8 @@ bool convert<qm::parsers::yaml::NetworkYamlDTO>::decode(const Node &node,
     parseObjectsSequence(nodesYaml, networkYamlDTO.NodesDTO, generateUUID);
     parseObjectsSequence(connectionsYaml, networkYamlDTO.ConnectionsDTO, generateUUID);
 
+    networkYamlDTO.ResolveContext();
+
     return true;
 }
 }
