@@ -13,9 +13,13 @@ set_property(TARGET qm PROPERTY CXX_STANDARD 17)
 set_property(TARGET qm PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET qm PROPERTY CXX_EXTENSIONS ON)
 
+
 link_directories($ENV{DCE_ROOT}/lib)
+execute_process(COMMAND sh -c "cd $ENV{DCE_ROOT}/lib; ls *ns3.28* | grep -v 'test-debug' | sed 's/^lib//; s/.so$//' | xargs echo -n" OUTPUT_VARIABLE NS_LIBS)
 target_include_directories(qm PUBLIC include $ENV{DCE_ROOT}/include)
-target_link_libraries(qm PUBLIC ns3.28-core-debug yaml-cpp)
+
+string(REPLACE " " ";" NS_LIBS_LIST ${NS_LIBS})
+target_link_libraries(qm PUBLIC ${NS_LIBS_LIST} yaml-cpp)
 
 if (BUILD_TESTS)
     add_subdirectory(tests)
