@@ -15,6 +15,9 @@ class Network {
     std::vector<std::vector<uint32_t>> m_adjacencyList;
 public:
     Network(std::vector<std::shared_ptr<Node>> &nodes, std::vector<std::shared_ptr<Connection>> &connections);
+    const std::vector<std::shared_ptr<Node>>& GetNodes() const;
+    const std::vector<std::shared_ptr<Connection>>& GetConnections() const;
+    void ConfigureNS3();
 };
 
 }
