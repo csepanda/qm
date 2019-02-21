@@ -98,6 +98,7 @@ struct NetworkYamlDTO {
     std::unordered_map<std::string, NodeYamlDTO> NodesDTO{};
     std::unordered_map<std::string, ConnectionYamlDTO> ConnectionsDTO{};
 
+    const qm::models::Network GetNetwork() const;
     void ResolveContext();
 };
 }

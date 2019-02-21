@@ -1,3 +1,4 @@
+#include <vector>
 #include <unordered_map>
 
 #include <boost/uuid/uuid.hpp>
@@ -5,6 +6,22 @@
 #include <boost/uuid/uuid_io.hpp>
 
 #include <qm/parsers.hpp>
+
+namespace qm::parsers::yaml {
+const qm::models::Network NetworkYamlDTO::GetNetwork() const {
+    std::vector<std::shared_ptr<qm::models::Node>> nodes{};
+    std::vector<std::shared_ptr<qm::models::Connection>> connections{};
+
+    for (const auto &[_, dto] : NodesDTO) {
+        nodes.push_back(dto.Node);
+    }
+    for (const auto &[_, dto] : ConnectionsDTO) {
+        connections.push_back(dto.GetConnection());
+    }
+
+    return qm::models::Network(nodes, connections);
+}
+}
 
 namespace YAML {
 
