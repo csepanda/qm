@@ -49,7 +49,7 @@ TEST_CASE("parse Network from valid yaml // references resolving in nodes", "[pa
     for (const auto&[id, node] : actual.NodesDTO) {
         const qm::parsers::yaml::NodeYamlDTO n = node;
 
-        for (const auto& ipConfig : n.Node->GetIpConfigs()) {
+        for (const auto &ipConfig : n.Node->GetIpConfigs()) {
             REQUIRE(ipConfig.BindConnection != nullptr);
         }
 
@@ -67,7 +67,7 @@ TEST_CASE("parse Network from valid yaml // references resolving in connections"
         const auto nodes = connection.GetConnection()->GetNodes();
 
         REQUIRE(!nodes.empty());
-        for (const auto& node : nodes) {
+        for (const auto &node : nodes) {
             REQUIRE(node != nullptr);
         }
 
@@ -90,7 +90,7 @@ connections:
 
     REQUIRE(actual.ConnectionsDTO.size() == 1);
 
-    for (const auto& [key, connection] : actual.ConnectionsDTO) {
+    for (const auto&[key, connection] : actual.ConnectionsDTO) {
         const std::string id = connection.GetId();
 
         REQUIRE(key == id);
@@ -98,5 +98,57 @@ connections:
         boost::uuids::uuid uuid{};
 
         REQUIRE_NOTHROW(uuid = boost::lexical_cast<boost::uuids::uuid, std::string>(id));
+    }
+}
+
+
+template<typename T>
+static std::shared_ptr<T> findById(const std::vector<std::shared_ptr<T>> &collection, const std::string &id) {
+    const auto iteratorPtr = std::find_if(collection.begin(), collection.end(),
+      [id](const std::shared_ptr<T> &x) {
+        return x->GetId() == id;
+    });
+
+    REQUIRE(iteratorPtr != collection.end());
+
+    return *iteratorPtr;
+}
+
+
+TEST_CASE("parse Network from valid yaml // Final object", "[parsers][yaml]") {
+    const YAML::Node yaml = YAML::Load(validYamlWithIdsAndReferences);
+    const auto networkDTO = yaml.as<qm::parsers::yaml::NetworkYamlDTO> ();
+    const qm::models::Network actual = networkDTO.GetNetwork();
+
+    const auto &actualNodes = actual.GetNodes();
+    const auto &actualConnections = actual.GetConnections();
+
+    REQUIRE(actualNodes.size() == 2);
+    REQUIRE(actualConnections.size() == 1);
+
+    const auto node01 = findById(actualNodes, "node01");
+    const auto node02 = findById(actualNodes, "node02");
+    const auto connection01 = findById(actualConnections, "connection01");
+
+    SECTION("Check references in connection") {
+        const auto &nodesInConnection = connection01->GetNodes();
+        REQUIRE(nodesInConnection.size() == 2);
+
+        REQUIRE(std::find(nodesInConnection.begin(), nodesInConnection.end(), node01) != nodesInConnection.end());
+        REQUIRE(std::find(nodesInConnection.begin(), nodesInConnection.end(), node02) != nodesInConnection.end());
+    }
+
+    SECTION("Check references in node01") {
+        REQUIRE(node01->GetIpConfigs().size() == 1);
+
+        const auto ipConfig = node01->GetIpConfigs()[0];
+        REQUIRE(ipConfig.BindConnection == connection01);
+    }
+
+    SECTION("Check references in node02") {
+        REQUIRE(node02->GetIpConfigs().size() == 1);
+
+        const auto ipConfig = node02->GetIpConfigs()[0];
+        REQUIRE(ipConfig.BindConnection == connection01);
     }
 }
