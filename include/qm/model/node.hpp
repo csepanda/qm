@@ -24,20 +24,24 @@ class Connection;
 struct IpConfig {
     std::shared_ptr<IPNetwork> Address;
     std::shared_ptr<Connection> BindConnection;
+
+    ns3::Ptr<ns3::NetDevice> NS3NetDevice;
 };
 
 class Node : public Identifiable {
     ns3::Ptr<ns3::Node> m_ns3_node;
-    std::vector<IpConfig> m_ipConfigs{};
+    std::vector<std::shared_ptr<IpConfig>> m_ipConfigs{};
 
 public:
     const ns3::Ptr<ns3::Node> &GetNS3Node() const;
 
     void SetNS3Node(const ns3::Ptr<ns3::Node> &NS3Node);
 
-    const std::vector<IpConfig> &GetIpConfigs() const;
+    const std::vector<std::shared_ptr<IpConfig>> &GetIpConfigs() const;
 
-    void AddIpConfig(IpConfig ipConfig);
+    void AddIpConfig(std::shared_ptr<IpConfig> ipConfig);
+
+    const std::shared_ptr<IpConfig> &FindIpConfig(const std::shared_ptr<Connection> &connection) const;
 };
 
 }
