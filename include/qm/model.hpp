@@ -4,3 +4,4 @@
 #include "model/ip.hpp"
 #include "model/network.hpp"
 #include "model/node.hpp"
+#include "model/SimulationConfiguration.hpp"
