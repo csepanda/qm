@@ -10,7 +10,8 @@
 namespace qm::parsers::yaml {
 class IdentifiableDTO {
 public:
-    virtual const std::string& GetId() const = 0;
+    virtual const std::string &GetId() const = 0;
+
     virtual void SetId(std::string id) = 0;
 };
 
@@ -48,7 +49,7 @@ struct ConnectionYamlDTO : public IdentifiableDTO {
         }
     }
 
-    const std::string& GetId() const override {
+    const std::string &GetId() const override {
         switch (type) {
             case models::ConnectionType::P2P: {
                 if (p2p == nullptr) {
@@ -99,7 +100,9 @@ struct NetworkYamlDTO {
     std::unordered_map<std::string, ConnectionYamlDTO> ConnectionsDTO{};
 
     const qm::models::Network GetNetwork() const;
+
     void ResolveContext();
 };
+
 }
 #endif //QM_YAML_DTO_H
