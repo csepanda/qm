@@ -24,4 +24,8 @@ double TimeSequence::Current() const {
     return m_time;
 }
 
+ns3::Time TimeSequence::NextSeconds() {
+    return ns3::Seconds(Next());
+}
+
 }
