@@ -2,6 +2,8 @@
 
 #include <utility>
 
+#include <utility>
+
 #ifndef QM_MODEL_PROCESS_HPP
 #define QM_MODEL_PROCESS_HPP
 
@@ -16,8 +18,12 @@ class Application {
     std::vector<std::string> m_arguments;
     uint32_t m_stackSize;
 public:
-    Application(std::shared_ptr<Node> m_node, std::string m_binary, uint32_t m_stackSize)
-      : m_node(std::move(m_node)), m_binary(std::move(m_binary)), m_stackSize(m_stackSize) {
+    Application(std::shared_ptr<Node> m_node, std::string m_binary, uint32_t m_stackSize,
+                std::vector<std::string> m_arguments)
+      : m_node(std::move(m_node)),
+        m_binary(std::move(m_binary)),
+        m_arguments(std::move(m_arguments)),
+        m_stackSize(m_stackSize) {
 
     }
 
