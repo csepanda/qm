@@ -15,9 +15,17 @@ class Network {
     std::vector<std::vector<uint32_t>> m_adjacencyList;
 public:
     Network(std::vector<std::shared_ptr<Node>> &nodes, std::vector<std::shared_ptr<Connection>> &connections);
-    const std::vector<std::shared_ptr<Node>>& GetNodes() const;
-    const std::vector<std::shared_ptr<Connection>>& GetConnections() const;
-    void ConfigureNS3();
+
+    const std::vector<std::shared_ptr<Node>> &GetNodes() const;
+
+    const std::vector<std::shared_ptr<Connection>> &GetConnections() const;
+
+    /**
+     * Find node in network by its NS3 representation.
+     * @param ns3Node
+     * @return ptr to node if found otherwise nullptr
+     */
+    const std::shared_ptr<Node> &FindNode(const ns3::Ptr<ns3::Node> &ns3Node) const;
 };
 
 }
