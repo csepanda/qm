@@ -58,10 +58,6 @@ static void LinkSet(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::st
 }
 
 static const std::string GetSimulatedNetDeviceName(const uint32_t ifIndex) {
-    if (ifIndex < 0) {
-        throw std::invalid_argument("ifIndex cannot be less than 0");
-    }
-
     return "sim" + std::to_string(ifIndex);
 }
 }
