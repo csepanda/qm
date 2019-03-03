@@ -48,7 +48,7 @@ bool convert<qm::parsers::yaml::ApplicationYamlDTO>::decode(const Node &node,
     if (!(binaryNode.IsDefined() && binaryNode.IsScalar())) {
         throw qm::parsers::ParseException("'binary' is required for Application", SOURCE);
     } else if (!nodeReferenceNode.IsDefined()) {
-        throw qm::parsers::ParseException("'node is required for Application", SOURCE);
+        throw qm::parsers::ParseException("'node' is required for Application", SOURCE);
     }
 
     applicationDTO.Binary = binaryNode.as<std::string>();
