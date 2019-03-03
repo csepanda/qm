@@ -10,14 +10,12 @@ void PointToPointConnection::setMtu(const uint16_t t_mtu) {
     m_mtu = ns3::UintegerValue(t_mtu);
 }
 
-void PointToPointConnection::setDataRate(const std::string t_dataRate) {
+void PointToPointConnection::setDataRate(const ns3::DataRate t_dataRate) {
     m_dataRate = ns3::DataRateValue(t_dataRate);
 }
 
-void PointToPointConnection::setDelay(const std::string t_delay) {
-    auto delayTimeValue = ns3::Time(t_delay);
-
-    m_delay = ns3::TimeValue(delayTimeValue);
+void PointToPointConnection::setDelay(const ns3::Time t_delay) {
+    m_delay = ns3::TimeValue(t_delay);
 }
 
 std::map<std::string, std::unique_ptr<ns3::AttributeValue>> PointToPointConnection::GetChannelAttributes() const {

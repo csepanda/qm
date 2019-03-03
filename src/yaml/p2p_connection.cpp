@@ -54,11 +54,11 @@ bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
             }
 
             if (dataRateNode.IsDefined()) {
-                connectionDTO.p2p->setDataRate(dataRateNode.as<std::string>());
+                connectionDTO.p2p->setDataRate(dataRateNode.as<ns3::DataRate>());
             }
 
             if (delayNode.IsDefined()) {
-                connectionDTO.p2p->setDelay(delayNode.as<std::string>());
+                connectionDTO.p2p->setDelay(delayNode.as<ns3::Time>());
             }
 
             const auto targets = node["targets"];

@@ -46,9 +46,9 @@ public:
 
     void setMtu(uint16_t t_mtu);
 
-    void setDataRate(std::string t_dataRate);
+    void setDataRate(ns3::DataRate t_dataRate);
 
-    void setDelay(std::string t_delay);
+    void setDelay(ns3::Time t_delay);
 
     ConnectionType GetConnectionType() const override { return ConnectionType::P2P; };
 
