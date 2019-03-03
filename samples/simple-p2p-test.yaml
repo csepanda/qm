@@ -20,3 +20,10 @@ network:
           dataRate: 5Mbps
           delay: 1ms
           mtu: 1500
+applications:
+    - binary: ping
+      node: !Ref node01
+      arguments:
+          - -c 1
+          - 10.10.0.3
+      startAt: 12s
