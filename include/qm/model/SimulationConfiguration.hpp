@@ -15,6 +15,7 @@ class SimulationConfiguration {
     NetworkStack m_networkStack {NetworkStack::LinuxKernel};
 
 public:
+    SimulationConfiguration(NetworkStack networkStack);
     NetworkStack GetNetworkStack() const;
 };
 }
