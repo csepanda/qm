@@ -14,8 +14,12 @@ namespace qm::services {
 Simulation::Simulation(
   const qm::models::SimulationConfiguration cfg,
   qm::models::Network network,
+  std::vector<std::shared_ptr<qm::models::Application>> applications,
   std::shared_ptr<TimeSequence> timer)
-  : m_network{std::move(network)} {
+
+  : m_network{std::move(network)},
+    m_applications{std::move(applications)} {
+
     m_dceManager = std::make_shared<ns3::DceManagerHelper>();
 
     switch (cfg.GetNetworkStack()) {
