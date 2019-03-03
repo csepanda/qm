@@ -32,12 +32,12 @@ node:
             }
 
             SECTION("Connection is null after parse") {
-                REQUIRE(ipConfigDTO.IpConfig.BindConnection == nullptr);
+                REQUIRE(ipConfigDTO.IpConfig->BindConnection == nullptr);
             }
 
             SECTION("Address is correctly parsed") {
-                REQUIRE(ipConfigDTO.IpConfig.Address->GetProtocolVersion() == qm::models::IPv4);
-                REQUIRE(ipConfigDTO.IpConfig.Address->GetNetworkStr() == "10.0.1.3/24");
+                REQUIRE(ipConfigDTO.IpConfig->Address->GetProtocolVersion() == qm::models::IPv4);
+                REQUIRE(ipConfigDTO.IpConfig->Address->GetNetworkStr() == "10.0.1.3/24");
             }
         }
     }

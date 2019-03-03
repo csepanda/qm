@@ -22,6 +22,7 @@ static NodeDTO createNode(std::string nodeId) {
 static IpConfigDTO createIpConfig(std::string connectionId) {
     IpConfigDTO ipConfigDTO {};
     ipConfigDTO.ConnectionRef.Id = std::move(connectionId);
+    ipConfigDTO.IpConfig = std::make_shared<IpConfig>();
 
     return ipConfigDTO;
 }
@@ -56,9 +57,9 @@ TEST_CASE("resolveContext // valid context", "[parsers][yaml]") {
         SECTION("verify resolved context") {
             REQUIRE(connection01.p2p->GetNodes().size() == 1);
             REQUIRE(connection01.p2p->GetNodes()[0] == node01.Node);
-            REQUIRE(node01.IpConfigs[0].IpConfig.BindConnection == connection01.p2p);
+            REQUIRE(node01.IpConfigs[0].IpConfig->BindConnection == connection01.p2p);
             REQUIRE(node01.Node->GetIpConfigs().size() == 1);
-            REQUIRE(node01.Node->GetIpConfigs()[0].BindConnection == connection01.p2p);
+            REQUIRE(node01.Node->GetIpConfigs()[0]->BindConnection == connection01.p2p);
         }
     }
 }
@@ -105,7 +106,7 @@ static Context prepareContext_valid() {
         REQUIRE(connection01.TargetsRefs[0].Id == id_node01);
         REQUIRE(node01.IpConfigs.size() == 1);
         REQUIRE(node01.IpConfigs[0].ConnectionRef.Id == id_connection01);
-        REQUIRE(node01.IpConfigs[0].IpConfig.BindConnection == nullptr);
+        REQUIRE(node01.IpConfigs[0].IpConfig->BindConnection == nullptr);
         REQUIRE(node01.Node->GetIpConfigs().empty());
     }
 
@@ -127,7 +128,7 @@ static Context prepareContext_noBackReference() {
         REQUIRE(connection01.TargetsRefs.empty());
         REQUIRE(node01.IpConfigs.size() == 1);
         REQUIRE(node01.IpConfigs[0].ConnectionRef.Id == id_connection01);
-        REQUIRE(node01.IpConfigs[0].IpConfig.BindConnection == nullptr);
+        REQUIRE(node01.IpConfigs[0].IpConfig->BindConnection == nullptr);
         REQUIRE(node01.Node->GetIpConfigs().empty());
     }
 
@@ -151,9 +152,9 @@ static Context prepareContext_allReferencesUsed() {
         REQUIRE(connection01.TargetsRefs[0].Id == id_node01);
         REQUIRE(node01.IpConfigs.size() == 2);
         REQUIRE(node01.IpConfigs[0].ConnectionRef.Id == id_connection01);
-        REQUIRE(node01.IpConfigs[0].IpConfig.BindConnection == nullptr);
         REQUIRE(node01.IpConfigs[1].ConnectionRef.Id == id_connection01);
-        REQUIRE(node01.IpConfigs[1].IpConfig.BindConnection == nullptr);
+        REQUIRE(node01.IpConfigs[0].IpConfig->BindConnection == nullptr);
+        REQUIRE(node01.IpConfigs[1].IpConfig->BindConnection == nullptr);
         REQUIRE(node01.Node->GetIpConfigs().empty());
     }
 

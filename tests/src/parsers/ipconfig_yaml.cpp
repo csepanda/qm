@@ -15,12 +15,12 @@ ipConfig:
     }
 
     SECTION("Connection is null after parse") {
-        REQUIRE(actual.IpConfig.BindConnection == nullptr);
+        REQUIRE(actual.IpConfig->BindConnection == nullptr);
     }
 
     SECTION("Address is correctly parsed") {
-        REQUIRE(actual.IpConfig.Address->GetProtocolVersion() == qm::models::IPv4);
-        REQUIRE(actual.IpConfig.Address->GetNetworkStr() == "10.0.1.3/24");
+        REQUIRE(actual.IpConfig->Address->GetProtocolVersion() == qm::models::IPv4);
+        REQUIRE(actual.IpConfig->Address->GetNetworkStr() == "10.0.1.3/24");
     }
 }
 

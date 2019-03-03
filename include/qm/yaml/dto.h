@@ -34,7 +34,7 @@ struct IPNetworkYamlDTO {
 
 struct IpConfigYamlDTO {
     YamlReference ConnectionRef;
-    qm::models::IpConfig IpConfig;
+    std::shared_ptr<qm::models::IpConfig> IpConfig;
 };
 
 struct ConnectionYamlDTO : public IdentifiableDTO {

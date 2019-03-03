@@ -50,7 +50,7 @@ TEST_CASE("parse Network from valid yaml // references resolving in nodes", "[pa
         const qm::parsers::yaml::NodeYamlDTO n = node;
 
         for (const auto &ipConfig : n.Node->GetIpConfigs()) {
-            REQUIRE(ipConfig.BindConnection != nullptr);
+            REQUIRE(ipConfig->BindConnection != nullptr);
         }
 
         for (const auto &ipConfigDTO : n.IpConfigs) {
@@ -142,13 +142,13 @@ TEST_CASE("parse Network from valid yaml // Final object", "[parsers][yaml]") {
         REQUIRE(node01->GetIpConfigs().size() == 1);
 
         const auto ipConfig = node01->GetIpConfigs()[0];
-        REQUIRE(ipConfig.BindConnection == connection01);
+        REQUIRE(ipConfig->BindConnection == connection01);
     }
 
     SECTION("Check references in node02") {
         REQUIRE(node02->GetIpConfigs().size() == 1);
 
         const auto ipConfig = node02->GetIpConfigs()[0];
-        REQUIRE(ipConfig.BindConnection == connection01);
+        REQUIRE(ipConfig->BindConnection == connection01);
     }
 }

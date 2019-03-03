@@ -54,9 +54,10 @@ bool convert<qm::parsers::yaml::IpConfigYamlDTO>::decode(const Node &node, qm::p
     const auto parsedConnection = connectionYaml.as<qm::parsers::yaml::YamlReference>();
 
     ipConfigYamlDTO.ConnectionRef = parsedConnection;
+    ipConfigYamlDTO.IpConfig = std::make_shared<qm::models::IpConfig>();
     switch (parsedNetwork.ProtocolVersion) {
         case qm::models::IPv4: {
-            ipConfigYamlDTO.IpConfig.Address = std::make_shared<qm::models::IPv4Network>(parsedNetwork.IPv4);
+            ipConfigYamlDTO.IpConfig->Address = std::make_shared<qm::models::IPv4Network>(parsedNetwork.IPv4);
             break;
         }
         case qm::models::IPv6: {

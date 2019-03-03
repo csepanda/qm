@@ -22,7 +22,7 @@ void NetworkYamlDTO::ResolveContext() {
             auto &connectionRef = configDTO.ConnectionRef;
             auto connection = resolveConnectionRef(nodeId, configDTO.ConnectionRef, ConnectionsDTO);
 
-            configDTO.IpConfig.BindConnection = connection;
+            configDTO.IpConfig->BindConnection = connection;
             connection->GetNodes().push_back(nodeDTO.Node);
 
             nodeDTO.Node->AddIpConfig(configDTO.IpConfig);
