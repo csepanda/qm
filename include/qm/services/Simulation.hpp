@@ -11,17 +11,18 @@
 namespace qm::services {
 class Simulation {
     qm::models::Network m_network;
-    std::vector<std::shared_ptr<qm::models::Application>> m_applications;
+    std::vector<std::shared_ptr<qm::models::Process>> m_applications;
+    std::shared_ptr<TimeSequence> m_timer;
     std::shared_ptr<ns3::DceManagerHelper> m_dceManager;
-    std::unique_ptr<qm::services::IpConfigurator> m_ipConfigurator;
-
-    void ConfigureP2PConnection(const std::shared_ptr<qm::models::PointToPointConnection> &connection);
-
 public:
-    Simulation(qm::models::SimulationConfiguration, qm::models::Network,
-               std::vector<std::shared_ptr<qm::models::Application>>, std::shared_ptr<TimeSequence> timeSequence);
+    Simulation(
+      qm::models::Network,
+      std::vector<std::shared_ptr<qm::models::Process>>,
+      std::shared_ptr<TimeSequence>,
+      std::shared_ptr<ns3::DceManagerHelper>
+    );
 
-    void ConfigureNetwork();
+    void Run();
 };
 }
 
