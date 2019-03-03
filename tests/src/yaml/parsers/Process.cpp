@@ -8,15 +8,17 @@ node: !Ref node01
 arguments:
  - 127.0.0.1
 stackSize: 1048576
+startAt: 1s
 )");
 
-    const auto actual = yaml.as<qm::parsers::yaml::ApplicationYamlDTO>();
+    const auto actual = yaml.as<qm::parsers::yaml::ProcessYamlDTO>();
 
     REQUIRE(actual.Binary == "ping");
     REQUIRE(actual.Arguments.size() == 1);
     REQUIRE(actual.Arguments[0] == "127.0.0.1");
     REQUIRE(actual.StackSize == 1048576);
     REQUIRE(actual.NodeReference.Id == "node01");
+    REQUIRE(actual.StartAt == ns3::Time::FromDouble(1, ns3::Time::Unit::S));
 }
 
 TEST_CASE("parse application from invalid yaml - missing binary", "[parsers][yaml]") {
@@ -27,8 +29,8 @@ arguments:
 stackSize: 1048576
 )");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ApplicationYamlDTO>(), qm::parsers::ParseException);
-    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ApplicationYamlDTO>(), "'binary' is required for Application");
+    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), qm::parsers::ParseException);
+    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), "'binary' is required for Process");
 }
 
 TEST_CASE("parse application from invalid yaml - missing node", "[parsers][yaml]") {
@@ -39,8 +41,8 @@ arguments:
 stackSize: 1048576
 )");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ApplicationYamlDTO>(), qm::parsers::ParseException);
-    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ApplicationYamlDTO>(), "'node' is required for Application");
+    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), qm::parsers::ParseException);
+    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), "'node' is required for Process");
 }
 
 TEST_CASE("parse application from invalid yaml - invalid arguments", "[parsers][yaml]") {
@@ -51,6 +53,6 @@ arguments: 127.0.0.1
 stackSize: 1048576
 )");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ApplicationYamlDTO>(), qm::parsers::ParseException);
-    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ApplicationYamlDTO>(), "'arguments' should be an array");
+    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), qm::parsers::ParseException);
+    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), "'arguments' should be an array");
 }

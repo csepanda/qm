@@ -10,13 +10,14 @@
 #include "dto.h"
 
 namespace qm::parsers::yaml {
-struct ApplicationYamlDTO {
+struct ProcessYamlDTO {
     std::string Binary;
     std::vector <std::string> Arguments;
     uint32_t StackSize;
+    ns3::Time StartAt;
     YamlReference NodeReference;
 
-    std::shared_ptr <qm::models::Application> GetApplication() const;
+    std::shared_ptr <qm::models::Process> GetApplication() const;
 
     void ResolveNode(NetworkYamlDTO networkYamlDTO);
 
@@ -27,10 +28,10 @@ private:
 
 namespace YAML {
 template<>
-struct convert<qm::parsers::yaml::ApplicationYamlDTO> {
-    static Node encode(const qm::parsers::yaml::ApplicationYamlDTO &);
+struct convert<qm::parsers::yaml::ProcessYamlDTO> {
+    static Node encode(const qm::parsers::yaml::ProcessYamlDTO &);
 
-    static bool decode(const Node &node, qm::parsers::yaml::ApplicationYamlDTO &);
+    static bool decode(const Node &node, qm::parsers::yaml::ProcessYamlDTO &);
 };
 }
 

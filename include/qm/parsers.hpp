@@ -25,7 +25,7 @@ struct ParseException : public std::runtime_error {
 #include "yaml/yaml_reference.hpp"
 #include "yaml/network.hpp"
 #include "yaml/dto.h"
-#include "yaml/ApplicationYamlDTO.hpp"
+#include "qm/yaml/ProcessYamlDTO.hpp"
 #include "yaml/dto/SimulationConfigurationYamlDTO.hpp"
 #include "yaml/parsers/SimulationConfigurationYamlParser.hpp"
 #include "yaml/parsers/NS3Types.hpp"
