@@ -37,7 +37,7 @@ resolveConnectionRef(std::string &referrerId, YamlReference &reference, Connecti
 
         inverseResolve(referrerId, reference.Id, connection.TargetsRefs);
         reference.Resolved = true;
-        return connection.GetConnection();
+        return connection.GetModel();
     } catch (std::out_of_range &err) {
         std::stringstream ss;
         ss << "Cannot resolve connection with id '" << reference.Id << "'";

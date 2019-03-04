@@ -1,8 +1,8 @@
-#ifndef QM_YAML_NETWORK_HPP
-#define QM_YAML_NETWORK_HPP
+#ifndef QM_YAML_PARSERS_NETWORK_HPP
+#define QM_YAML_PARSERS_NETWORK_HPP
 
 #include <yaml-cpp/node/node.h>
-#include "dto.h"
+#include <qm/parsers.hpp>
 
 namespace YAML {
 template<>

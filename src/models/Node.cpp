@@ -1,5 +1,5 @@
 #include <qm/model.hpp>
-#include <qm/model/node.hpp>
+#include <qm/model/Node.hpp>
 #include <algorithm>
 
 

@@ -64,7 +64,7 @@ TEST_CASE("parse Network from valid yaml // references resolving in connections"
     const auto actual = yaml.as<qm::parsers::yaml::NetworkYamlDTO>();
 
     for (const auto&[id, connection] : actual.ConnectionsDTO) {
-        const auto nodes = connection.GetConnection()->GetNodes();
+        const auto nodes = connection.GetModel()->GetNodes();
 
         REQUIRE(!nodes.empty());
         for (const auto &node : nodes) {
@@ -118,7 +118,7 @@ static std::shared_ptr<T> findById(const std::vector<std::shared_ptr<T>> &collec
 TEST_CASE("parse Network from valid yaml // Final object", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(validYamlWithIdsAndReferences);
     const auto networkDTO = yaml.as<qm::parsers::yaml::NetworkYamlDTO> ();
-    const qm::models::Network actual = networkDTO.GetNetwork();
+    const qm::models::Network actual = networkDTO.GetModel();
 
     const auto &actualNodes = actual.GetNodes();
     const auto &actualConnections = actual.GetConnections();

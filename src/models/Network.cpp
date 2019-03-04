@@ -1,6 +1,6 @@
 #include <qm/exceptions.hpp>
 #include <qm/model.hpp>
-#include <qm/model/network.hpp>
+#include <qm/model/Network.hpp>
 #include <algorithm>
 
 namespace qm::models {

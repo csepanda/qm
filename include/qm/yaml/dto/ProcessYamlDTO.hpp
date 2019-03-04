@@ -2,12 +2,14 @@
 // Created by cspanda on 2/22/19.
 //
 
-#ifndef QM_YAML_APPLICATIONYAMLDTO_H
-#define QM_YAML_APPLICATIONYAMLDTO_H
+#ifndef QM_YAML_DTO_APPLICATIONYAMLDTO_H
+#define QM_YAML_DTO_APPLICATIONYAMLDTO_H
 
 #include <string>
 #include <vector>
-#include "dto.h"
+
+#include "Index.hpp"
+#include "NetworkYamlDTO.hpp"
 
 namespace qm::parsers::yaml {
 struct ProcessYamlDTO {
@@ -26,13 +28,4 @@ private:
 };
 }
 
-namespace YAML {
-template<>
-struct convert<qm::parsers::yaml::ProcessYamlDTO> {
-    static Node encode(const qm::parsers::yaml::ProcessYamlDTO &);
-
-    static bool decode(const Node &node, qm::parsers::yaml::ProcessYamlDTO &);
-};
-}
-
-#endif //QM_YAML_APPLICATIONYAMLDTO_H
+#endif //QM_YAML_DTO_APPLICATIONYAMLDTO_H

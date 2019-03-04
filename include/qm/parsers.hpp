@@ -19,14 +19,22 @@ struct ParseException : public std::runtime_error {
 }
 
 #endif
-#include "yaml/ip.hpp"
-#include "yaml/p2p_connection.hpp"
-#include "yaml/node.hpp"
-#include "yaml/yaml_reference.hpp"
-#include "yaml/network.hpp"
-#include "yaml/dto.h"
-#include "qm/yaml/ProcessYamlDTO.hpp"
+
+#include "yaml/dto/Index.hpp"
 #include "yaml/dto/SimulationConfigurationYamlDTO.hpp"
+#include "yaml/dto/ConnectionYamlDTO.hpp"
+#include "yaml/dto/NodeYamlDTO.hpp"
+#include "yaml/dto/NetworkYamlDTO.hpp"
+#include "yaml/dto/ProcessYamlDTO.hpp"
+#include "yaml/dto/IpNetworkYamlDTO.hpp"
+#include "yaml/dto/IpAddressYamlDTO.hpp"
 #include "yaml/parsers/SimulationConfigurationYamlParser.hpp"
 #include "yaml/parsers/NS3Types.hpp"
+#include "yaml/parsers/Node.hpp"
+#include "yaml/parsers/Connection.hpp"
+#include "yaml/parsers/Network.hpp"
+#include "yaml/parsers/Process.hpp"
+#include "yaml/parsers/IpNetwork.hpp"
+#include "yaml/parsers/IpAddress.hpp"
+#include "yaml/parsers/YamlReference.hpp"
 

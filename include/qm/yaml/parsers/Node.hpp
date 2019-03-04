@@ -1,10 +1,10 @@
-#ifndef QM_PARSERS_NODE_H_
-#define QM_PARSERS_NODE_H_
+#ifndef QM_YAML_PARSERS_NODE_H_
+#define QM_YAML_PARSERS_NODE_H_
 
 #include <yaml-cpp/yaml.h>
 #include <unordered_map>
-#include "../model.hpp"
-#include "../parsers.hpp"
+#include "qm/model.hpp"
+#include "qm/parsers.hpp"
 
 namespace YAML {
 template<>

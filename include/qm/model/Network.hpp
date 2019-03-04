@@ -4,7 +4,7 @@
 #include "ns3/node.h"
 #include "ns3/ptr.h"
 
-#include "node.hpp"
+#include "Node.hpp"
 #include "connections.hpp"
 
 

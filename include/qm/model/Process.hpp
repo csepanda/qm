@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include "node.hpp"
+#include "Node.hpp"
 
 namespace qm::models {
 class Process {

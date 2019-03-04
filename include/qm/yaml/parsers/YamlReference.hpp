@@ -1,7 +1,8 @@
-#ifndef QM_YAML_PARSERS_NODE_H_
-#define QM_YAML_PARSERS_NODE_H_
+#ifndef QM_YAML_PARSERS_YAMLREFERENCE_HPP
+#define QM_YAML_PARSERS_YAMLREFERENCE_HPP
 
-#include <qm/parsers.hpp>
+#include <yaml-cpp/yaml.h>
+#include <qm/yaml/dto/Index.hpp>
 
 namespace YAML {
 template<>
@@ -10,7 +11,6 @@ struct convert<qm::parsers::yaml::YamlReference> {
 
     static bool decode(const Node &node, qm::parsers::yaml::YamlReference &);
 };
-
 }
 
-#endif
+#endif //QM_YAML_PARSERS_YAMLREFERENCE_HPP

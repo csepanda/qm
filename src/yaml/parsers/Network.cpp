@@ -7,22 +7,6 @@
 
 #include <qm/parsers.hpp>
 
-namespace qm::parsers::yaml {
-const qm::models::Network NetworkYamlDTO::GetNetwork() const {
-    std::vector<std::shared_ptr<qm::models::Node>> nodes{};
-    std::vector<std::shared_ptr<qm::models::Connection>> connections{};
-
-    for (const auto &[_, dto] : NodesDTO) {
-        nodes.push_back(dto.Node);
-    }
-    for (const auto &[_, dto] : ConnectionsDTO) {
-        connections.push_back(dto.GetConnection());
-    }
-
-    return qm::models::Network(nodes, connections);
-}
-}
-
 namespace YAML {
 
 Node convert<qm::parsers::yaml::NetworkYamlDTO>::encode(const qm::parsers::yaml::NetworkYamlDTO &networkYamlDTO) {

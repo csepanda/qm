@@ -43,6 +43,7 @@ bool convert<qm::parsers::yaml::IpConfigYamlDTO>::decode(const Node &node, qm::p
     const auto connectionYaml = node["connection"];
 
     if (!addressYaml.IsDefined()) {
+        // TODO remove node.as<std::string> with correct source
         throw qm::parsers::ParseException("IpConfig require address fields", node.as<std::string>());
     }
 
@@ -55,15 +56,7 @@ bool convert<qm::parsers::yaml::IpConfigYamlDTO>::decode(const Node &node, qm::p
 
     ipConfigYamlDTO.ConnectionRef = parsedConnection;
     ipConfigYamlDTO.IpConfig = std::make_shared<qm::models::IpConfig>();
-    switch (parsedNetwork.ProtocolVersion) {
-        case qm::models::IPv4: {
-            ipConfigYamlDTO.IpConfig->Address = std::make_shared<qm::models::IPv4Network>(parsedNetwork.IPv4);
-            break;
-        }
-        case qm::models::IPv6: {
-            throw std::logic_error("Not implemented");
-        }
-    }
+    ipConfigYamlDTO.IpConfig->Address = parsedNetwork.GetModel();
 
     return true;
 }

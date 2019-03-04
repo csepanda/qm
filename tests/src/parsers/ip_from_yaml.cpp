@@ -64,7 +64,7 @@ TEST_CASE("parse IPv4 Network from valid yaml", "[parsers][yaml]") {
             const auto actual = inputNode.as<qm::parsers::yaml::IPNetworkYamlDTO>();
 
             REQUIRE(actual.ProtocolVersion == qm::models::IPv4);
-            REQUIRE(actual.IPv4.GetNetworkStr() == inputNode.as<std::string>());
+            REQUIRE(actual.IPv4->GetNetworkStr() == inputNode.as<std::string>());
         }
     }
 }

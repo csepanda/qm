@@ -3,7 +3,7 @@
 namespace YAML {
 
 Node convert<qm::parsers::yaml::YamlReference>::encode(const qm::parsers::yaml::YamlReference &) {
-    throw std::logic_error("not implemented");
+    throw std::logic_error("Not implemented");
 }
 
 bool
