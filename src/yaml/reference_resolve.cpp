@@ -3,7 +3,7 @@
 namespace qm::yaml::dto {
 
 using ConnectionPtr = std::shared_ptr<qm::models::Connection>;
-using ConnectionsDictionary = std::unordered_map<std::string, ConnectionYamlDTO>;
+using ConnectionsDictionary = std::unordered_map<std::string, Connection>;
 
 static void
 inverseResolve(std::string &referrerId, std::string &targetId, std::vector<YamlReference> &targetRefs);
@@ -11,7 +11,7 @@ inverseResolve(std::string &referrerId, std::string &targetId, std::vector<YamlR
 static ConnectionPtr
 resolveConnectionRef(std::string &referrerId, YamlReference &reference, ConnectionsDictionary &connectionsDTO);
 
-void NetworkYamlDTO::ResolveContext() {
+void Network::ResolveContext() {
     // resolve references between ip-configs and connections
     // in terms of network it's actually resolving network interface and corresponding channel
     for (auto& [id, nodeDTO] : NodesDTO) {
@@ -33,7 +33,7 @@ void NetworkYamlDTO::ResolveContext() {
 static ConnectionPtr
 resolveConnectionRef(std::string &referrerId, YamlReference &reference, ConnectionsDictionary &connectionsDTO) {
     try {
-        ConnectionYamlDTO &connection = connectionsDTO.at(reference.Id);
+        Connection &connection = connectionsDTO.at(reference.Id);
 
         inverseResolve(referrerId, reference.Id, connection.TargetsRefs);
         reference.Resolved = true;

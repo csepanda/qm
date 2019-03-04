@@ -4,7 +4,7 @@
 #include <qm/yaml/dto/Index.hpp>
 
 namespace qm::yaml::dto {
-struct IPNetworkYamlDTO : public BaseYamlDTO<std::shared_ptr<qm::models::IPNetwork>> {
+struct IPNetwork : public BaseYamlDTO<std::shared_ptr<qm::models::IPNetwork>> {
     qm::models::IPVersion ProtocolVersion{};
     std::shared_ptr<qm::models::IPv4Network> IPv4;
     // std::shared_ptr<qm::models::IPv6Address> IPv6;

@@ -2,9 +2,9 @@
 #include <qm/parsers.hpp>
 #include <yaml-cpp/yaml.h>
 
-using Context = qm::yaml::dto::NetworkYamlDTO;
-using NodeDTO = qm::yaml::dto::NodeYamlDTO;
-using ConnectionDTO = qm::yaml::dto::ConnectionYamlDTO;
+using Context = qm::yaml::dto::Network;
+using NodeDTO = qm::yaml::dto::Node;
+using ConnectionDTO = qm::yaml::dto::Connection;
 using IpConfigDTO = qm::yaml::dto::IpConfigYamlDTO;
 using YamlReference = qm::yaml::dto::YamlReference;
 using Node = qm::models::Node;

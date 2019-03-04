@@ -90,17 +90,17 @@ TEST_CASE("determineIPVersion/IPv6 input", "[parsers]") {
 TEST_CASE("parse IPv4 Network from invalid format string", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load("192.168.0.1");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetworkYamlDTO>(), qm::ParseException);
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetwork>(), qm::ParseException);
 }
 
 TEST_CASE("parse IPv4 Network from string with invalid cidr value", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load("192.168.0.1/64");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetworkYamlDTO>(), std::invalid_argument);
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetwork>(), std::invalid_argument);
 }
 
 TEST_CASE("parse IPv4 Network from string with invalid cidr", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load("192.168.0.1/dasd");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetworkYamlDTO>(), qm::ParseException);
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetwork>(), qm::ParseException);
 }

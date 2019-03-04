@@ -4,7 +4,7 @@
 #include <qm/parsers.hpp>
 
 namespace qm::yaml::dto {
-qm::models::Network NetworkYamlDTO::GetModel() const {
+qm::models::Network Network::GetModel() const {
     std::vector<std::shared_ptr<qm::models::Node>> nodes{};
     std::vector<std::shared_ptr<qm::models::Connection>> connections{};
 

@@ -35,7 +35,7 @@ TEST_CASE("parse IPv4 Address from valid yaml", "[parsers][yaml]") {
     for (const auto& key : {"current", "loopback", "arbitrary", "broadcast"}) {
         SECTION(key) {
             const auto inputNode = ipAddresses[key];
-            const auto actual = inputNode.as<qm::yaml::dto::IPAddressYamlDTO>();
+            const auto actual = inputNode.as<qm::yaml::dto::IPAddress>();
 
             REQUIRE(actual.ProtocolVersion == qm::models::IPv4);
             REQUIRE(actual.IPv4.GetAddressStr() == inputNode.as<std::string>());
@@ -50,7 +50,7 @@ TEST_CASE("try to parse IPv4 Address from invalid yaml", "[parsers][yaml]") {
         SECTION(key) {
             const auto inputNode = ipAddresses[key];
 
-            REQUIRE_THROWS_AS(inputNode.as<qm::yaml::dto::IPAddressYamlDTO>(), qm::ParseException);
+            REQUIRE_THROWS_AS(inputNode.as<qm::yaml::dto::IPAddress>(), qm::ParseException);
         }
     }
 }
@@ -61,7 +61,7 @@ TEST_CASE("parse IPv4 Network from valid yaml", "[parsers][yaml]") {
     for (const auto& key : {"current", "loopback", "arbitrary", "broadcast"}) {
         SECTION(key) {
             const auto inputNode = ipAddresses[key];
-            const auto actual = inputNode.as<qm::yaml::dto::IPNetworkYamlDTO>();
+            const auto actual = inputNode.as<qm::yaml::dto::IPNetwork>();
 
             REQUIRE(actual.ProtocolVersion == qm::models::IPv4);
             REQUIRE(actual.IPv4->GetNetworkStr() == inputNode.as<std::string>());
@@ -76,7 +76,7 @@ TEST_CASE("try to parse IPv4 Network from invalid yaml", "[parsers][yaml]") {
         SECTION(key) {
             const auto inputNode = ipAddresses[key];
 
-            REQUIRE_THROWS_AS(inputNode.as<qm::yaml::dto::IPNetworkYamlDTO>(), qm::ParseException);
+            REQUIRE_THROWS_AS(inputNode.as<qm::yaml::dto::IPNetwork>(), qm::ParseException);
         }
     }
 }

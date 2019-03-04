@@ -9,10 +9,10 @@
 #include <vector>
 
 #include "Index.hpp"
-#include "NetworkYamlDTO.hpp"
+#include "Network.hpp"
 
 namespace qm::yaml::dto {
-struct ProcessYamlDTO {
+struct Process{
     std::string Binary;
     std::vector <std::string> Arguments;
     uint32_t StackSize;
@@ -21,7 +21,7 @@ struct ProcessYamlDTO {
 
     std::shared_ptr <qm::models::Process> GetApplication() const;
 
-    void ResolveNode(NetworkYamlDTO networkYamlDTO);
+    void ResolveNode(Network networkYamlDTO);
 
 private:
     std::shared_ptr <qm::models::Node> m_node;

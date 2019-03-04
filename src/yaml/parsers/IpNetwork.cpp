@@ -6,12 +6,12 @@
 #include <qm/parsers.hpp>
 
 namespace YAML {
-Node convert<qm::yaml::dto::IPNetworkYamlDTO>::encode(const qm::yaml::dto::IPNetworkYamlDTO &networkYamlDTO) {
+Node convert<qm::yaml::dto::IPNetwork>::encode(const qm::yaml::dto::IPNetwork &networkYamlDTO) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::yaml::dto::IPNetworkYamlDTO>::decode(const Node &node,
-                                                          qm::yaml::dto::IPNetworkYamlDTO &networkYamlDTO) {
+bool convert<qm::yaml::dto::IPNetwork>::decode(const Node &node,
+                                                          qm::yaml::dto::IPNetwork &networkYamlDTO) {
     const auto inputNetwork = node.as<std::string>();
     std::vector<std::string> splitted;
 

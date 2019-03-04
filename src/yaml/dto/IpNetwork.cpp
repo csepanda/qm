@@ -1,8 +1,8 @@
-#include <qm/yaml/dto/IpNetworkYamlDTO.hpp>
+#include <qm/yaml/dto/IpNetwork.hpp>
 
 namespace qm::yaml::dto {
 
-std::shared_ptr<models::IPNetwork> IPNetworkYamlDTO::GetModel() const {
+std::shared_ptr<models::IPNetwork> IPNetwork::GetModel() const {
     switch (ProtocolVersion) {
         case models::IPv4:
             return IPv4;

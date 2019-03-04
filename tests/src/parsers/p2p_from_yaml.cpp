@@ -5,7 +5,7 @@
 TEST_CASE("parse P2P connection from valid yaml", "[parsers][yaml]") {
     SECTION("default") {
         const YAML::Node node = YAML::Load(R"(type: p2p)");
-        const auto actual = node.as<qm::yaml::dto::ConnectionYamlDTO>();
+        const auto actual = node.as<qm::yaml::dto::Connection>();
 
         REQUIRE(actual.type == qm::models::ConnectionType::P2P);
     }
@@ -19,7 +19,7 @@ delay: 100ms
 targets:
   - !Ref node01
 )");
-        const auto actual = node.as<qm::yaml::dto::ConnectionYamlDTO>();
+        const auto actual = node.as<qm::yaml::dto::Connection>();
         const auto deviceAttributes = actual.p2p->GetDeviceAttributes();
         const auto channelAttributes = actual.p2p->GetChannelAttributes();
 
@@ -55,8 +55,8 @@ TEST_CASE("parse P2P connection from yaml with invalid targets", "[parsers][yaml
 type: p2p
 targets: 0
 )");
-        REQUIRE_THROWS_AS(node.as<qm::yaml::dto::ConnectionYamlDTO>(), qm::ParseException);
-        REQUIRE_THROWS_WITH(node.as<qm::yaml::dto::ConnectionYamlDTO>(), "Connection's targets should be a sequence");
+        REQUIRE_THROWS_AS(node.as<qm::yaml::dto::Connection>(), qm::ParseException);
+        REQUIRE_THROWS_WITH(node.as<qm::yaml::dto::Connection>(), "Connection's targets should be a sequence");
     }
 
     SECTION("targets illegal format") {
@@ -65,7 +65,7 @@ type: p2p
 targets:
  - !ref node01 123
 )");
-        REQUIRE_THROWS_AS(node.as<qm::yaml::dto::ConnectionYamlDTO>(), qm::ParseException);
-        REQUIRE_THROWS_WITH(node.as<qm::yaml::dto::ConnectionYamlDTO>(), "Expected reference with !Ref tag, got: '!ref'");
+        REQUIRE_THROWS_AS(node.as<qm::yaml::dto::Connection>(), qm::ParseException);
+        REQUIRE_THROWS_WITH(node.as<qm::yaml::dto::Connection>(), "Expected reference with !Ref tag, got: '!ref'");
     }
 }

@@ -1,15 +1,15 @@
 #include <qm/parsers.hpp>
-#include <qm/yaml/dto/ProcessYamlDTO.hpp>
+#include <qm/yaml/dto/Process.hpp>
 #include <qm/yaml/parsers/Process.hpp>
 
 namespace YAML {
 static const auto SOURCE = "Parse Process from yaml";
-Node convert<qm::yaml::dto::ProcessYamlDTO>::encode(const qm::yaml::dto::ProcessYamlDTO &) {
+Node convert<qm::yaml::dto::Process>::encode(const qm::yaml::dto::Process &) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::yaml::dto::ProcessYamlDTO>::decode(const Node &node,
-                                                        qm::yaml::dto::ProcessYamlDTO &processYamlDTO) {
+bool convert<qm::yaml::dto::Process>::decode(const Node &node,
+                                                        qm::yaml::dto::Process &processYamlDTO) {
     const auto binaryNode = node["binary"];
     const auto argumentsNode = node["arguments"];
     const auto stackSizeNode = node["stackSize"];

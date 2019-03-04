@@ -1,8 +1,8 @@
-#include <qm/yaml/dto/NodeYamlDTO.hpp>
+#include <qm/yaml/dto/Node.hpp>
 
 namespace qm::yaml::dto {
 
-const std::string &NodeYamlDTO::GetId() const {
+const std::string &Node::GetId() const {
     if (Node == nullptr) {
         throw qm::UninitializedException("Node is not initialized");
     }
@@ -10,7 +10,7 @@ const std::string &NodeYamlDTO::GetId() const {
     return Node->GetId();
 }
 
-void NodeYamlDTO::SetId(std::string id) {
+void Node::SetId(std::string id) {
     if (Node == nullptr) {
         throw qm::UninitializedException("Node is not initialized");
     }

@@ -8,9 +8,9 @@
 
 namespace qm::yaml::dto {
 
-struct NodeYamlDTO : public IdentifiableDTO {
-    std::shared_ptr <qm::models::Node> Node;
-    std::vector <IpConfigYamlDTO> IpConfigs{};
+struct Node : public IdentifiableDTO {
+    std::shared_ptr<qm::models::Node> Node;
+    std::vector<IpConfigYamlDTO> IpConfigs{};
 
     const std::string &GetId() const override;
 

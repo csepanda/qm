@@ -4,7 +4,7 @@
 #include <qm/yaml/dto/Index.hpp>
 
 namespace qm::yaml::dto {
-struct ConnectionYamlDTO : public IdentifiableDTO, public BaseYamlDTO<std::shared_ptr<qm::models::Connection>> {
+struct Connection: public IdentifiableDTO, public BaseYamlDTO<std::shared_ptr<qm::models::Connection>> {
     std::vector <YamlReference> TargetsRefs;
     qm::models::ConnectionType type;
     std::shared_ptr <qm::models::PointToPointConnection> p2p;

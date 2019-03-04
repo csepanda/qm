@@ -10,7 +10,7 @@ static const std::unordered_map<std::string, qm::models::ConnectionType> typeMap
   {"PointToPoint", qm::models::ConnectionType::P2P}
 };
 
-Node convert<qm::yaml::dto::ConnectionYamlDTO>::encode(const qm::yaml::dto::ConnectionYamlDTO &connectionDTO) {
+Node convert<qm::yaml::dto::Connection>::encode(const qm::yaml::dto::Connection &connectionDTO) {
     Node node;
 
     switch (connectionDTO.type) {
@@ -20,8 +20,8 @@ Node convert<qm::yaml::dto::ConnectionYamlDTO>::encode(const qm::yaml::dto::Conn
     }
 }
 
-bool convert<qm::yaml::dto::ConnectionYamlDTO>::decode(const Node &node,
-                                                           qm::yaml::dto::ConnectionYamlDTO &connectionDTO) {
+bool convert<qm::yaml::dto::Connection>::decode(const Node &node,
+                                                           qm::yaml::dto::Connection &connectionDTO) {
     const auto typeNode = node["type"];
 
     if (typeNode.IsDefined()) {

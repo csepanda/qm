@@ -9,7 +9,7 @@
 
 namespace YAML {
 
-Node convert<qm::yaml::dto::NetworkYamlDTO>::encode(const qm::yaml::dto::NetworkYamlDTO &networkYamlDTO) {
+Node convert<qm::yaml::dto::Network>::encode(const qm::yaml::dto::Network &networkYamlDTO) {
     throw std::logic_error("Not implemented");
 }
 
@@ -42,8 +42,8 @@ void parseObjectsSequence(const Node &node, std::unordered_map<std::string, T> &
 
 }
 
-bool convert<qm::yaml::dto::NetworkYamlDTO>::decode(const Node &node,
-                                                        qm::yaml::dto::NetworkYamlDTO &networkYamlDTO) {
+bool convert<qm::yaml::dto::Network>::decode(const Node &node,
+                                                        qm::yaml::dto::Network &networkYamlDTO) {
     boost::uuids::random_generator generateUUID;
     const auto nodesYaml = node["nodes"];
     const auto connectionsYaml = node["connections"];

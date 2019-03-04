@@ -3,12 +3,12 @@
 
 namespace YAML {
 
-Node convert<qm::yaml::dto::NodeYamlDTO>::encode(const qm::yaml::dto::NodeYamlDTO &nodeYamlDTO) {
+Node convert<qm::yaml::dto::Node>::encode(const qm::yaml::dto::Node &nodeYamlDTO) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::yaml::dto::NodeYamlDTO>::decode(const Node &node,
-                                                           qm::yaml::dto::NodeYamlDTO &nodeYamlDTO) {
+bool convert<qm::yaml::dto::Node>::decode(const Node &node,
+                                                           qm::yaml::dto::Node &nodeYamlDTO) {
     nodeYamlDTO.Node.reset(new qm::models::Node);
 
     const auto id = node["id"];
@@ -51,7 +51,7 @@ bool convert<qm::yaml::dto::IpConfigYamlDTO>::decode(const Node &node, qm::yaml:
         throw qm::ParseException("IpConfig require connection reference", node.as<std::string>());
     }
 
-    const auto parsedNetwork = addressYaml.as<qm::yaml::dto::IPNetworkYamlDTO>();
+    const auto parsedNetwork = addressYaml.as<qm::yaml::dto::IPNetwork>();
     const auto parsedConnection = connectionYaml.as<qm::yaml::dto::YamlReference>();
 
     ipConfigYamlDTO.ConnectionRef = parsedConnection;

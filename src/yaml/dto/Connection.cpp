@@ -1,15 +1,15 @@
-#include <qm/yaml/dto/ConnectionYamlDTO.hpp>
+#include <qm/yaml/dto/Connection.hpp>
 
 namespace qm::yaml::dto {
 
-std::shared_ptr<qm::models::Connection> ConnectionYamlDTO::GetModel() const {
+std::shared_ptr<qm::models::Connection> Connection::GetModel() const {
     switch (type) {
         case models::ConnectionType::P2P:
             return p2p;
     }
 }
 
-const std::string &ConnectionYamlDTO::GetId() const {
+const std::string &Connection::GetId() const {
     switch (type) {
         case models::ConnectionType::P2P: {
             if (p2p == nullptr) {
@@ -21,7 +21,7 @@ const std::string &ConnectionYamlDTO::GetId() const {
     }
 }
 
-void ConnectionYamlDTO::SetId(std::string id) {
+void Connection::SetId(std::string id) {
     switch (type) {
         case models::ConnectionType::P2P: {
             if (p2p == nullptr) {

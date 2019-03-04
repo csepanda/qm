@@ -21,13 +21,13 @@ bool convert<qm::models::NetworkStack>::decode(const Node &node, qm::models::Net
     return false;
 }
 
-Node convert<qm::yaml::dto::SimulationConfigurationYamlDTO>::encode(
-  const qm::yaml::dto::SimulationConfigurationYamlDTO &) {
+Node convert<qm::yaml::dto::SimulationConfiguration>::encode(
+  const qm::yaml::dto::SimulationConfiguration &) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::yaml::dto::SimulationConfigurationYamlDTO>::decode(
-  const Node &node, qm::yaml::dto::SimulationConfigurationYamlDTO &simulationConfigurationYamlDTO) {
+bool convert<qm::yaml::dto::SimulationConfiguration>::decode(
+  const Node &node, qm::yaml::dto::SimulationConfiguration &simulationConfigurationYamlDTO) {
     const auto networkStackNode = node["networkStack"];
 
     if (networkStackNode.IsDefined()) {

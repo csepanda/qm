@@ -10,7 +10,7 @@ node:
         connection: !Ref connection_01
 )");
 
-    const auto actual = yaml["node"].as<qm::yaml::dto::NodeYamlDTO>();
+    const auto actual = yaml["node"].as<qm::yaml::dto::Node>();
 
     SECTION("Id of node is correctly parsed") {
         REQUIRE(actual.Node->GetId() == "testNode");
@@ -52,5 +52,5 @@ node:
         connection: !Ref connection_01
 )");
 
-    REQUIRE_THROWS(yaml["node"].as<qm::yaml::dto::NodeYamlDTO>());
+    REQUIRE_THROWS(yaml["node"].as<qm::yaml::dto::Node>());
 }

@@ -4,7 +4,7 @@
 #include <qm/models.hpp>
 
 namespace qm::yaml::dto {
-struct IPAddressYamlDTO {
+struct IPAddress {
     qm::models::IPVersion ProtocolVersion{};
     qm::models::IPv4Address IPv4;
     //qm::models::IPv6Address IPv6;
