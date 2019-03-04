@@ -23,3 +23,5 @@ CTestTestfile.cmake
 
 # simulation files
 files-*/
+elf-cache/
+exitprocs
