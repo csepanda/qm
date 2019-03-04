@@ -28,4 +28,12 @@ ns3::Time TimeSequence::NextSeconds() {
     return ns3::Seconds(Next());
 }
 
+ns3::Time TimeSequence::CurrentSeconds() {
+    return ns3::Seconds(Current());
+}
+
+void TimeSequence::SetSeconds(ns3::Time value) {
+    m_time = value.ToDouble(ns3::Time::Unit::S);
+    m_time += DEFAULT_TIME_SKIP;
+}
 }

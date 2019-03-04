@@ -11,9 +11,13 @@ public:
 
     ns3::Time NextSeconds();
 
+    ns3::Time CurrentSeconds();
+
     double Next(double skip);
 
     double Current() const;
+
+    void SetSeconds(ns3::Time value);
 };
 }
 

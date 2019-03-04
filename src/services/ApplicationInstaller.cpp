@@ -20,12 +20,15 @@ void ApplicationInstaller::Install(std::vector<std::shared_ptr<qm::models::Proce
         }
 
         auto appContainer = applicationHelper.Install(process->GetNode()->GetNS3Node());
+        auto time = process->GetStartTime();
 
-        if (process->GetStartTime() == 0) {
-            appContainer.Start(m_timer->NextSeconds());
-        } else {
-            appContainer.Start(process->GetStartTime());
+        if (time == 0) {
+            time = m_timer->NextSeconds();
+        } else if (m_timer->CurrentSeconds().ToDouble(ns3::Time::Unit::S) < time.ToDouble(ns3::Time::Unit::S)){
+            m_timer->SetSeconds(time);
         }
+
+        appContainer.Start(time);
     }
 }
 }
