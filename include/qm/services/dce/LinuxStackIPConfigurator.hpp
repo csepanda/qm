@@ -13,8 +13,7 @@ class LinuxStackIpConfigurator : public IpConfigurator {
     std::shared_ptr <ns3::DceManagerHelper> m_dceManager;
 public:
     LinuxStackIpConfigurator(std::shared_ptr <qm::services::TimeSequence> &timer,
-                             std::shared_ptr <ns3::DceManagerHelper> &dceManager) : m_timer{timer},
-                                                                                    m_dceManager{dceManager} {}
+                             std::shared_ptr <ns3::DceManagerHelper> &dceManager);
 
     void Configure(const qm::models::Network &network) override;
 };

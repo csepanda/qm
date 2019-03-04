@@ -10,12 +10,15 @@ namespace qm::services::dce {
 
 static const std::string LIBRARY_ATTRIBUTE = "Library";
 static const std::string LIB_LINUX = "liblinux.so";
-static const std::string SOCKET_FACTORY = "ns3::LinuxSocketFactory";
+static const std::string SOCKET_FACTORY = "ns3::LinuxSocketFdFactory";
 
 static const std::string GetSimulatedNetDeviceName(uint32_t ifIndex);
 
 static void RunIp(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &str);
-static void AddAddress(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &name, const std::string &address);
+
+static void
+AddAddress(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &name, const std::string &address);
+
 static void LinkSet(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &deviceName);
 
 void LinuxStackIpConfigurator::Configure(const qm::models::Network &network) {
@@ -36,6 +39,13 @@ void LinuxStackIpConfigurator::Configure(const qm::models::Network &network) {
     }
 }
 
+LinuxStackIpConfigurator::LinuxStackIpConfigurator(
+  std::shared_ptr<qm::services::TimeSequence> &timer,
+  std::shared_ptr<ns3::DceManagerHelper> &dceManager
+)
+  : m_timer{timer},
+    m_dceManager{dceManager} {}
+
 static void RunIp(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &str) {
     CommandBuilder{node}
       .SetBinary("ip")
@@ -43,7 +53,8 @@ static void RunIp(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::stri
       .Execute(std::move(at));
 }
 
-static void AddAddress(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &name, const std::string &address) {
+static void
+AddAddress(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &name, const std::string &address) {
     std::ostringstream oss;
     oss << "-f inet addr add " << address << " dev " << name;
 
