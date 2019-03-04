@@ -15,12 +15,22 @@ set_property(TARGET qm PROPERTY CXX_EXTENSIONS ON)
 
 
 link_directories($ENV{DCE_ROOT}/lib)
-execute_process(COMMAND sh -c "cd $ENV{DCE_ROOT}/lib; ls *ns3.28* | grep -v 'test-debug' | sed 's/^lib//; s/.so$//' | xargs echo -n" OUTPUT_VARIABLE NS_LIBS)
+execute_process(COMMAND sh -c "cd $ENV{DCE_ROOT}/lib; ls *ns3.28* *ns3-dce* *ns3-netlink* | grep -v 'test-debug' | sed 's/^lib//; s/.so$//' | xargs echo -n" OUTPUT_VARIABLE NS_LIBS)
 target_include_directories(qm PUBLIC include $ENV{DCE_ROOT}/include)
 
 string(REPLACE " " ";" NS_LIBS_LIST ${NS_LIBS})
 target_link_libraries(qm PUBLIC ${NS_LIBS_LIST} yaml-cpp)
 
+message(${NS_LIBS})
+
 if (BUILD_TESTS)
     add_subdirectory(tests)
 endif()
+
+add_executable(qm-runner src/test.cpp)
+
+set_property(TARGET qm-runner PROPERTY CXX_STANDARD 17)
+set_property(TARGET qm-runner PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET qm-runner PROPERTY CXX_EXTENSIONS ON)
+target_link_libraries(qm-runner qm yaml-cpp)
+target_link_libraries(qm PUBLIC ${NS_LIBS_LIST})
