@@ -13,7 +13,7 @@ enum class NetworkStack {
 
 class SimulationConfiguration {
     NetworkStack m_networkStack {NetworkStack::LinuxKernel};
-    ns3::Time m_stopTime;
+    ns3::Time m_stopTime {};
 
 public:
     SimulationConfiguration(NetworkStack networkStack, ns3::Time stopTime);
