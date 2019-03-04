@@ -1,4 +1,4 @@
-#include <qm/yaml/parsers/SimulationConfigurationYamlParser.hpp>
+#include <qm/yaml/parsers/SimulationConfiguration.hpp>
 #include <yaml-cpp/yaml.h>
 
 namespace YAML {

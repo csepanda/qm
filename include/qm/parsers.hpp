@@ -20,7 +20,7 @@ namespace qm::parsers {
 #include "qm/yaml/dto/Process.hpp"
 #include "qm/yaml/dto/IpNetwork.hpp"
 #include "qm/yaml/dto/IpAddress.hpp"
-#include "yaml/parsers/SimulationConfigurationYamlParser.hpp"
+#include "qm/yaml/parsers/SimulationConfiguration.hpp"
 #include "yaml/parsers/NS3Types.hpp"
 #include "yaml/parsers/Node.hpp"
 #include "yaml/parsers/Connection.hpp"
