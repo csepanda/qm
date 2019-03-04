@@ -10,7 +10,7 @@
 
 namespace qm::services {
 class Simulation {
-    ns3::Time m_stopTime;
+    ns3::Time m_stopTime {};
     qm::models::Network m_network;
     std::vector<std::shared_ptr<qm::models::Process>> m_applications;
     std::shared_ptr<TimeSequence> m_timer;
