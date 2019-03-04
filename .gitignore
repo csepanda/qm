@@ -1,6 +1,7 @@
 *build*/
 *.a
 qm_test
+qm-runner
 
 # vim swap files
 .*.sw?
@@ -19,3 +20,6 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
+
+# simulation files
+files-*/
