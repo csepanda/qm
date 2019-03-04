@@ -1,7 +1,7 @@
 #ifndef QM_YAML_DTO_SIMULATIONCONFIGURATIONYAMLDTO_H
 #define QM_YAML_DTO_SIMULATIONCONFIGURATIONYAMLDTO_H
 
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 #include <qm/yaml/dto/Index.hpp>
 
 namespace qm::parsers::yaml {

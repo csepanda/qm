@@ -3,9 +3,10 @@
 
 #include <vector>
 #include <unordered_map>
+#include <memory>
 
 #include <qm/exceptions.hpp>
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 
 namespace qm::parsers::yaml {
 template<typename TModel>

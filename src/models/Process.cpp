@@ -1,8 +1,6 @@
 #include <utility>
 
-#include <qm/model.hpp>
-#include <qm/model/Process.hpp>
-
+#include <qm/models.hpp>
 
 namespace qm::models {
 const std::shared_ptr<Node> &Process::GetNode() const {

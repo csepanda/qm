@@ -1,7 +1,6 @@
-#include <qm/model.hpp>
-#include <qm/model/Node.hpp>
 #include <algorithm>
 
+#include <qm/models.hpp>
 
 namespace qm::models {
 const ns3::Ptr<ns3::Node> &Node::GetNS3Node() const {

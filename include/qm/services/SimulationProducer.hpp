@@ -1,7 +1,7 @@
 #ifndef QM_SIMULATIONPRODUCER_H
 #define QM_SIMULATIONPRODUCER_H
 
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 #include "Simulation.hpp"
 #include "TimeSequence.h"
 #include "NetworkConfigurator.hpp"

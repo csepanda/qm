@@ -1,7 +1,7 @@
 #ifndef QM_YAML_DTO_IPADDRESSYAMLDTO_HPP
 #define QM_YAML_DTO_IPADDRESSYAMLDTO_HPP
 
-#include <qm/model/ip.hpp>
+#include <qm/models.hpp>
 
 namespace qm::parsers::yaml {
 struct IPAddressYamlDTO {

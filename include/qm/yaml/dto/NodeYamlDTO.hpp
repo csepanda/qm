@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <qm/exceptions.hpp>
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 #include <qm/yaml/dto/Index.hpp>
 
 namespace qm::parsers::yaml {

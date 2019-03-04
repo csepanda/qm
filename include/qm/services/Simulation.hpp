@@ -5,7 +5,7 @@
 #ifndef QM_SERVICES_SIMULATION_H
 #define QM_SERVICES_SIMULATION_H
 
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 #include "IpConfigurator.hpp"
 
 namespace qm::services {

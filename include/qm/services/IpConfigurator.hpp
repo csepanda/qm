@@ -2,7 +2,7 @@
 #define QM_SERVICES_IPCONFIGURATOR_H
 
 #include <ns3/dce-manager-helper.h>
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 #include "TimeSequence.h"
 
 namespace qm::services {

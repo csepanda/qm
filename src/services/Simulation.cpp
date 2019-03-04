@@ -9,7 +9,7 @@
 #include <ns3/point-to-point-helper.h>
 
 #include <qm/exceptions.hpp>
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 #include <qm/services/dce/LinuxStackIPConfigurator.hpp>
 #include <qm/services/Simulation.hpp>
 

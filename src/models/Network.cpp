@@ -1,7 +1,7 @@
-#include <qm/exceptions.hpp>
-#include <qm/model.hpp>
-#include <qm/model/Network.hpp>
 #include <algorithm>
+
+#include <qm/exceptions.hpp>
+#include <qm/models.hpp>
 
 namespace qm::models {
 Network::Network(std::vector<std::shared_ptr<Node>> &nodes, std::vector<std::shared_ptr<Connection>> &connections) {

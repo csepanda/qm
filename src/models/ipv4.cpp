@@ -1,11 +1,10 @@
-#include <qm/model.hpp>
-
 #include <array>
 #include <boost/tokenizer.hpp>
 #include <cmath>
 #include <regex>
 #include <string>
-#include <qm/model/ip.hpp>
+
+#include <qm/models.hpp>
 
 
 namespace qm::models {

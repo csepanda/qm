@@ -4,7 +4,7 @@
 #include <array>
 #include <cstdint>
 #include <unordered_map>
-#include "model.hpp"
+#include "models.hpp"
 
 namespace qm::parsers {
 

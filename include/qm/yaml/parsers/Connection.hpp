@@ -3,7 +3,7 @@
 
 #include <yaml-cpp/yaml.h>
 #include <unordered_map>
-#include "qm/model.hpp"
+#include "qm/models.hpp"
 #include "qm/parsers.hpp"
 
 namespace YAML {

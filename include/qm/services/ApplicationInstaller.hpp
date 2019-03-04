@@ -2,7 +2,7 @@
 #define QM_APPLICATIONINSTALLER_H
 
 #include <memory>
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 
 #include "TimeSequence.h"
 

@@ -1,7 +1,7 @@
 #ifndef QM_PARSERS_IPUTILS_HPP
 #define QM_PARSERS_IPUTILS_HPP
 
-#include <qm/model.hpp>
+#include <qm/models.hpp>
 
 namespace qm::parsers {
 class IpUtils {

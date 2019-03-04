@@ -1,5 +1,4 @@
-
-#include <qm/model/SimulationConfiguration.hpp>
+#include <qm/models.hpp>
 
 namespace qm::models {
 NetworkStack SimulationConfiguration::GetNetworkStack() const {

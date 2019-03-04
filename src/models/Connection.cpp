@@ -1,9 +1,10 @@
-#include <memory>
-
-#include <qm/model.hpp>
-#include <ns3/data-rate.h>
 #include <bits/unique_ptr.h>
 #include <functional>
+#include <memory>
+
+#include <ns3/data-rate.h>
+
+#include <qm/models.hpp>
 
 namespace qm::models {
 void PointToPointConnection::setMtu(const uint16_t t_mtu) {
