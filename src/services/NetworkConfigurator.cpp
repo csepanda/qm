@@ -12,7 +12,7 @@ NetworkConfigurator::NetworkConfigurator(
   qm::models::NetworkStack &networkStack,
   std::shared_ptr<TimeSequence> timer,
   std::shared_ptr<ns3::DceManagerHelper> dceManager
-) : m_timer{std::move(timer)} {
+) {
 
     switch (networkStack) {
         case models::NetworkStack::Ns3:

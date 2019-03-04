@@ -10,7 +10,6 @@
 namespace qm::services {
 class NetworkConfigurator {
     std::unique_ptr<qm::services::IpConfigurator> m_ipConfigurator;
-    std::shared_ptr<TimeSequence> m_timer;
 
     void ConfigureP2PConnection(const qm::models::Network& network, const std::shared_ptr<qm::models::PointToPointConnection> &connection) const;
 public:
