@@ -20,6 +20,10 @@ Simulation SimulationProducer::Create(
     ApplicationInstaller{timer}
         .Install(applications);
 
+    for (const auto &node : network.GetNodes()) {
+        dceManagerHelper->Install(node->GetNS3Node());
+    }
+
     Simulation simulation{
         std::move(m_cfg.GetStopTime()),
         std::move(network),
