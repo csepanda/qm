@@ -24,7 +24,7 @@ Simulation::Simulation(
   std::shared_ptr<TimeSequence> timer,
   std::shared_ptr<ns3::DceManagerHelper> dceManager
 )
-  : m_stopTime {std::move(stopTime)},
+  : m_stopTime{std::move(stopTime)},
     m_network{std::move(network)},
     m_applications{std::move(applications)},
     m_timer{std::move(timer)},
@@ -36,7 +36,10 @@ Simulation::Simulation(
 
 void Simulation::Run() {
     if (m_stopTime == 0) {
-        m_stopTime = m_timer->NextSeconds();
+        m_stopTime = ns3::Time::FromDouble(
+          m_timer->CurrentSeconds().ToDouble(ns3::Time::Unit::S) + 1.0,
+          ns3::Time::Unit::S
+        );
     }
 
     if (m_stopTime < m_timer->CurrentSeconds()) {
@@ -44,7 +47,7 @@ void Simulation::Run() {
 
         ss << "Simulation stop time cannot be less then last initialization timer time: ";
         ss << "StopTime: " << m_stopTime.GetSeconds() << "s\n";
-        ss << "Timer's time: " << m_timer->CurrentSeconds() << "s\n";
+        ss << "Timer's time: " << m_timer->CurrentSeconds().GetSeconds() << "s\n";
         throw InitializationException(ss.str(), "Simulation::Run");
     }
 
