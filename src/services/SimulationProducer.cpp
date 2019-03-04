@@ -14,6 +14,8 @@ Simulation SimulationProducer::Create(
     auto dceManagerHelper = std::make_shared<ns3::DceManagerHelper>();
     auto networkStack = m_cfg.GetNetworkStack();
 
+    timer->NextSeconds();
+
     NetworkConfigurator{networkStack, timer, dceManagerHelper}
         .Configure(network);
 
