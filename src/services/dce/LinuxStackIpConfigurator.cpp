@@ -63,7 +63,7 @@ AddAddress(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &nam
 
 static void LinkSet(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &deviceName) {
     std::ostringstream oss;
-    oss << "link set " << deviceName << "up arp off";
+    oss << "link set " << deviceName << " up arp off";
 
     RunIp(node, std::move(at), oss.str());
 }
