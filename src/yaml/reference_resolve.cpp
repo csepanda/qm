@@ -1,6 +1,6 @@
 #include <qm/parsers.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 
 using ConnectionPtr = std::shared_ptr<qm::models::Connection>;
 using ConnectionsDictionary = std::unordered_map<std::string, ConnectionYamlDTO>;
@@ -47,7 +47,7 @@ resolveConnectionRef(std::string &referrerId, YamlReference &reference, Connecti
         ss << "for object with id '" << referrerId << "'";
         auto source = std::move(ss.str());
 
-        throw ParseException(message, std::move(source));
+        throw qm::ParseException(message, std::move(source));
     }
 }
 
@@ -73,7 +73,7 @@ static void inverseResolve(std::string &referrerId, std::string &targetId, std::
         ss << "for object with id '" << referrerId;
         auto source = std::move(ss.str());
 
-        throw ParseException(message, std::move(source));
+        throw qm::ParseException(message, std::move(source));
     }
 
     if (backRef->Resolved) {
@@ -85,7 +85,7 @@ static void inverseResolve(std::string &referrerId, std::string &targetId, std::
         ss << "for object with id '" << referrerId;
         auto source = std::move(ss.str());
 
-        throw ParseException(message, std::move(source));
+        throw qm::ParseException(message, std::move(source));
     }
 
     backRef->Resolved = true;

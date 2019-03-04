@@ -3,12 +3,12 @@
 
 namespace YAML {
 
-Node convert<qm::parsers::yaml::NodeYamlDTO>::encode(const qm::parsers::yaml::NodeYamlDTO &nodeYamlDTO) {
+Node convert<qm::yaml::dto::NodeYamlDTO>::encode(const qm::yaml::dto::NodeYamlDTO &nodeYamlDTO) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::parsers::yaml::NodeYamlDTO>::decode(const Node &node,
-                                                           qm::parsers::yaml::NodeYamlDTO &nodeYamlDTO) {
+bool convert<qm::yaml::dto::NodeYamlDTO>::decode(const Node &node,
+                                                           qm::yaml::dto::NodeYamlDTO &nodeYamlDTO) {
     nodeYamlDTO.Node.reset(new qm::models::Node);
 
     const auto id = node["id"];
@@ -21,11 +21,11 @@ bool convert<qm::parsers::yaml::NodeYamlDTO>::decode(const Node &node,
 
     if (ipConfigs.IsDefined()) {
         if (!ipConfigs.IsSequence()) {
-            throw qm::parsers::ParseException("ipConfig should be sequence", "Node");
+            throw qm::ParseException("ipConfig should be sequence", "Node");
         }
 
         for (const auto& ipConfigYaml : ipConfigs) {
-            const auto ipConfigDTO = ipConfigYaml.as<qm::parsers::yaml::IpConfigYamlDTO>();
+            const auto ipConfigDTO = ipConfigYaml.as<qm::yaml::dto::IpConfigYamlDTO>();
 
             nodeYamlDTO.IpConfigs.push_back(ipConfigDTO);
         }
@@ -34,25 +34,25 @@ bool convert<qm::parsers::yaml::NodeYamlDTO>::decode(const Node &node,
     return true;
 }
 
-Node convert<qm::parsers::yaml::IpConfigYamlDTO>::encode(const qm::parsers::yaml::IpConfigYamlDTO &) {
+Node convert<qm::yaml::dto::IpConfigYamlDTO>::encode(const qm::yaml::dto::IpConfigYamlDTO &) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::parsers::yaml::IpConfigYamlDTO>::decode(const Node &node, qm::parsers::yaml::IpConfigYamlDTO &ipConfigYamlDTO) {
+bool convert<qm::yaml::dto::IpConfigYamlDTO>::decode(const Node &node, qm::yaml::dto::IpConfigYamlDTO &ipConfigYamlDTO) {
     const auto addressYaml = node["address"];
     const auto connectionYaml = node["connection"];
 
     if (!addressYaml.IsDefined()) {
         // TODO remove node.as<std::string> with correct source
-        throw qm::parsers::ParseException("IpConfig require address fields", node.as<std::string>());
+        throw qm::ParseException("IpConfig require address fields", node.as<std::string>());
     }
 
     if (!connectionYaml.IsDefined()) {
-        throw qm::parsers::ParseException("IpConfig require connection reference", node.as<std::string>());
+        throw qm::ParseException("IpConfig require connection reference", node.as<std::string>());
     }
 
-    const auto parsedNetwork = addressYaml.as<qm::parsers::yaml::IPNetworkYamlDTO>();
-    const auto parsedConnection = connectionYaml.as<qm::parsers::yaml::YamlReference>();
+    const auto parsedNetwork = addressYaml.as<qm::yaml::dto::IPNetworkYamlDTO>();
+    const auto parsedConnection = connectionYaml.as<qm::yaml::dto::YamlReference>();
 
     ipConfigYamlDTO.ConnectionRef = parsedConnection;
     ipConfigYamlDTO.IpConfig = std::make_shared<qm::models::IpConfig>();

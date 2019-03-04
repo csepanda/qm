@@ -1,6 +1,6 @@
 #include <qm/yaml/dto/ConnectionYamlDTO.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 
 std::shared_ptr<qm::models::Connection> ConnectionYamlDTO::GetModel() const {
     switch (type) {

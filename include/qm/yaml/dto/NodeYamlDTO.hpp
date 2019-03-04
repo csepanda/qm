@@ -6,7 +6,7 @@
 #include <qm/models.hpp>
 #include <qm/yaml/dto/Index.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 
 struct NodeYamlDTO : public IdentifiableDTO {
     std::shared_ptr <qm::models::Node> Node;

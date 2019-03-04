@@ -6,10 +6,10 @@
 
 namespace YAML {
 template<>
-struct convert<qm::parsers::yaml::IPAddressYamlDTO> {
-    static Node encode(const qm::parsers::yaml::IPAddressYamlDTO &addressDto);
+struct convert<qm::yaml::dto::IPAddressYamlDTO> {
+    static Node encode(const qm::yaml::dto::IPAddressYamlDTO &addressDto);
 
-    static bool decode(const Node &node, qm::parsers::yaml::IPAddressYamlDTO &addressDto);
+    static bool decode(const Node &node, qm::yaml::dto::IPAddressYamlDTO &addressDto);
 };
 }
 

@@ -1,7 +1,7 @@
 #ifndef QM_YAML_DTO_NETWORKYAMLDTO_HPP
 #define QM_YAML_DTO_NETWORKYAMLDTO_HPP
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 struct NetworkYamlDTO : public BaseYamlDTO<qm::models::Network> {
     std::unordered_map<std::string, NodeYamlDTO> NodesDTO{};
     std::unordered_map<std::string, ConnectionYamlDTO> ConnectionsDTO{};

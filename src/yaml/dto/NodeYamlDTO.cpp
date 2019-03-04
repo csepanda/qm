@@ -1,6 +1,6 @@
 #include <qm/yaml/dto/NodeYamlDTO.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 
 const std::string &NodeYamlDTO::GetId() const {
     if (Node == nullptr) {

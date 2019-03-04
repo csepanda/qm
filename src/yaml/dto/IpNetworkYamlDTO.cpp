@@ -1,6 +1,6 @@
 #include <qm/yaml/dto/IpNetworkYamlDTO.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 
 std::shared_ptr<models::IPNetwork> IPNetworkYamlDTO::GetModel() const {
     switch (ProtocolVersion) {

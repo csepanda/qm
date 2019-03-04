@@ -8,7 +8,7 @@ ipConfig:
     connection: !Ref connection_01
 )");
 
-    const auto actual = yaml["ipConfig"].as<qm::parsers::yaml::IpConfigYamlDTO>();
+    const auto actual = yaml["ipConfig"].as<qm::yaml::dto::IpConfigYamlDTO>();
 
     SECTION("ConnectionReference is correctly parsed") {
         REQUIRE(actual.ConnectionRef.Id == "connection_01");
@@ -31,7 +31,7 @@ ipConfig:
     connection: !Ref connection_01
 )");
 
-    REQUIRE_THROWS(yaml["ipConfig"].as<qm::parsers::yaml::IpConfigYamlDTO>());
+    REQUIRE_THROWS(yaml["ipConfig"].as<qm::yaml::dto::IpConfigYamlDTO>());
 }
 
 TEST_CASE("parse IpConfig from yaml with invalid connection reference", "[parsers][yaml]") {
@@ -41,6 +41,6 @@ ipConfig:
     connection: !fef connection_01
 )");
 
-    REQUIRE_THROWS(yaml["ipConfig"].as<qm::parsers::yaml::IpConfigYamlDTO>());
+    REQUIRE_THROWS(yaml["ipConfig"].as<qm::yaml::dto::IpConfigYamlDTO>());
 }
 

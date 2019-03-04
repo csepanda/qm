@@ -9,11 +9,11 @@
 
 namespace YAML {
 
-Node convert<qm::parsers::yaml::NetworkYamlDTO>::encode(const qm::parsers::yaml::NetworkYamlDTO &networkYamlDTO) {
+Node convert<qm::yaml::dto::NetworkYamlDTO>::encode(const qm::yaml::dto::NetworkYamlDTO &networkYamlDTO) {
     throw std::logic_error("Not implemented");
 }
 
-static void SetIdIfNotSet(qm::parsers::yaml::IdentifiableDTO &obj, boost::uuids::random_generator generator) {
+static void SetIdIfNotSet(qm::yaml::dto::IdentifiableDTO &obj, boost::uuids::random_generator generator) {
     if (obj.GetId().empty()) {
         const auto uuid = generator();
         const auto id = boost::uuids::to_string(uuid);
@@ -30,7 +30,7 @@ void parseObjectsSequence(const Node &node, std::unordered_map<std::string, T> &
     }
 
     if (!node.IsSequence()) {
-        throw qm::parsers::ParseException("Expected array", "Network yaml parsing");
+        throw qm::ParseException("Expected array", "Network yaml parsing");
     }
 
     for (const auto &nodeYaml : node) {
@@ -42,8 +42,8 @@ void parseObjectsSequence(const Node &node, std::unordered_map<std::string, T> &
 
 }
 
-bool convert<qm::parsers::yaml::NetworkYamlDTO>::decode(const Node &node,
-                                                        qm::parsers::yaml::NetworkYamlDTO &networkYamlDTO) {
+bool convert<qm::yaml::dto::NetworkYamlDTO>::decode(const Node &node,
+                                                        qm::yaml::dto::NetworkYamlDTO &networkYamlDTO) {
     boost::uuids::random_generator generateUUID;
     const auto nodesYaml = node["nodes"];
     const auto connectionsYaml = node["connections"];

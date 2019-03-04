@@ -3,7 +3,7 @@
 
 #include <qm/yaml/dto/Index.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 struct ConnectionYamlDTO : public IdentifiableDTO, public BaseYamlDTO<std::shared_ptr<qm::models::Connection>> {
     std::vector <YamlReference> TargetsRefs;
     qm::models::ConnectionType type;

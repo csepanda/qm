@@ -4,12 +4,12 @@
 
 namespace YAML {
 static const auto SOURCE = "Parse Process from yaml";
-Node convert<qm::parsers::yaml::ProcessYamlDTO>::encode(const qm::parsers::yaml::ProcessYamlDTO &) {
+Node convert<qm::yaml::dto::ProcessYamlDTO>::encode(const qm::yaml::dto::ProcessYamlDTO &) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::parsers::yaml::ProcessYamlDTO>::decode(const Node &node,
-                                                        qm::parsers::yaml::ProcessYamlDTO &processYamlDTO) {
+bool convert<qm::yaml::dto::ProcessYamlDTO>::decode(const Node &node,
+                                                        qm::yaml::dto::ProcessYamlDTO &processYamlDTO) {
     const auto binaryNode = node["binary"];
     const auto argumentsNode = node["arguments"];
     const auto stackSizeNode = node["stackSize"];
@@ -17,17 +17,17 @@ bool convert<qm::parsers::yaml::ProcessYamlDTO>::decode(const Node &node,
     const auto startAtNode = node["startAt"];
 
     if (!(binaryNode.IsDefined() && binaryNode.IsScalar())) {
-        throw qm::parsers::ParseException("'binary' is required for Process", SOURCE);
+        throw qm::ParseException("'binary' is required for Process", SOURCE);
     } else if (!nodeReferenceNode.IsDefined()) {
-        throw qm::parsers::ParseException("'node' is required for Process", SOURCE);
+        throw qm::ParseException("'node' is required for Process", SOURCE);
     }
 
     processYamlDTO.Binary = binaryNode.as<std::string>();
-    processYamlDTO.NodeReference = nodeReferenceNode.as<qm::parsers::yaml::YamlReference>();
+    processYamlDTO.NodeReference = nodeReferenceNode.as<qm::yaml::dto::YamlReference>();
 
     if (argumentsNode.IsDefined()) {
         if (!argumentsNode.IsSequence()) {
-            throw qm::parsers::ParseException("'arguments' should be an array", SOURCE);
+            throw qm::ParseException("'arguments' should be an array", SOURCE);
         }
 
         processYamlDTO.Arguments = argumentsNode.as<std::vector<std::string>>();
@@ -35,7 +35,7 @@ bool convert<qm::parsers::yaml::ProcessYamlDTO>::decode(const Node &node,
 
     if (startAtNode.IsDefined()) {
         if (!startAtNode.IsScalar()) {
-            throw qm::parsers::ParseException("'arguments' should be a string", SOURCE);
+            throw qm::ParseException("'arguments' should be a string", SOURCE);
         }
 
         processYamlDTO.StartAt = startAtNode.as<ns3::Time>();

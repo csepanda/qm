@@ -11,7 +11,7 @@
 #include "Index.hpp"
 #include "NetworkYamlDTO.hpp"
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 struct ProcessYamlDTO {
     std::string Binary;
     std::vector <std::string> Arguments;

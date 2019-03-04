@@ -13,10 +13,10 @@ struct convert<qm::models::NetworkStack> {
 };
 
 template<>
-struct convert<qm::parsers::yaml::SimulationConfigurationYamlDTO> {
-    static Node encode(const qm::parsers::yaml::SimulationConfigurationYamlDTO &);
+struct convert<qm::yaml::dto::SimulationConfigurationYamlDTO> {
+    static Node encode(const qm::yaml::dto::SimulationConfigurationYamlDTO &);
 
-    static bool decode(const Node &node, qm::parsers::yaml::SimulationConfigurationYamlDTO &);
+    static bool decode(const Node &node, qm::yaml::dto::SimulationConfigurationYamlDTO &);
 };
 }
 #endif //QM_YAML_PARSER_SIMULATIONCONFIGURATIONYAMLPARSER_H

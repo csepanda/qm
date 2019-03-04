@@ -3,7 +3,7 @@
 
 #include <qm/yaml/dto/Index.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 struct IPNetworkYamlDTO : public BaseYamlDTO<std::shared_ptr<qm::models::IPNetwork>> {
     qm::models::IPVersion ProtocolVersion{};
     std::shared_ptr<qm::models::IPv4Network> IPv4;

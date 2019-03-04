@@ -16,7 +16,7 @@ TEST_CASE("parseCIDR/Parse valid input", "[parsers]") {
 }
 
 TEST_CASE("parseCIDR/Throws ParseException on invalid input", "[parsers]") {
-    REQUIRE_THROWS_AS(qm::parsers::IpUtils::parseCIDR("foobar"), qm::parsers::ParseException);
+    REQUIRE_THROWS_AS(qm::parsers::IpUtils::parseCIDR("foobar"), qm::ParseException);
 }
 
 void parseIPv4AndAssert(const std::string &input, const std::array<uint8_t, 4> &expected) {
@@ -46,7 +46,7 @@ TEST_CASE("parseIPv4/Parse valid input", "[parsers]") {
 TEST_CASE("parseIPv4/Invalid format", "[parsers]") {
     const auto expectedMessage = "doesn't match format: x.x.x.x";
 
-    REQUIRE_THROWS_AS(qm::parsers::IpUtils::parseIPv4("127..0.0"), qm::parsers::ParseException);
+    REQUIRE_THROWS_AS(qm::parsers::IpUtils::parseIPv4("127..0.0"), qm::ParseException);
     REQUIRE_THROWS_WITH(qm::parsers::IpUtils::parseIPv4("127..0.0"), expectedMessage);
     REQUIRE_THROWS_WITH(qm::parsers::IpUtils::parseIPv4("127.-1.0.0"), expectedMessage);
 
@@ -58,7 +58,7 @@ TEST_CASE("parseIPv4/Invalid format", "[parsers]") {
 TEST_CASE("parseIPv4/Wrong IPv4 components", "[parsers]") {
     const auto expectedMessage = "IPv4 component cannot contain numbers greater than 255 or less than zero";
 
-    REQUIRE_THROWS_AS(qm::parsers::IpUtils::parseIPv4("127.256.0.1"), qm::parsers::ParseException);
+    REQUIRE_THROWS_AS(qm::parsers::IpUtils::parseIPv4("127.256.0.1"), qm::ParseException);
     REQUIRE_THROWS_WITH(qm::parsers::IpUtils::parseIPv4("127.256.0.1"), expectedMessage);
     REQUIRE_THROWS_WITH(qm::parsers::IpUtils::parseIPv4("127.512.0.1"), expectedMessage);
 }
@@ -74,7 +74,7 @@ TEST_CASE("determineIPVersion/IPv4 input", "[parsers]") {
 TEST_CASE("determineIPVersion/Invalid input", "[parsers]") {
     const auto expectedMessage = "Unknown IP address protocol version";
 
-    REQUIRE_THROWS_AS(qm::parsers::IpUtils::determineIPVersion("127..0.1"), qm::parsers::ParseException);
+    REQUIRE_THROWS_AS(qm::parsers::IpUtils::determineIPVersion("127..0.1"), qm::ParseException);
     REQUIRE_THROWS_WITH(qm::parsers::IpUtils::determineIPVersion(".56.0.1"), expectedMessage);
     REQUIRE_THROWS_WITH(qm::parsers::IpUtils::determineIPVersion("foobar"), expectedMessage);
 }
@@ -90,17 +90,17 @@ TEST_CASE("determineIPVersion/IPv6 input", "[parsers]") {
 TEST_CASE("parse IPv4 Network from invalid format string", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load("192.168.0.1");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::IPNetworkYamlDTO>(), qm::parsers::ParseException);
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetworkYamlDTO>(), qm::ParseException);
 }
 
 TEST_CASE("parse IPv4 Network from string with invalid cidr value", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load("192.168.0.1/64");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::IPNetworkYamlDTO>(), std::invalid_argument);
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetworkYamlDTO>(), std::invalid_argument);
 }
 
 TEST_CASE("parse IPv4 Network from string with invalid cidr", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load("192.168.0.1/dasd");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::IPNetworkYamlDTO>(), qm::parsers::ParseException);
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::IPNetworkYamlDTO>(), qm::ParseException);
 }

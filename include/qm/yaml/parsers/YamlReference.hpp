@@ -6,10 +6,10 @@
 
 namespace YAML {
 template<>
-struct convert<qm::parsers::yaml::YamlReference> {
-    static Node encode(const qm::parsers::yaml::YamlReference &);
+struct convert<qm::yaml::dto::YamlReference> {
+    static Node encode(const qm::yaml::dto::YamlReference &);
 
-    static bool decode(const Node &node, qm::parsers::yaml::YamlReference &);
+    static bool decode(const Node &node, qm::yaml::dto::YamlReference &);
 };
 }
 

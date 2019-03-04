@@ -1,7 +1,7 @@
 #include <qm/parsers.hpp>
 #include <qm/yaml/dto/ProcessYamlDTO.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 std::shared_ptr<qm::models::Process> ProcessYamlDTO::GetApplication() const {
     if (!NodeReference.Resolved) {
         throw InitializationException("Node reference is not resolved yet!", "Process::GetApplication");

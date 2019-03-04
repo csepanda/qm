@@ -2,7 +2,7 @@
 #include <qm/yaml/parsers/IpAddress.hpp>
 
 namespace YAML {
-Node convert<qm::parsers::yaml::IPAddressYamlDTO>::encode(const qm::parsers::yaml::IPAddressYamlDTO &addressDto) {
+Node convert<qm::yaml::dto::IPAddressYamlDTO>::encode(const qm::yaml::dto::IPAddressYamlDTO &addressDto) {
     Node node;
 
     switch (addressDto.ProtocolVersion) {
@@ -16,8 +16,8 @@ Node convert<qm::parsers::yaml::IPAddressYamlDTO>::encode(const qm::parsers::yam
     return node;
 }
 
-bool convert<qm::parsers::yaml::IPAddressYamlDTO>::decode(const Node &node,
-                                                          qm::parsers::yaml::IPAddressYamlDTO &addressDto) {
+bool convert<qm::yaml::dto::IPAddressYamlDTO>::decode(const Node &node,
+                                                          qm::yaml::dto::IPAddressYamlDTO &addressDto) {
     const auto inputAddress = node.as<std::string>();
     const auto protocolVersion = qm::parsers::IpUtils::determineIPVersion(inputAddress);
 

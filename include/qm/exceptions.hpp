@@ -4,6 +4,15 @@
 #include <stdexcept>
 
 namespace qm {
+struct ParseException : public std::runtime_error {
+    const std::string m_source;
+
+    explicit ParseException(const std::string &message, std::string source) :
+      std::runtime_error(message),
+      m_source(std::move(source)) {
+    }
+};
+
 struct InitializationException : public std::runtime_error {
     const std::string m_source;
 

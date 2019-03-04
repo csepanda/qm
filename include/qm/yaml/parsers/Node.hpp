@@ -8,17 +8,17 @@
 
 namespace YAML {
 template<>
-struct convert<qm::parsers::yaml::NodeYamlDTO> {
-    static Node encode(const qm::parsers::yaml::NodeYamlDTO &);
+struct convert<qm::yaml::dto::NodeYamlDTO> {
+    static Node encode(const qm::yaml::dto::NodeYamlDTO &);
 
-    static bool decode(const Node &node, qm::parsers::yaml::NodeYamlDTO &);
+    static bool decode(const Node &node, qm::yaml::dto::NodeYamlDTO &);
 };
 
 template<>
-struct convert<qm::parsers::yaml::IpConfigYamlDTO> {
-    static Node encode(const qm::parsers::yaml::IpConfigYamlDTO &);
+struct convert<qm::yaml::dto::IpConfigYamlDTO> {
+    static Node encode(const qm::yaml::dto::IpConfigYamlDTO &);
 
-    static bool decode(const Node &node, qm::parsers::yaml::IpConfigYamlDTO&);
+    static bool decode(const Node &node, qm::yaml::dto::IpConfigYamlDTO&);
 };
 }
 

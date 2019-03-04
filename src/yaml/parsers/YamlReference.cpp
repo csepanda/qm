@@ -2,12 +2,12 @@
 
 namespace YAML {
 
-Node convert<qm::parsers::yaml::YamlReference>::encode(const qm::parsers::yaml::YamlReference &) {
+Node convert<qm::yaml::dto::YamlReference>::encode(const qm::yaml::dto::YamlReference &) {
     throw std::logic_error("Not implemented");
 }
 
 bool
-convert<qm::parsers::yaml::YamlReference>::decode(const Node &node, qm::parsers::yaml::YamlReference &yamlReference) {
+convert<qm::yaml::dto::YamlReference>::decode(const Node &node, qm::yaml::dto::YamlReference &yamlReference) {
     const auto id = node.as<std::string>();
     const auto &type = node.Tag();
 
@@ -16,7 +16,7 @@ convert<qm::parsers::yaml::YamlReference>::decode(const Node &node, qm::parsers:
         yamlReference.Resolved = false;
         return true;
     } else {
-        throw qm::parsers::ParseException("Expected reference with !Ref tag, got: '" + type + "'", "");
+        throw qm::ParseException("Expected reference with !Ref tag, got: '" + type + "'", "");
     }
 }
 }

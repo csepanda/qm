@@ -10,7 +10,7 @@ static const std::unordered_map<std::string, qm::models::ConnectionType> typeMap
   {"PointToPoint", qm::models::ConnectionType::P2P}
 };
 
-Node convert<qm::parsers::yaml::ConnectionYamlDTO>::encode(const qm::parsers::yaml::ConnectionYamlDTO &connectionDTO) {
+Node convert<qm::yaml::dto::ConnectionYamlDTO>::encode(const qm::yaml::dto::ConnectionYamlDTO &connectionDTO) {
     Node node;
 
     switch (connectionDTO.type) {
@@ -20,8 +20,8 @@ Node convert<qm::parsers::yaml::ConnectionYamlDTO>::encode(const qm::parsers::ya
     }
 }
 
-bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
-                                                           qm::parsers::yaml::ConnectionYamlDTO &connectionDTO) {
+bool convert<qm::yaml::dto::ConnectionYamlDTO>::decode(const Node &node,
+                                                           qm::yaml::dto::ConnectionYamlDTO &connectionDTO) {
     const auto typeNode = node["type"];
 
     if (typeNode.IsDefined()) {
@@ -30,7 +30,7 @@ bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
         try {
             connectionDTO.type = typeMapper.at(type);
         } catch (std::out_of_range&) {
-            throw qm::parsers::ParseException("Unknown connection type: '" + type + "'", "Parse Connection from yaml");
+            throw qm::ParseException("Unknown connection type: '" + type + "'", "Parse Connection from yaml");
         }
     } else {
         connectionDTO.type = DEFAULT_TYPE;
@@ -65,11 +65,11 @@ bool convert<qm::parsers::yaml::ConnectionYamlDTO>::decode(const Node &node,
 
             if (targets.IsDefined()) {
                 if (!targets.IsSequence()) {
-                    throw qm::parsers::ParseException("Connection's targets should be a sequence", "Connection");
+                    throw qm::ParseException("Connection's targets should be a sequence", "Connection");
                 }
 
                 for (const auto& target : targets) {
-                    const auto ref = target.as<qm::parsers::yaml::YamlReference>();
+                    const auto ref = target.as<qm::yaml::dto::YamlReference>();
 
                     connectionDTO.TargetsRefs.push_back(ref);
                 }

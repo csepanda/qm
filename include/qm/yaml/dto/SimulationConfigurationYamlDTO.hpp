@@ -4,7 +4,7 @@
 #include <qm/models.hpp>
 #include <qm/yaml/dto/Index.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 struct SimulationConfigurationYamlDTO : public BaseYamlDTO<qm::models::SimulationConfiguration> {
     qm::models::NetworkStack networkStack{};
     qm::models::SimulationConfiguration GetModel() const override;

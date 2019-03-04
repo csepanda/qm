@@ -27,7 +27,7 @@ connections:
 
 TEST_CASE("parse Network from valid yaml // correct nodes filling", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(validYamlWithIdsAndReferences);
-    const auto actual = yaml.as<qm::parsers::yaml::NetworkYamlDTO>();
+    const auto actual = yaml.as<qm::yaml::dto::NetworkYamlDTO>();
 
     REQUIRE(actual.NodesDTO.size() == 2);
     REQUIRE(actual.NodesDTO.at("node01").GetId() == "node01");
@@ -36,7 +36,7 @@ TEST_CASE("parse Network from valid yaml // correct nodes filling", "[parsers][y
 
 TEST_CASE("parse Network from valid yaml // correct connections filling", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(validYamlWithIdsAndReferences);
-    const auto actual = yaml.as<qm::parsers::yaml::NetworkYamlDTO>();
+    const auto actual = yaml.as<qm::yaml::dto::NetworkYamlDTO>();
 
     REQUIRE(actual.ConnectionsDTO.size() == 1);
     REQUIRE(actual.ConnectionsDTO.at("connection01").GetId() == "connection01");
@@ -44,10 +44,10 @@ TEST_CASE("parse Network from valid yaml // correct connections filling", "[pars
 
 TEST_CASE("parse Network from valid yaml // references resolving in nodes", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(validYamlWithIdsAndReferences);
-    const auto actual = yaml.as<qm::parsers::yaml::NetworkYamlDTO>();
+    const auto actual = yaml.as<qm::yaml::dto::NetworkYamlDTO>();
 
     for (const auto&[id, node] : actual.NodesDTO) {
-        const qm::parsers::yaml::NodeYamlDTO n = node;
+        const qm::yaml::dto::NodeYamlDTO n = node;
 
         for (const auto &ipConfig : n.Node->GetIpConfigs()) {
             REQUIRE(ipConfig->BindConnection != nullptr);
@@ -61,7 +61,7 @@ TEST_CASE("parse Network from valid yaml // references resolving in nodes", "[pa
 
 TEST_CASE("parse Network from valid yaml // references resolving in connections", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(validYamlWithIdsAndReferences);
-    const auto actual = yaml.as<qm::parsers::yaml::NetworkYamlDTO>();
+    const auto actual = yaml.as<qm::yaml::dto::NetworkYamlDTO>();
 
     for (const auto&[id, connection] : actual.ConnectionsDTO) {
         const auto nodes = connection.GetModel()->GetNodes();
@@ -86,7 +86,7 @@ connections:
     mtu: 1500
 )");
 
-    const auto actual = yaml.as<qm::parsers::yaml::NetworkYamlDTO>();
+    const auto actual = yaml.as<qm::yaml::dto::NetworkYamlDTO>();
 
     REQUIRE(actual.ConnectionsDTO.size() == 1);
 
@@ -117,7 +117,7 @@ static std::shared_ptr<T> findById(const std::vector<std::shared_ptr<T>> &collec
 
 TEST_CASE("parse Network from valid yaml // Final object", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(validYamlWithIdsAndReferences);
-    const auto networkDTO = yaml.as<qm::parsers::yaml::NetworkYamlDTO> ();
+    const auto networkDTO = yaml.as<qm::yaml::dto::NetworkYamlDTO> ();
     const qm::models::Network actual = networkDTO.GetModel();
 
     const auto &actualNodes = actual.GetNodes();

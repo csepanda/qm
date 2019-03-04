@@ -8,7 +8,7 @@
 #include <qm/exceptions.hpp>
 #include <qm/models.hpp>
 
-namespace qm::parsers::yaml {
+namespace qm::yaml::dto {
 template<typename TModel>
 class BaseYamlDTO {
 public:

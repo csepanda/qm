@@ -6,19 +6,19 @@
 #include <qm/parsers.hpp>
 
 namespace YAML {
-Node convert<qm::parsers::yaml::IPNetworkYamlDTO>::encode(const qm::parsers::yaml::IPNetworkYamlDTO &networkYamlDTO) {
+Node convert<qm::yaml::dto::IPNetworkYamlDTO>::encode(const qm::yaml::dto::IPNetworkYamlDTO &networkYamlDTO) {
     throw std::logic_error("Not implemented");
 }
 
-bool convert<qm::parsers::yaml::IPNetworkYamlDTO>::decode(const Node &node,
-                                                          qm::parsers::yaml::IPNetworkYamlDTO &networkYamlDTO) {
+bool convert<qm::yaml::dto::IPNetworkYamlDTO>::decode(const Node &node,
+                                                          qm::yaml::dto::IPNetworkYamlDTO &networkYamlDTO) {
     const auto inputNetwork = node.as<std::string>();
     std::vector<std::string> splitted;
 
     boost::split(splitted, inputNetwork, [](char c) { return c == '/'; });
 
     if (splitted.size() != 2) {
-        throw qm::parsers::ParseException("Network doesn't match format 'IPAddress/CidrMask'", inputNetwork);
+        throw qm::ParseException("Network doesn't match format 'IPAddress/CidrMask'", inputNetwork);
     }
 
     const auto inputAddress = splitted[0];

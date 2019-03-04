@@ -11,7 +11,7 @@ stackSize: 1048576
 startAt: 1s
 )");
 
-    const auto actual = yaml.as<qm::parsers::yaml::ProcessYamlDTO>();
+    const auto actual = yaml.as<qm::yaml::dto::ProcessYamlDTO>();
 
     REQUIRE(actual.Binary == "ping");
     REQUIRE(actual.Arguments.size() == 1);
@@ -29,8 +29,8 @@ arguments:
 stackSize: 1048576
 )");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), qm::parsers::ParseException);
-    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), "'binary' is required for Process");
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::ProcessYamlDTO>(), qm::ParseException);
+    REQUIRE_THROWS_WITH(yaml.as<qm::yaml::dto::ProcessYamlDTO>(), "'binary' is required for Process");
 }
 
 TEST_CASE("parse application from invalid yaml - missing node", "[parsers][yaml]") {
@@ -41,8 +41,8 @@ arguments:
 stackSize: 1048576
 )");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), qm::parsers::ParseException);
-    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), "'node' is required for Process");
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::ProcessYamlDTO>(), qm::ParseException);
+    REQUIRE_THROWS_WITH(yaml.as<qm::yaml::dto::ProcessYamlDTO>(), "'node' is required for Process");
 }
 
 TEST_CASE("parse application from invalid yaml - invalid arguments", "[parsers][yaml]") {
@@ -53,6 +53,6 @@ arguments: 127.0.0.1
 stackSize: 1048576
 )");
 
-    REQUIRE_THROWS_AS(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), qm::parsers::ParseException);
-    REQUIRE_THROWS_WITH(yaml.as<qm::parsers::yaml::ProcessYamlDTO>(), "'arguments' should be an array");
+    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::ProcessYamlDTO>(), qm::ParseException);
+    REQUIRE_THROWS_WITH(yaml.as<qm::yaml::dto::ProcessYamlDTO>(), "'arguments' should be an array");
 }

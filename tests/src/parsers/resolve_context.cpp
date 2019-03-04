@@ -2,11 +2,11 @@
 #include <qm/parsers.hpp>
 #include <yaml-cpp/yaml.h>
 
-using Context = qm::parsers::yaml::NetworkYamlDTO;
-using NodeDTO = qm::parsers::yaml::NodeYamlDTO;
-using ConnectionDTO = qm::parsers::yaml::ConnectionYamlDTO;
-using IpConfigDTO = qm::parsers::yaml::IpConfigYamlDTO;
-using YamlReference = qm::parsers::yaml::YamlReference;
+using Context = qm::yaml::dto::NetworkYamlDTO;
+using NodeDTO = qm::yaml::dto::NodeYamlDTO;
+using ConnectionDTO = qm::yaml::dto::ConnectionYamlDTO;
+using IpConfigDTO = qm::yaml::dto::IpConfigYamlDTO;
+using YamlReference = qm::yaml::dto::YamlReference;
 using Node = qm::models::Node;
 using IpConfig = qm::models::IpConfig;
 using P2PConnection = qm::models::PointToPointConnection;
@@ -68,7 +68,7 @@ static Context prepareContext_noBackReference();
 TEST_CASE("resolveContext // no back reference", "[parsers][yaml]") {
     SECTION("exception") {
         Context ctx = prepareContext_noBackReference();
-        REQUIRE_THROWS_AS(ctx.ResolveContext(), qm::parsers::ParseException);
+        REQUIRE_THROWS_AS(ctx.ResolveContext(), qm::ParseException);
     }
 
     SECTION("message") {
@@ -81,7 +81,7 @@ static Context prepareContext_allReferencesUsed();
 TEST_CASE("resolveContext // all references are used", "[parsers][yaml]") {
     SECTION("exception") {
         Context ctx = prepareContext_allReferencesUsed();
-        REQUIRE_THROWS_AS(ctx.ResolveContext(), qm::parsers::ParseException);
+        REQUIRE_THROWS_AS(ctx.ResolveContext(), qm::ParseException);
     }
 
     SECTION("message") {

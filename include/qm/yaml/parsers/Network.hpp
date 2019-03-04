@@ -6,10 +6,10 @@
 
 namespace YAML {
 template<>
-struct convert<qm::parsers::yaml::NetworkYamlDTO> {
-    static Node encode(const qm::parsers::yaml::NetworkYamlDTO &);
+struct convert<qm::yaml::dto::NetworkYamlDTO> {
+    static Node encode(const qm::yaml::dto::NetworkYamlDTO &);
 
-    static bool decode(const Node &node, qm::parsers::yaml::NetworkYamlDTO &);
+    static bool decode(const Node &node, qm::yaml::dto::NetworkYamlDTO &);
 };
 
 }

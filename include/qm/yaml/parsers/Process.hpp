@@ -5,10 +5,10 @@
 
 namespace YAML {
 template<>
-struct convert<qm::parsers::yaml::ProcessYamlDTO> {
-    static Node encode(const qm::parsers::yaml::ProcessYamlDTO &);
+struct convert<qm::yaml::dto::ProcessYamlDTO> {
+    static Node encode(const qm::yaml::dto::ProcessYamlDTO &);
 
-    static bool decode(const Node &node, qm::parsers::yaml::ProcessYamlDTO &);
+    static bool decode(const Node &node, qm::yaml::dto::ProcessYamlDTO &);
 };
 }
 
