@@ -10,7 +10,7 @@ namespace qm::services {
 class SimulationProducer {
     qm::models::SimulationConfiguration m_cfg;
 public:
-    SimulationProducer(qm::models::SimulationConfiguration cfg);
+    explicit SimulationProducer(qm::models::SimulationConfiguration cfg);
     qm::services::Simulation Create(
       qm::models::Network,
       std::vector<std::shared_ptr<qm::models::Process>>
