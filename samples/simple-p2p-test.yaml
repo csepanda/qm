@@ -4,17 +4,17 @@ network:
     nodes:
         - id: node01
           ipConfig:
-              connection: !Ref connection_01
-              address: 10.10.0.2/24
+              - connection: !Ref connection_01
+                address: 10.10.0.2/24
 
         - id: node02
           ipConfig:
-              connection: !Ref connection_01
-              address: 10.10.0.3/24
+              - connection: !Ref connection_01
+                address: 10.10.0.3/24
     connections:
         - id: connection_01
           type: P2P
-          target:
+          targets:
               - !Ref node01
               - !Ref node02
           dataRate: 5Mbps
