@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <qm/models.hpp>
 #include <qm/models/SimulationConfiguration.hpp>
 
@@ -12,7 +14,7 @@ SimulationConfiguration::SimulationConfiguration(
   ns3::Time stopTime
 )
   : m_networkStack{networkStack},
-    m_stopTime{m_stopTime} {
+    m_stopTime{std::move(stopTime)} {
 }
 
 ns3::Time SimulationConfiguration::GetStopTime() const {
