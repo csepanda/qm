@@ -1,5 +1,7 @@
-#include <qm/yaml/parsers/SimulationConfiguration.hpp>
 #include <yaml-cpp/yaml.h>
+
+#include <qm/yaml/parsers/NS3Types.hpp>
+#include <qm/yaml/parsers/SimulationConfiguration.hpp>
 
 namespace YAML {
 
