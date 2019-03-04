@@ -37,7 +37,7 @@ Simulation::Simulation(
 void Simulation::Run() {
     if (m_stopTime == 0) {
         m_stopTime = ns3::Time::FromDouble(
-          m_timer->CurrentSeconds().ToDouble(ns3::Time::Unit::S) + 1.0,
+          m_timer->CurrentSeconds().ToDouble(ns3::Time::Unit::S) + 60.0,
           ns3::Time::Unit::S
         );
     }
