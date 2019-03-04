@@ -7,6 +7,7 @@
 namespace qm::yaml::dto {
 struct SimulationConfiguration: public BaseYamlDTO<qm::models::SimulationConfiguration> {
     qm::models::NetworkStack networkStack{};
+    ns3::Time stopTime{};
     qm::models::SimulationConfiguration GetModel() const override;
 };
 }

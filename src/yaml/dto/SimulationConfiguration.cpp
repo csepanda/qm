@@ -2,6 +2,6 @@
 #include <qm/yaml/dto/SimulationConfiguration.hpp>
 
 qm::models::SimulationConfiguration qm::yaml::dto::SimulationConfiguration::GetModel() const {
-    return qm::models::SimulationConfiguration{networkStack};
+    return qm::models::SimulationConfiguration{networkStack, stopTime};
 }
 

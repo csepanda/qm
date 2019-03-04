@@ -29,10 +29,16 @@ Node convert<qm::yaml::dto::SimulationConfiguration>::encode(
 bool convert<qm::yaml::dto::SimulationConfiguration>::decode(
   const Node &node, qm::yaml::dto::SimulationConfiguration &simulationConfigurationYamlDTO) {
     const auto networkStackNode = node["networkStack"];
+    const auto stopTimeNode = node["stopTime"];
 
     if (networkStackNode.IsDefined()) {
         simulationConfigurationYamlDTO.networkStack = networkStackNode.as<qm::models::NetworkStack>();
     }
+
+    if (stopTimeNode.IsDefined()) {
+        simulationConfigurationYamlDTO.stopTime = stopTimeNode.as<ns3::Time>();
+    }
+
 
     return true;
 }

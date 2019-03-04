@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <ns3/dce-module.h>
 #include <qm/services/SimulationProducer.hpp>
 #include <qm/services/NetworkConfigurator.hpp>
@@ -19,6 +21,7 @@ Simulation SimulationProducer::Create(
         .Install(applications);
 
     Simulation simulation{
+        std::move(m_cfg.GetStopTime()),
         std::move(network),
         std::move(applications),
         std::move(timer),
@@ -28,7 +31,7 @@ Simulation SimulationProducer::Create(
     return simulation;
 }
 
-SimulationProducer::SimulationProducer(qm::models::SimulationConfiguration cfg) : m_cfg{cfg} {
+SimulationProducer::SimulationProducer(qm::models::SimulationConfiguration cfg) : m_cfg{std::move(cfg)} {
 }
 }
 

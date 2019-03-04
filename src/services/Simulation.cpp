@@ -2,6 +2,8 @@
 
 #include <utility>
 
+#include <utility>
+
 #include <algorithm>
 #include <utility>
 
@@ -16,12 +18,14 @@
 namespace qm::services {
 
 Simulation::Simulation(
+  ns3::Time stopTime,
   qm::models::Network network,
   std::vector<std::shared_ptr<qm::models::Process>> applications,
   std::shared_ptr<TimeSequence> timer,
   std::shared_ptr<ns3::DceManagerHelper> dceManager
 )
-  : m_network{std::move(network)},
+  : m_stopTime {std::move(stopTime)},
+    m_network{std::move(network)},
     m_applications{std::move(applications)},
     m_timer{std::move(timer)},
     m_dceManager{std::move(dceManager)} {
@@ -30,8 +34,22 @@ Simulation::Simulation(
 
 }
 
-// TODO implement
 void Simulation::Run() {
-    throw std::logic_error("TODO implement");
+    if (m_stopTime == 0) {
+        m_stopTime = m_timer->NextSeconds();
+    }
+
+    if (m_stopTime < m_timer->CurrentSeconds()) {
+        std::stringstream ss;
+
+        ss << "Simulation stop time cannot be less then last initialization timer time: ";
+        ss << "StopTime: " << m_stopTime.GetSeconds() << "s\n";
+        ss << "Timer's time: " << m_timer->CurrentSeconds() << "s\n";
+        throw InitializationException(ss.str(), "Simulation::Run");
+    }
+
+    ns3::Simulator::Stop(m_stopTime);
+    ns3::Simulator::Run();
+    ns3::Simulator::Destroy();
 }
 }
