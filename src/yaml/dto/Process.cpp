@@ -2,7 +2,7 @@
 #include <qm/yaml/dto/Process.hpp>
 
 namespace qm::yaml::dto {
-std::shared_ptr<qm::models::Process> Process::GetApplication() const {
+std::shared_ptr<qm::models::Process> Process::GetModel() const {
     if (!NodeReference.Resolved) {
         throw InitializationException("Node reference is not resolved yet!", "Process::GetApplication");
     }
@@ -10,7 +10,7 @@ std::shared_ptr<qm::models::Process> Process::GetApplication() const {
     return std::make_shared<models::Process>(m_node, Binary, StackSize, Arguments, StartAt);
 }
 
-void Process::ResolveNode(Network networkYamlDTO) {
+void Process::ResolveNode(Network &networkYamlDTO) {
     if (NodeReference.Resolved) {
         return;
     }

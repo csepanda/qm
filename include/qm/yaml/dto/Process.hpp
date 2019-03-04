@@ -12,16 +12,16 @@
 #include "Network.hpp"
 
 namespace qm::yaml::dto {
-struct Process{
+struct Process : public BaseYamlDTO<std::shared_ptr<qm::models::Process>> {
     std::string Binary;
     std::vector <std::string> Arguments;
     uint32_t StackSize;
     ns3::Time StartAt;
     YamlReference NodeReference;
 
-    std::shared_ptr <qm::models::Process> GetApplication() const;
+    std::shared_ptr <qm::models::Process> GetModel() const override;
 
-    void ResolveNode(Network networkYamlDTO);
+    void ResolveNode(Network &networkYamlDTO);
 
 private:
     std::shared_ptr <qm::models::Node> m_node;
