@@ -16,13 +16,13 @@ TEST_CASE("parse SimulationConfiguration from valid yaml", "[parsers][yaml]") {
         const YAML::Node yaml = YAML::Load(createSCValidYaml(ns));
         const auto actual = yaml.as<qm::yaml::dto::SimulationConfiguration>();
 
-        REQUIRE(actual.networkStack == networkStacksDict.at(ns));
+        REQUIRE(actual.NetworkStack == networkStacksDict.at(ns));
     }
 }
 
 TEST_CASE("parse SimulationConfiguration from invalid yaml", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(R"(
-networkStack: foo-bar
+NetworkStack: foo-bar
 )");
     REQUIRE_THROWS(yaml.as<qm::yaml::dto::SimulationConfiguration>());
 }
@@ -30,7 +30,7 @@ networkStack: foo-bar
 std::string createSCValidYaml(const std::string &networkStack) {
     std::stringstream ss;
 
-    ss << "networkStack: " << networkStack << "\n";
+    ss << "NetworkStack: " << networkStack << "\n";
 
     return ss.str();
 }
