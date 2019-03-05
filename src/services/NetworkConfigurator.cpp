@@ -79,5 +79,7 @@ void NetworkConfigurator::ConfigureP2PConnection(
 
         ipConfig->NS3NetDevice = netDevice;
     }
+
+    helper.EnablePcapAll ("simulation-p2p");
 }
 };
