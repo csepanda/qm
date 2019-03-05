@@ -5,7 +5,7 @@ namespace qm::services {
 
 // TODO implement
 void Ns3StackIpConfigurator::Configure(const qm::models::Network &network) {
-    throw std::logic_error("Not implemented, please use linux kernel stack");
+    throw std::logic_error("Ns3StackIpConfigurator is not implemented, please use linux kernel stack");
 }
 
 };
