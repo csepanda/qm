@@ -42,7 +42,7 @@ const std::string NodeFileSystem::constructRealPath(const std::string &path) con
     auto nodeNS3Id = m_node->GetNS3Node()->GetId();
     auto cwd = getCurrentWorkingDirectory();
 
-    ss << cwd << NS3_DCE_NODE_DIR_PREFIX << nodeNS3Id;
+    ss << cwd << "/" << NS3_DCE_NODE_DIR_PREFIX << nodeNS3Id << "/" << path;
 
     return ss.str();
 }
