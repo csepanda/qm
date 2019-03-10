@@ -30,7 +30,7 @@ TEST_CASE("Grant to All", "[fs][system]") {
     }
 
     SECTION("GrantSearchToAll == GrantExecuteToAll") {
-        REQUIRE(FMBuilder{}.GrantExecuteToAll().Build() == FMBuilder{}.GrantExecuteToAll().Build());
+        REQUIRE(FMBuilder{}.GrantSearchToAll().Build() == FMBuilder{}.GrantExecuteToAll().Build());
     }
 }
 
@@ -52,7 +52,7 @@ TEST_CASE("Grant to Owner", "[fs][system]") {
     }
 
     SECTION("GrantSearchToOwner == GrantExecuteToOwner") {
-        REQUIRE(FMBuilder{}.GrantExecuteToOwner().Build() == FMBuilder{}.GrantExecuteToOwner().Build());
+        REQUIRE(FMBuilder{}.GrantSearchToOwner().Build() == FMBuilder{}.GrantExecuteToOwner().Build());
     }
 }
 
@@ -74,7 +74,7 @@ TEST_CASE("Grant to Group", "[fs][system]") {
     }
 
     SECTION("GrantSearchToGroup == GrantExecuteToGroup") {
-        REQUIRE(FMBuilder{}.GrantExecuteToGroup().Build() == FMBuilder{}.GrantExecuteToGroup().Build());
+        REQUIRE(FMBuilder{}.GrantSearchToGroup().Build() == FMBuilder{}.GrantExecuteToGroup().Build());
     }
 }
 
@@ -96,7 +96,7 @@ TEST_CASE("Grant to Others", "[fs][system]") {
     }
 
     SECTION("GrantSearchToOthers == GrantExecuteToOthers") {
-        REQUIRE(FMBuilder{}.GrantExecuteToOthers().Build() == FMBuilder{}.GrantExecuteToOthers().Build());
+        REQUIRE(FMBuilder{}.GrantSearchToOthers().Build() == FMBuilder{}.GrantExecuteToOthers().Build());
     }
 }
 
