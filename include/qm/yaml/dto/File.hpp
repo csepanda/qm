@@ -14,7 +14,7 @@ struct File : public BaseYamlDTO<std::unique_ptr<qm::models::File>> {
     std::string Path;
 
     RegularFileSourceType RegularSourceType;
-    std::vector<std::string> TextContent;
+    std::string TextContent;
 
     std::unique_ptr<qm::models::File> GetModel() const override;
 

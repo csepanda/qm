@@ -26,25 +26,30 @@ Node convert<qm::yaml::dto::File>::encode(const qm::yaml::dto::File &) {
 
 bool convert<qm::yaml::dto::File>::decode(const Node &node, qm::yaml::dto::File &fileDTO) {
     const auto typeNode = node["type"];
+    const auto pathNode = node["path"];
     const auto textContentNode = node["text"];
 
     if (typeNode.IsDefined()) {
         fileDTO.Type = typeNode.as<qm::models::FileType>();
     }
 
+    if (pathNode.IsDefined()) {
+        fileDTO.Path = pathNode.as<std::string>();
+    } else {
+        throw qm::ParseException("path is required field of file", "files parsing");
+    }
+
     if (textContentNode.IsDefined()) {
         if (textContentNode.IsScalar()) {
-            fileDTO.TextContent = textContentNode.as<std::vector<std::string>>();
-        } else if (textContentNode.IsSequence()) {
-            fileDTO.TextContent = std::vector<std::string>(1, textContentNode.as<std::string>());
+            fileDTO.TextContent = textContentNode.as<std::string>();
         } else {
-            throw qm::ParseException("text content of file should be a string or sequence", "files parsing");
+            throw qm::ParseException("text content of file should be a string", "files parsing");
         }
 
         fileDTO.RegularSourceType = qm::yaml::dto::RegularFileSourceType::Text;
     }
 
 
-    return false;
+    return true;
 }
 }

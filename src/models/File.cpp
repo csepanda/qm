@@ -21,25 +21,10 @@ FileType RegularFile::GetFileType() const {
 
 TextFile::TextFile(const std::string &path, const std::string &text)
   : RegularFile(path),
-    m_lines{} {
-    m_lines.push_back(text);
+    m_text {text} {
 }
-
-TextFile::TextFile(const std::string &path, const std::vector<std::string> &lines)
-  : RegularFile(path),
-    m_lines{lines} {
-}
-
 std::unique_ptr<std::istream> TextFile::GetStream() const {
-    auto *ss = new std::stringstream();
-
-    std::copy(
-      m_lines.begin(),
-      m_lines.end(),
-      std::ostream_iterator<std::string>(*ss, "\n")
-    );
-
-    return std::unique_ptr<std::istream>(ss);
+    return std::unique_ptr<std::istream>(new std::stringstream {m_text});
 }
 
 }

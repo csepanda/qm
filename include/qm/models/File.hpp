@@ -31,11 +31,9 @@ public:
 };
 
 class TextFile : public RegularFile {
-    std::vector<std::string> m_lines;
+    std::string m_text;
 public:
     TextFile(const std::string &path, const std::string &text);
-
-    TextFile(const std::string &path, const std::vector<std::string> &lines);
 
     virtual std::unique_ptr<std::istream> GetStream() const override;
 };
