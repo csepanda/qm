@@ -14,13 +14,13 @@ bool convert<qm::models::NetworkStack>::decode(const Node &node, qm::models::Net
 
     if (str == "linux") {
         stack = qm::models::NetworkStack::LinuxKernel;
-        return true;
     } else if (str == "ns3") {
         stack = qm::models::NetworkStack::Ns3;
-        return true;
+    } else {
+        return false;
     }
 
-    return false;
+    return true;
 }
 
 Node convert<qm::yaml::dto::SimulationConfiguration>::encode(
