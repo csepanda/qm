@@ -4,6 +4,7 @@
 #include <qm/services/SimulationProducer.hpp>
 #include <qm/services/NetworkConfigurator.hpp>
 #include <qm/services/ApplicationInstaller.hpp>
+#include <qm/services/FilesInstaller.hpp>
 
 namespace qm::services {
 Simulation SimulationProducer::Create(
@@ -21,6 +22,9 @@ Simulation SimulationProducer::Create(
 
     ApplicationInstaller{timer}
         .Install(applications);
+
+    FilesInstaller{}
+        .Install(network.GetNodes());
 
     for (const auto &node : network.GetNodes()) {
         dceManagerHelper->Install(node->GetNS3Node());
