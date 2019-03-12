@@ -10,11 +10,11 @@ enum class RegularFileSourceType {
 };
 
 struct File : public BaseYamlDTO<std::unique_ptr<qm::models::File>> {
-    qm::models::FileType Type;
-    std::string Path;
+    qm::models::FileType Type {};
+    std::string Path {};
 
-    RegularFileSourceType RegularSourceType;
-    std::string TextContent;
+    RegularFileSourceType RegularSourceType {};
+    std::string TextContent {};
 
     std::unique_ptr<qm::models::File> GetModel() const override;
 
