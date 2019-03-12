@@ -33,7 +33,18 @@ void NodeFileSystem::Mkdir(const std::string &path, mode_t mode) {
 
 std::unique_ptr<std::ostream> NodeFileSystem::CreateOutputStream(const std::string &path) {
     const auto realPath = constructRealPath(path);
-    return std::make_unique<std::ofstream>(realPath, std::ofstream::out);
+    const auto stream = new std::ofstream {realPath, std::ofstream::out};
+
+    if (stream->fail()) {
+        if (!stream->is_open()) {
+            std::stringstream ss{};
+            ss << "Cannot open file '" << realPath << "': " << ::strerror(errno);
+
+            throw qm::IOException(ss.str());
+        }
+    }
+
+    return std::unique_ptr<std::ofstream>(stream);
 }
 
 const std::string NodeFileSystem::constructRealPath(const std::string &path) const {
@@ -42,7 +53,7 @@ const std::string NodeFileSystem::constructRealPath(const std::string &path) con
     auto nodeNS3Id = m_node->GetNS3Node()->GetId();
     auto cwd = getCurrentWorkingDirectory();
 
-    ss << cwd << "/" << NS3_DCE_NODE_DIR_PREFIX << nodeNS3Id << "/" << path;
+    ss << cwd << "/" << NS3_DCE_NODE_DIR_PREFIX << nodeNS3Id << path;
 
     return ss.str();
 }
