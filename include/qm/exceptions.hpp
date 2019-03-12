@@ -22,6 +22,10 @@ struct InitializationException : public std::runtime_error {
     }
 };
 
+struct IOException : public std::runtime_error {
+    explicit IOException(const std::string &message) : std::runtime_error(message) {}
+};
+
 struct UninitializedException : public std::runtime_error {
     explicit UninitializedException(const std::string &message) : std::runtime_error(message) { }
 };
