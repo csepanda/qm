@@ -1,13 +1,18 @@
 #include <catch2/catch.hpp>
 #include <qm/parsers.hpp>
 
-TEST_CASE("parse Node from valid yaml", "[parsers][yaml]") {
+TEST_CASE("Node yaml parsing/Valid yaml/All fields", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(R"(
 node:
     id: testNode
     ipConfig:
       - address: 10.0.1.3/24
         connection: !Ref connection_01
+    files:
+      - path: /etc/foo/bar.cfg
+        text: |
+          debug=true
+          logLevel=verbose
 )");
 
     const auto actual = yaml["node"].as<qm::yaml::dto::Node>();
@@ -41,6 +46,30 @@ node:
             }
         }
     }
+
+    SECTION("Files check") {
+        const auto &files = actual.Node->GetFiles();
+
+        SECTION("files count == 1") {
+            REQUIRE(files.size() == 1);
+        }
+
+        SECTION("file's path is correct") {
+            REQUIRE(files[0]->GetPath() == "/etc/foo/bar.cfg");
+        }
+    }
+}
+
+TEST_CASE("Node yaml parsing/Valid yaml/Files are nto required", "[parsers][yaml]") {
+    const YAML::Node yaml = YAML::Load(R"(
+node:
+    id: testNode
+    ipConfig:
+      - address: 10.0.1.3/24
+        connection: !Ref connection_01
+)");
+
+    REQUIRE_NOTHROW(yaml["node"].as<qm::yaml::dto::Node>());
 }
 
 TEST_CASE("parse Node from yaml with invalid non-sequence ipConfig", "[parsers][yaml]") {
