@@ -15,6 +15,7 @@
 
 #include "identifiable.hpp"
 #include "connections.hpp"
+#include "File.hpp"
 #include "ip.hpp"
 
 namespace qm::models {
