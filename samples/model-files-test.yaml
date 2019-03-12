@@ -1,0 +1,73 @@
+simulationConfiguration:
+    networkStack: linux
+network:
+    nodes:
+        - id: node01
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.10.0.2/24
+          files:
+              - path: /etc/foo.cfg
+                text: |
+                    I am a sinner and I worship evil
+                    Blood is thinner but you will never know
+                    Can you confess that you thrive in chaos?
+                    You're a sorceress and your eye is on the lost
+
+        - id: node02
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.10.0.3/24
+              - connection: !Ref connection_02
+                address: 10.10.1.3/24
+        - id: node03
+          ipConfig:
+              - connection: !Ref connection_02
+                address: 10.10.1.2/24
+    connections:
+        - id: connection_01
+          type: P2P
+          targets:
+              - !Ref node01
+              - !Ref node02
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_02
+          type: P2P
+          targets:
+              - !Ref node02
+              - !Ref node03
+          dataRate: 5Mbps
+          delay: 12ms
+          mtu: 1500
+applications:
+    - binary: ip
+      node: !Ref node01
+      arguments:
+          - route
+          - add
+          - 10.10.1.2
+          - via
+          - 10.10.0.3
+      startAt: 6s
+    - binary: ip
+      node: !Ref node03
+      arguments:
+          - route
+          - add
+          - 10.10.0.2
+          - via
+          - 10.10.1.3
+      startAt: 6s
+    - binary: ip
+      node: !Ref node01
+      arguments:
+          - route
+      startAt: 8s
+    - binary: ping
+      node: !Ref node01
+      arguments:
+          - -c 1
+          - 10.10.1.2
+      startAt: 12s
