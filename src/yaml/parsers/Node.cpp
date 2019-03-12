@@ -31,6 +31,20 @@ bool convert<qm::yaml::dto::Node>::decode(const Node &node,
         }
     }
 
+    const auto filesNode = node["files"];
+
+    if (filesNode.IsDefined()) {
+        if (!filesNode.IsSequence()) {
+            throw qm::ParseException("files should be a sequence", "Decode node from yaml");
+        }
+
+        const auto filesDTO = filesNode.as<std::vector<qm::yaml::dto::File>>();
+
+        for (const auto &fileDTO : filesDTO) {
+            nodeYamlDTO.Node->AddFile(fileDTO.GetModel());
+        }
+    }
+
     return true;
 }
 
