@@ -7,7 +7,7 @@ std::unique_ptr<qm::models::File> File::GetModel() const {
         case models::FileType::Regular:
             return getRegularFile();
         default:
-            throw std::logic_error("Handler for this FileType is not implemented");
+            throw std::logic_error("Handler for this FileType is not implemented " + std::to_string((int) Type));
     }
 }
 
