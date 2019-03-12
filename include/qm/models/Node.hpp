@@ -21,6 +21,8 @@ namespace qm::models {
 
 class Connection;
 
+class File;
+
 struct IpConfig {
     std::shared_ptr<IPNetwork> Address;
     std::shared_ptr<Connection> BindConnection;
@@ -30,16 +32,21 @@ struct IpConfig {
 
 class Node : public Identifiable {
     ns3::Ptr<ns3::Node> m_ns3_node;
+    std::vector<std::unique_ptr<File>> m_files{};
     std::vector<std::shared_ptr<IpConfig>> m_ipConfigs{};
 
 public:
     const ns3::Ptr<ns3::Node> &GetNS3Node() const;
 
-    void SetNS3Node(const ns3::Ptr<ns3::Node> &NS3Node);
-
     const std::vector<std::shared_ptr<IpConfig>> &GetIpConfigs() const;
 
+    const std::vector<std::unique_ptr<File>> &GetFiles() const;
+
     void AddIpConfig(std::shared_ptr<IpConfig> ipConfig);
+
+    void AddFile(std::unique_ptr<File> file);
+
+    void SetNS3Node(const ns3::Ptr<ns3::Node> &NS3Node);
 
     const std::shared_ptr<IpConfig> &FindIpConfig(const std::shared_ptr<Connection> &connection) const;
 };
