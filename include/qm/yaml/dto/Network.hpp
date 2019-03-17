@@ -3,8 +3,8 @@
 
 namespace qm::yaml::dto {
 struct Network: public BaseYamlDTO<qm::models::Network> {
-    std::unordered_map<std::string, Node> NodesDTO{};
-    std::unordered_map<std::string, Connection> ConnectionsDTO{};
+    std::map<std::string, Node> NodesDTO{};
+    std::map<std::string, Connection> ConnectionsDTO{};
 
     qm::models::Network GetModel() const override;
 

@@ -3,7 +3,7 @@
 namespace qm::yaml::dto {
 
 using ConnectionPtr = std::shared_ptr<qm::models::Connection>;
-using ConnectionsDictionary = std::unordered_map<std::string, Connection>;
+using ConnectionsDictionary = std::map<std::string, Connection>;
 
 static void
 inverseResolve(std::string &referrerId, std::string &targetId, std::vector<YamlReference> &targetRefs);

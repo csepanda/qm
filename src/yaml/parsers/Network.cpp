@@ -23,7 +23,7 @@ static void SetIdIfNotSet(qm::yaml::dto::IdentifiableDTO &obj, boost::uuids::ran
 }
 
 template<typename T>
-void parseObjectsSequence(const Node &node, std::unordered_map<std::string, T> &resultMap,
+void parseObjectsSequence(const Node &node, std::map<std::string, T> &resultMap,
                           boost::uuids::random_generator &generator) {
     if (!node.IsDefined()) {
         return;
