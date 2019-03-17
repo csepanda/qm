@@ -25,3 +25,4 @@ CTestTestfile.cmake
 files-*/
 elf-cache/
 exitprocs
+*pcap
