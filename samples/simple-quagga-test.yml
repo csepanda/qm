@@ -1,0 +1,113 @@
+# configuration was taken from dce-quagga-bgpd model from dce-quagga module
+
+simulationConfiguration:
+    networkStack: linux
+    stopTime: 60s
+network:
+    nodes:
+        - id: node01
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.0.0.1/24
+          files:
+              - path: /usr/local/etc/zebra.conf
+                text: |
+                    hostname zebra
+                    password zebra
+                    log stdout
+              - path: /usr/local/etc/bgp.conf
+                text: |
+                    hostname bgpd
+                    password zebra
+                    log stdout
+                    debug bgp
+                    debug bgp fsm
+                    debug bgp events
+                    debug bgp updates
+                    router bgp 1
+                      bgp router-id 192.168.0.1
+                      neighbor 10.0.0.2 remote-as 2
+                      neighbor 10.0.0.2 advertisement-interval 5
+                      redistribute connected
+                      address-family ipv4 unicast
+                       neighbor 10.0.0.2 activate
+                       neighbor 10.0.0.2 next-hop-self
+                      exit-address-family
+                      address-family ipv6 unicast
+                       redistribute connected
+                      exit-address-family
+                    !
+        - id: node02
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.0.0.2/24
+          files:
+              - path: /usr/local/etc/zebra.conf
+                text: |
+                    hostname zebra
+                    password zebra
+                    log stdout
+              - path: /usr/local/etc/bgp.conf
+                text: |
+                    hostname bgpd
+                    password zebra
+                    log stdout
+                    debug bgp
+                    debug bgp fsm
+                    debug bgp events
+                    debug bgp updates
+                    router bgp 2
+                      bgp router-id 192.168.0.2
+                      neighbor 10.0.0.1 remote-as 1
+                      neighbor 10.0.0.1 advertisement-interval 5
+                      redistribute connected
+                      address-family ipv4 unicast
+                       neighbor 10.0.0.1 activate
+                       neighbor 10.0.0.1 next-hop-self
+                      exit-address-family
+                      address-family ipv6 unicast
+                       redistribute connected
+                      exit-address-family
+                    !
+    connections:
+        - id: connection_01
+          type: P2P
+          targets:
+              - !Ref node01
+              - !Ref node02
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+applications:
+    - binary: zebra
+      node: !Ref node01
+      arguments:
+          - -f
+          - /usr/local/etc/zebra.conf
+          - -i
+          - /zebra.pid
+      startAt: 16s
+    - binary: bgpd
+      node: !Ref node01
+      arguments:
+          - -f
+          - /usr/local/etc/bgp.conf
+          - -i
+          - /bgp.pid
+      startAt: 32s
+    - binary: zebra
+      node: !Ref node02
+      arguments:
+          - -f
+          - /usr/local/etc/zebra.conf
+          - -i
+          - /zebra.pid
+      startAt: 25s
+    - binary: bgpd
+      node: !Ref node02
+      arguments:
+          - -f
+          - /usr/local/etc/bgp.conf
+          - -i
+          - /bgp.pid
+      startAt: 30s
