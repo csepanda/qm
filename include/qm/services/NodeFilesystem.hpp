@@ -13,6 +13,8 @@ public:
 
     void Mkdir(const std::string &path, mode_t mode);
 
+    bool DirectoryExists(const std::string &path);
+
     std::unique_ptr<std::ostream> CreateOutputStream(const std::string &path);
 
 private:
