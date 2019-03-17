@@ -3,7 +3,7 @@
 
 namespace qm::services::utils {
 
-std::string NodeFileSystemHelper::BuildDirectoriesHierarchy(NodeFileSystem &fs, const std::vector<std::string> &dirs) {
+std::string NodeFileSystemHelper::BuildDirectoriesHierarchy(const NodeFileSystem &fs, const std::vector<std::string> &dirs) {
     std::stringstream ss{};
 
     mode_t mode = FileModeBuilder{}

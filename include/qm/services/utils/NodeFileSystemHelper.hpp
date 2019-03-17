@@ -7,7 +7,7 @@
 namespace qm::services::utils {
 class NodeFileSystemHelper {
 public:
-    static std::string BuildDirectoriesHierarchy(NodeFileSystem &, const std::vector<std::string> &);
+    static std::string BuildDirectoriesHierarchy(const NodeFileSystem &, const std::vector<std::string> &);
 };
 }
 
