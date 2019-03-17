@@ -10,6 +10,7 @@
 #include <qm/exceptions.hpp>
 #include <qm/services/NodeFilesystem.hpp>
 #include <qm/services/utils/FileTypes.hpp>
+#include <qm/services/utils/NodeFileSystemHelper.hpp>
 
 namespace qm::services {
 
@@ -24,7 +25,7 @@ NodeFileSystem::NodeFileSystem(const std::shared_ptr<qm::models::Node> &node)
     }
 }
 
-void NodeFileSystem::Mkdir(const std::string &path, mode_t mode) {
+void NodeFileSystem::Mkdir(const std::string &path, mode_t mode) const {
     const auto realPath = constructRealPath(path);
 
     int result = ::mkdir(realPath.c_str(), mode);
@@ -35,7 +36,7 @@ void NodeFileSystem::Mkdir(const std::string &path, mode_t mode) {
     }
 }
 
-bool NodeFileSystem::DirectoryExists(const std::string &path) {
+bool NodeFileSystem::DirectoryExists(const std::string &path) const {
     const auto realPath = constructRealPath(path);
     struct stat sb{};
 
@@ -64,7 +65,9 @@ bool NodeFileSystem::DirectoryExists(const std::string &path) {
     throw qm::IOException(ss.str());
 }
 
-std::unique_ptr<std::ostream> NodeFileSystem::CreateOutputStream(const std::string &path) {
+std::unique_ptr<std::ostream> NodeFileSystem::CreateOutputStream(const std::string &path) const {
+    createPathToFile(path);
+
     const auto realPath = constructRealPath(path);
     const auto stream = new std::ofstream{realPath, std::ofstream::out};
 
@@ -101,6 +104,14 @@ const std::vector<std::string> NodeFileSystem::splitPathToComponents(const std::
     }
 
     return components;
+}
+
+const void NodeFileSystem::createPathToFile(const std::string &path) const {
+    auto components = splitPathToComponents(path);
+
+    components.pop_back();
+
+    utils::NodeFileSystemHelper::BuildDirectoriesHierarchy(*this, components);
 }
 
 static const std::string getCurrentWorkingDirectory() {

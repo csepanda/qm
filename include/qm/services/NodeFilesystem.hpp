@@ -11,14 +11,15 @@ class NodeFileSystem {
 public:
     explicit NodeFileSystem(const std::shared_ptr<qm::models::Node> &node);
 
-    void Mkdir(const std::string &path, mode_t mode);
+    void Mkdir(const std::string &path, mode_t mode) const;
 
-    bool DirectoryExists(const std::string &path);
+    bool DirectoryExists(const std::string &path) const;
 
-    std::unique_ptr<std::ostream> CreateOutputStream(const std::string &path);
+    std::unique_ptr<std::ostream> CreateOutputStream(const std::string &path) const;
 
 private:
     const std::string constructRealPath(const std::string &path) const;
+    const void createPathToFile(const std::string &path) const;
     const std::vector<std::string> splitPathToComponents(const std::string &path) const;
 };
 }
