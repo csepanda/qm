@@ -8,13 +8,17 @@ std::string NodeFileSystemHelper::BuildDirectoriesHierarchy(NodeFileSystem &fs, 
 
     mode_t mode = FileModeBuilder{}
       .GrantAllToOwner()
+      .GrantReadToGroup()
       .GrantSearchToGroup()
       .Build();
 
     for (const auto &dir : dirs) {
         ss << "/" << dir;
 
-        fs.Mkdir(ss.str(), mode);
+        const auto pathname = ss.str();
+        if (!fs.DirectoryExists(pathname)) {
+            fs.Mkdir(pathname, mode);
+        }
     }
 
     return ss.str();
