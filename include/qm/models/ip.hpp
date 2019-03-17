@@ -68,8 +68,4 @@ private:
     IPv4Address m_address {};
     uint32_t m_cidr_mask {};
 };
-
-struct foo {
-    IPv4Network bar;
-};
 }
