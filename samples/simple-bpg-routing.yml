@@ -1,0 +1,210 @@
+# Network:
+#
+#
+#        10.0.0.1/24                                        10.0.1.2/24
+# (node01)___________                                      ___________(node03)
+#                    \                                    /              | 10.0.2.1/24 DEFAULT GATAWAY
+#                 BGP \                                  / BGP           |
+#                      \  10.0.0.2/24      10.0.1.1/24  /                | 10.0.2.2/24
+#                       \___________(node02)___________/              (node04)
+#
+simulationConfiguration:
+    networkStack: linux
+    stopTime: 600s
+network:
+    nodes:
+        - id: node01
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.0.0.1/24
+          files:
+              - path: /usr/local/etc/zebra.conf
+                text: |
+                    hostname zebra
+                    password zebra
+                    log stdout
+              - path: /usr/local/etc/bgp.conf
+                text: |
+                    hostname bgpd
+                    password zebra
+                    log stdout
+                    router bgp 1
+                      bgp router-id 192.168.0.1
+                      neighbor 10.0.0.2 remote-as 2
+                      neighbor 10.0.0.2 advertisement-interval 5
+                      redistribute connected
+                      address-family ipv4 unicast
+                       neighbor 10.0.0.2 activate
+                       neighbor 10.0.0.2 next-hop-self
+                      exit-address-family
+                    !
+        - id: node02
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.0.0.2/24
+              - connection: !Ref connection_02
+                address: 10.0.1.1/24
+          files:
+              - path: /usr/local/etc/zebra.conf
+                text: |
+                    hostname zebra
+                    password zebra
+                    log stdout
+              - path: /usr/local/etc/bgp.conf
+                text: |
+                    hostname bgpd
+                    password zebra
+                    log stdout
+                    router bgp 2
+                      bgp router-id 192.168.0.2
+                      neighbor 10.0.0.1 remote-as 1
+                      neighbor 10.0.0.1 advertisement-interval 5
+                      neighbor 10.0.1.2 remote-as 3
+                      neighbor 10.0.1.2 advertisement-interval 5
+                      redistribute connected
+                      address-family ipv4 unicast
+                       neighbor 10.0.0.1 activate
+                       neighbor 10.0.0.1 next-hop-self
+                       neighbor 10.0.1.2 activate
+                       neighbor 10.0.1.2 next-hop-self
+                      exit-address-family
+                    !
+        - id: node03
+          ipConfig:
+              - connection: !Ref connection_02
+                address: 10.0.1.2/24
+              - connection: !Ref connection_03
+                address: 10.0.2.1/24
+          files:
+              - path: /usr/local/etc/zebra.conf
+                text: |
+                    hostname zebra
+                    password zebra
+                    log stdout
+              - path: /usr/local/etc/bgp.conf
+                text: |
+                    hostname bgpd
+                    password zebra
+                    log stdout
+                    router bgp 3
+                      bgp router-id 192.168.0.3
+                      neighbor 10.0.1.1 remote-as 2
+                      neighbor 10.0.1.1 advertisement-interval 5
+                      redistribute connected
+                      network 10.0.2.0 mask 255.255.255.0
+                      address-family ipv4 unicast
+                       neighbor 10.0.1.1 activate
+                       neighbor 10.0.1.1 next-hop-self
+                      exit-address-family
+                    !
+        - id: node04
+          ipConfig:
+              - connection: !Ref connection_03
+                address: 10.0.2.2/24
+    connections:
+        - id: connection_01
+          type: P2P
+          targets:
+              - !Ref node01
+              - !Ref node02
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_02
+          type: P2P
+          targets:
+              - !Ref node02
+              - !Ref node03
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_03
+          type: P2P
+          targets:
+              - !Ref node03
+              - !Ref node04
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+applications:
+    - binary: ip
+      node: !Ref node04
+      arguments:
+          - route
+          - add
+          - default
+          - via
+          - 10.0.2.1
+          - dev
+          - sim0
+      startAt: 15s
+    - binary: zebra
+      node: !Ref node01
+      arguments:
+          - -f
+          - /usr/local/etc/zebra.conf
+          - -i
+          - /zebra.pid
+      startAt: 16s
+    - binary: bgpd
+      node: !Ref node01
+      arguments:
+          - -f
+          - /usr/local/etc/bgp.conf
+          - -i
+          - /bgp.pid
+      startAt: 32s
+    - binary: zebra
+      node: !Ref node02
+      arguments:
+          - -f
+          - /usr/local/etc/zebra.conf
+          - -i
+          - /zebra.pid
+      startAt: 25s
+    - binary: bgpd
+      node: !Ref node02
+      arguments:
+          - -f
+          - /usr/local/etc/bgp.conf
+          - -i
+          - /bgp.pid
+      startAt: 30s
+    - binary: zebra
+      node: !Ref node03
+      arguments:
+          - -f
+          - /usr/local/etc/zebra.conf
+          - -i
+          - /zebra.pid
+      startAt: 25s
+    - binary: bgpd
+      node: !Ref node03
+      arguments:
+          - -f
+          - /usr/local/etc/bgp.conf
+          - -i
+          - /bgp.pid
+      startAt: 30s
+    - binary: ping
+      node: !Ref node01
+      arguments:
+          - -c 1
+          - 10.0.2.2
+      startAt: 350s
+    - binary: ip
+      node: !Ref node01
+      arguments:
+          - route
+          - show
+          - table
+          - all
+      startAt: 250s
+    - binary: ip
+      node: !Ref node04
+      arguments:
+          - route
+          - show
+          - table
+          - all
+      startAt: 350s
