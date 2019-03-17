@@ -32,6 +32,7 @@ bool convert<qm::yaml::dto::SimulationConfiguration>::decode(
   const Node &node, qm::yaml::dto::SimulationConfiguration &simulationConfigurationYamlDTO) {
     const auto networkStackNode = node["networkStack"];
     const auto stopTimeNode = node["stopTime"];
+    const auto mpiNode = node["enableMpi"];
 
     if (networkStackNode.IsDefined()) {
         simulationConfigurationYamlDTO.NetworkStack = networkStackNode.as<qm::models::NetworkStack>();
@@ -39,6 +40,10 @@ bool convert<qm::yaml::dto::SimulationConfiguration>::decode(
 
     if (stopTimeNode.IsDefined()) {
         simulationConfigurationYamlDTO.StopTime = stopTimeNode.as<ns3::Time>();
+    }
+
+    if (mpiNode.IsDefined()) {
+        simulationConfigurationYamlDTO.EnableMpi = mpiNode.as<bool>();
     }
 
 

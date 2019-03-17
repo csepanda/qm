@@ -11,10 +11,12 @@ NetworkStack SimulationConfiguration::GetNetworkStack() const {
 
 SimulationConfiguration::SimulationConfiguration(
   NetworkStack networkStack,
-  ns3::Time stopTime
+  ns3::Time stopTime,
+  bool enableMpi
 )
   : m_networkStack{networkStack},
-    m_stopTime{std::move(stopTime)} {
+    m_stopTime{std::move(stopTime)},
+    m_mpi{enableMpi} {
 }
 
 ns3::Time SimulationConfiguration::GetStopTime() const {

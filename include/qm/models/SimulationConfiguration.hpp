@@ -12,12 +12,15 @@ enum class NetworkStack {
 };
 
 class SimulationConfiguration {
-    NetworkStack m_networkStack {NetworkStack::LinuxKernel};
-    ns3::Time m_stopTime {};
+    bool m_mpi{};
+    NetworkStack m_networkStack{NetworkStack::LinuxKernel};
+    ns3::Time m_stopTime{};
 
 public:
-    SimulationConfiguration(NetworkStack networkStack, ns3::Time stopTime);
+    SimulationConfiguration(NetworkStack networkStack, ns3::Time stopTime, bool enableMpi);
+
     NetworkStack GetNetworkStack() const;
+
     ns3::Time GetStopTime() const;
 };
 }
