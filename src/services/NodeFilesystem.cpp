@@ -91,6 +91,18 @@ const std::string NodeFileSystem::constructRealPath(const std::string &path) con
     return ss.str();
 }
 
+const std::vector<std::string> NodeFileSystem::splitPathToComponents(const std::string &path) const {
+    std::stringstream ss {path};
+    std::string component;
+    std::vector<std::string> components {};
+
+    while (std::getline(ss, component, '/')) {
+        components.push_back(component);
+    }
+
+    return components;
+}
+
 static const std::string getCurrentWorkingDirectory() {
     char buffer[PATH_MAX];
 
