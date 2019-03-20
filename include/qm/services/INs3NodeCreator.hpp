@@ -2,12 +2,12 @@
 #define QM_SERVICES_INODECREATOR_HPP
 
 #include <ns3/node.h>
-#include <qm/models/Node.hpp>
+#include <qm/models/Network.hpp>
 
 namespace qm::services {
-class INodeCreator {
+class INs3NodeCreator {
 public:
-    virtual ns3::Ptr<ns3::Node> Create(const qm::models::Node &node) = 0;
+    virtual void Create(qm::models::Network &network) = 0;
 };
 }
 
