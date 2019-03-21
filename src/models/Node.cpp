@@ -37,4 +37,12 @@ const std::shared_ptr<IpConfig> &Node::FindIpConfig(const std::shared_ptr<Connec
     return *iterPtr;
 }
 
+const uint32_t Node::GetSystemId() const {
+    return m_systemId;
+}
+
+void Node::SetSystemId(uint32_t systemId) {
+    m_systemId = systemId;
+}
+
 }

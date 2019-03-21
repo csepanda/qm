@@ -12,12 +12,17 @@ bool convert<qm::yaml::dto::Node>::decode(const Node &node,
     nodeYamlDTO.Node.reset(new qm::models::Node);
 
     const auto id = node["id"];
+    const auto ipConfigs = node["ipConfig"];
+    const auto filesNode = node["files"];
+    const auto sidNode = node["systemId"];
 
     if (id.IsDefined()) {
         nodeYamlDTO.Node->SetId(id.as<std::string>());
     }
 
-    const auto ipConfigs = node["ipConfig"];
+    if (sidNode.IsDefined()) {
+        nodeYamlDTO.Node->SetSystemId(sidNode.as<uint32_t >());
+    }
 
     if (ipConfigs.IsDefined()) {
         if (!ipConfigs.IsSequence()) {
@@ -30,8 +35,6 @@ bool convert<qm::yaml::dto::Node>::decode(const Node &node,
             nodeYamlDTO.IpConfigs.push_back(ipConfigDTO);
         }
     }
-
-    const auto filesNode = node["files"];
 
     if (filesNode.IsDefined()) {
         if (!filesNode.IsSequence()) {
