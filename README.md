@@ -4,7 +4,9 @@
 ### Prerequisites
 #### Dependencies
 - [libyaml-cpp](https://github.com/jbeder/yaml-cpp)
-- [ns-3-dce](https://ns-3-dce.readthedocs.io/en/latest/getting-started.html#build-dce)
+- [ns-3-dce (dce-linux-1.10)](https://ns-3-dce.readthedocs.io/en/latest/getting-started.html#build-dce)
+
+For distributed modeling NS-3 and DCE should be builded with --with-mpi / --enable-mpi options.
 
 #### Toolchain
 - cmake@3.13 or higher
@@ -38,3 +40,6 @@ make
 ### Other tools
 #### ./tools/examine-files.bash
 Show all last runned model's processes in nodes and exit status
+
+### ./tools/clean-simulation-files.bash
+Remove all files created during the simulation
