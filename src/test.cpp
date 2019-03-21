@@ -6,6 +6,7 @@
 #include <qm/services/Simulation.hpp>
 #include <qm/services/SimulationProducer.hpp>
 #include <qm/parsers.hpp>
+#include <ns3/mpi-interface.h>
 
 int main(int argc, char **argv) {
     if (argc < 2) {
@@ -25,11 +26,19 @@ int main(int argc, char **argv) {
         processes.push_back(std::move(dto.GetModel()));
     }
 
+    if (simulationConfiguration.IsMpiEnabled()) {
+        ns3::MpiInterface::Enable(&argc, &argv);
+    }
+
     qm::services::SimulationProducer simulationProducer {simulationConfiguration};
 
     qm::services::Simulation sim = simulationProducer.Create(network.GetModel(), processes);
 
     sim.Run();
+
+    if (simulationConfiguration.IsMpiEnabled()) {
+        ns3::MpiInterface::Disable();
+    }
 
     return 0;
 }
