@@ -29,7 +29,8 @@ void LinuxStackIpConfigurator::Configure(const qm::models::Network &network) {
         const auto &ns3Node = node->GetNS3Node();
         const auto &ipConfigs = node->GetIpConfigs();
 
-        if (ns3::MpiInterface::GetSystemId() != ns3Node->GetSystemId()) { // TODO refactor
+        if (ns3::MpiInterface::IsEnabled() &&
+            ns3::MpiInterface::GetSystemId() != ns3Node->GetSystemId()) { // TODO refactor
             continue;
         }
 

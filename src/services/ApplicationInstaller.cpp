@@ -4,14 +4,15 @@
 
 namespace qm::services {
 
-ApplicationInstaller::ApplicationInstaller(std::shared_ptr<TimeSequence> timer) : m_timer{std::move(timer)}{
+ApplicationInstaller::ApplicationInstaller(std::shared_ptr<TimeSequence> timer) : m_timer{std::move(timer)} {
 }
 
 void ApplicationInstaller::Install(std::vector<std::shared_ptr<qm::models::Process>> &processes) {
     ns3::DceApplicationHelper applicationHelper;
 
-    for (const auto& process : processes) {
-        if (ns3::MpiInterface::GetSystemId() != process->GetNode()->GetSystemId()) { // TODO refactor
+    for (const auto &process : processes) {
+        if (ns3::MpiInterface::IsEnabled() &&
+            ns3::MpiInterface::GetSystemId() != process->GetNode()->GetSystemId()) { // TODO refactor
             continue;
         }
 
@@ -20,7 +21,7 @@ void ApplicationInstaller::Install(std::vector<std::shared_ptr<qm::models::Proce
         applicationHelper.ResetArguments();
         applicationHelper.ResetEnvironment();
 
-        for (const auto& argument : process->GetArguments()) {
+        for (const auto &argument : process->GetArguments()) {
             applicationHelper.AddArgument(argument);
         }
 
@@ -29,7 +30,7 @@ void ApplicationInstaller::Install(std::vector<std::shared_ptr<qm::models::Proce
 
         if (time == 0) {
             time = m_timer->NextSeconds();
-        } else if (m_timer->CurrentSeconds().ToDouble(ns3::Time::Unit::S) < time.ToDouble(ns3::Time::Unit::S)){
+        } else if (m_timer->CurrentSeconds().ToDouble(ns3::Time::Unit::S) < time.ToDouble(ns3::Time::Unit::S)) {
             m_timer->SetSeconds(time);
         }
 
