@@ -11,9 +11,12 @@
 simulationConfiguration:
     networkStack: linux
     stopTime: 800s
+    enableMpi: true
+    systemIdMarkerStrategy: manual
 network:
     nodes:
         - id: node01
+          systemId: 0
           ipConfig:
               - connection: !Ref connection_01
                 address: 10.0.0.1/24
@@ -39,6 +42,7 @@ network:
                       exit-address-family
                     !
         - id: node02
+          systemId: 0
           ipConfig:
               - connection: !Ref connection_01
                 address: 10.0.0.2/24
@@ -70,6 +74,7 @@ network:
                       exit-address-family
                     !
         - id: node03
+          systemId: 1
           ipConfig:
               - connection: !Ref connection_02
                 address: 10.0.1.2/24
@@ -98,6 +103,7 @@ network:
                       exit-address-family
                     !
         - id: node04
+          systemId: 1
           ipConfig:
               - connection: !Ref connection_03
                 address: 10.0.2.2/24
