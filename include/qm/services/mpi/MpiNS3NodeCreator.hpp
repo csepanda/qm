@@ -2,16 +2,22 @@
 #define QM_SERVICES_MPI_MPINS3NODECREATOR_HPP
 
 #include <cstdint>
-#include <qm/services/INodeCreator.hpp>
+#include <qm/services/INs3NodeCreator.hpp>
+#include "ISystemIdMarkerStrategy.hpp"
 
 namespace qm::services::mpi {
-class MpiNS3NodeCreator : public INodeCreator {
+class MpiNS3NodeCreator : public INs3NodeCreator {
     uint32_t m_systemId{};
     uint32_t m_systemSize{};
+    std::unique_ptr<ISystemIdMarkerStrategyProducer> m_markerStrategyProducer;
 public:
-    MpiNS3NodeCreator(uint32_t systemId, uint32_t systemSize);
+    MpiNS3NodeCreator(
+      uint32_t systemId,
+      uint32_t systemSize,
+      std::unique_ptr<ISystemIdMarkerStrategyProducer> markerStrategyProducer
+    );
 
-    ns3::Ptr<ns3::Node> Create(const qm::models::Node &node) override;
+    void Create(qm::models::Network &network) override;
 };
 }
 
