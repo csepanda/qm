@@ -5,6 +5,7 @@
 #include <qm/services/IpConfigurator.hpp>
 #include <qm/services/dce/CommandBuilder.hpp>
 #include <qm/services/dce/LinuxStackIPConfigurator.hpp>
+#include <ns3/mpi-interface.h>
 
 namespace qm::services::dce {
 
@@ -27,6 +28,10 @@ void LinuxStackIpConfigurator::Configure(const qm::models::Network &network) {
     for (const auto &node : network.GetNodes()) {
         const auto &ns3Node = node->GetNS3Node();
         const auto &ipConfigs = node->GetIpConfigs();
+
+        if (ns3::MpiInterface::GetSystemId() != ns3Node->GetSystemId()) { // TODO refactor
+            continue;
+        }
 
         for (const auto &ipConfig : ipConfigs) {
             const auto &address = ipConfig->Address->GetNetworkStr();

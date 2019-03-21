@@ -1,5 +1,6 @@
 #include <qm/services/ApplicationInstaller.hpp>
 #include <ns3/dce-application-helper.h>
+#include <ns3/mpi-interface.h>
 
 namespace qm::services {
 
@@ -10,6 +11,10 @@ void ApplicationInstaller::Install(std::vector<std::shared_ptr<qm::models::Proce
     ns3::DceApplicationHelper applicationHelper;
 
     for (const auto& process : processes) {
+        if (ns3::MpiInterface::GetSystemId() != process->GetNode()->GetSystemId()) { // TODO refactor
+            continue;
+        }
+
         applicationHelper.SetBinary(process->GetBinary());
         applicationHelper.SetStackSize(process->GetStackSize());
         applicationHelper.ResetArguments();
