@@ -15,6 +15,9 @@ public:
       qm::models::Network,
       std::vector<std::shared_ptr<qm::models::Process>>
     );
+
+private:
+    std::unique_ptr<qm::services::INs3NodeCreator> produceNodeCreator();
 };
 }
 
