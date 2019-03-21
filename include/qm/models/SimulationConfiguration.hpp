@@ -1,7 +1,3 @@
-//
-// Created by cspanda on 2/22/19.
-//
-
 #ifndef QM_MODELS_SIMULATIONCONFIGURATION_H
 #define QM_MODELS_SIMULATIONCONFIGURATION_H
 
@@ -11,17 +7,32 @@ enum class NetworkStack {
     LinuxKernel
 };
 
+enum class SystemIdMarkerStrategy {
+    Manual,
+    Mlc
+};
+
 class SimulationConfiguration {
     bool m_mpi{};
+    SystemIdMarkerStrategy m_systemIdMarkerStrategy{};
     NetworkStack m_networkStack{NetworkStack::LinuxKernel};
     ns3::Time m_stopTime{};
 
 public:
-    SimulationConfiguration(NetworkStack networkStack, ns3::Time stopTime, bool enableMpi);
+    SimulationConfiguration(
+      NetworkStack networkStack,
+      ns3::Time stopTime,
+      bool enableMpi,
+      SystemIdMarkerStrategy m_systemIdMarkerStrategy
+    );
 
     NetworkStack GetNetworkStack() const;
 
     ns3::Time GetStopTime() const;
+
+    bool IsMpiEnabled() const;
+
+    SystemIdMarkerStrategy GetSystemIdMarkerStrategy() const;
 };
 }
 

@@ -6,6 +6,7 @@
 
 namespace qm::yaml::dto {
 struct SimulationConfiguration: public BaseYamlDTO<qm::models::SimulationConfiguration> {
+    qm::models::SystemIdMarkerStrategy SystemIdMarkerStrategy{};
     qm::models::NetworkStack NetworkStack{};
     ns3::Time StopTime{};
     bool EnableMpi{};
