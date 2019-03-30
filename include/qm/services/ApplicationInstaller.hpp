@@ -12,7 +12,8 @@ class ApplicationInstaller {
     std::shared_ptr<TimeSequence> m_timer;
 public:
     ApplicationInstaller(std::shared_ptr<TimeSequence>);
-    void Install(std::vector<std::shared_ptr<qm::models::Process>> &);
+    void Install(const std::vector<std::shared_ptr<qm::models::Process>> &);
+    void Install(const std::shared_ptr<qm::models::Process> &);
 };
 }
 
