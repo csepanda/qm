@@ -21,6 +21,20 @@ startAt: 1s
     REQUIRE(actual.StartAt == ns3::Time::FromDouble(1, ns3::Time::Unit::S));
 }
 
+TEST_CASE("parse application from valid yaml inline arguments", "[parsers][yaml]") {
+    const YAML::Node yaml = YAML::Load(R"(
+binary: ping
+node: !Ref node01
+arguments: -c 1 127.0.0.1
+stackSize: 1048576
+startAt: 1s
+)");
+
+    const auto actual = yaml.as<qm::yaml::dto::Process>();
+
+    REQUIRE(actual.Arguments[0] == "-c 1 127.0.0.1");
+}
+
 TEST_CASE("parse application from invalid yaml - missing binary", "[parsers][yaml]") {
     const YAML::Node yaml = YAML::Load(R"(
 node: !Ref node01
