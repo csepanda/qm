@@ -21,8 +21,14 @@ void ApplicationInstaller::Install(std::vector<std::shared_ptr<qm::models::Proce
         applicationHelper.ResetArguments();
         applicationHelper.ResetEnvironment();
 
-        for (const auto &argument : process->GetArguments()) {
-            applicationHelper.AddArgument(argument);
+        const auto &arguments = process->GetArguments();
+
+        if (arguments.size() == 1) {
+            applicationHelper.ParseArguments(arguments[0]);
+        } else if (!arguments.empty()){
+            for (const auto &argument : process->GetArguments()) {
+                applicationHelper.AddArgument(argument);
+            }
         }
 
         auto appContainer = applicationHelper.Install(process->GetNode()->GetNS3Node());
