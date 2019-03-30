@@ -81,33 +81,17 @@ network:
 applications:
     - binary: zebra
       node: !Ref node01
-      arguments:
-          - -f
-          - /usr/local/etc/zebra.conf
-          - -i
-          - /zebra.pid
+      arguments: -f /usr/local/etc/zebra.conf -i /zebra.pid
       startAt: 16s
     - binary: bgpd
       node: !Ref node01
-      arguments:
-          - -f
-          - /usr/local/etc/bgp.conf
-          - -i
-          - /bgp.pid
+      arguments: -f /usr/local/etc/bgp.conf -i /bgp.pid
       startAt: 32s
     - binary: zebra
       node: !Ref node02
-      arguments:
-          - -f
-          - /usr/local/etc/zebra.conf
-          - -i
-          - /zebra.pid
+      arguments: -f /usr/local/etc/zebra.conf -i /zebra.pid
       startAt: 25s
     - binary: bgpd
       node: !Ref node02
-      arguments:
-          - -f
-          - /usr/local/etc/bgp.conf
-          - -i
-          - /bgp.pid
+      arguments: -f /usr/local/etc/bgp.conf -i /bgp.pid
       startAt: 30s

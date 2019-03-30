@@ -129,99 +129,49 @@ network:
 applications:
     - binary: ip
       node: !Ref node04
-      arguments:
-          - route
-          - add
-          - default
-          - via
-          - 10.0.2.1
-          - dev
-          - sim0
+      arguments: route add default via 10.0.2.1 dev sim0
       startAt: 15s
     - binary: zebra
       node: !Ref node01
-      arguments:
-          - -f
-          - /usr/local/etc/zebra.conf
-          - -i
-          - /zebra.pid
+      arguments: -f /usr/local/etc/zebra.conf -i /zebra.pid
       startAt: 16s
     - binary: bgpd
       node: !Ref node01
-      arguments:
-          - -f
-          - /usr/local/etc/bgp.conf
-          - -i
-          - /bgp.pid
+      arguments: -f /usr/local/etc/bgp.conf -i /bgp.pid
       startAt: 32s
     - binary: zebra
       node: !Ref node02
-      arguments:
-          - -f
-          - /usr/local/etc/zebra.conf
-          - -i
-          - /zebra.pid
+      arguments: -f /usr/local/etc/zebra.conf -i /zebra.pid
       startAt: 25s
     - binary: bgpd
       node: !Ref node02
-      arguments:
-          - -f
-          - /usr/local/etc/bgp.conf
-          - -i
-          - /bgp.pid
+      arguments: -f /usr/local/etc/bgp.conf -i /bgp.pid
       startAt: 30s
     - binary: zebra
       node: !Ref node03
-      arguments:
-          - -f
-          - /usr/local/etc/zebra.conf
-          - -i
-          - /zebra.pid
+      arguments: -f /usr/local/etc/zebra.conf -i /zebra.pid
       startAt: 25s
     - binary: bgpd
       node: !Ref node03
-      arguments:
-          - -f
-          - /usr/local/etc/bgp.conf
-          - -i
-          - /bgp.pid
+      arguments: -f /usr/local/etc/bgp.conf -i /bgp.pid
       startAt: 30s
     - binary: ping
       node: !Ref node01
-      arguments:
-          - -c 1
-          - 10.0.2.2
+      arguments: -c 1 10.0.2.2
       startAt: 350s
     - binary: ip
       node: !Ref node01
-      arguments:
-          - route
-          - show
-          - table
-          - all
+      arguments: route show table all
       startAt: 250s
     - binary: ip
       node: !Ref node04
-      arguments:
-          - route
-          - show
-          - table
-          - all
+      arguments: route show table all
       startAt: 350s
     - binary: iperf
       node: !Ref node04
-      arguments:
-          - -s
-          - -u
+      arguments: -s -u
       startAt: 360s
     - binary: iperf
       node: !Ref node01
-      arguments:
-          - -c
-          - 10.0.2.2
-          - -u
-          - -b
-          - 10m
-          - -t
-          - 120
+      arguments: -c 10.0.2.2 -u -b 10m -t 120
       startAt: 380s

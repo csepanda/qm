@@ -37,30 +37,17 @@ network:
 applications:
     - binary: ip
       node: !Ref node01
-      arguments:
-          - route
-          - add
-          - 10.10.1.2
-          - via
-          - 10.10.0.3
+      arguments: route add 10.10.1.2 via 10.10.0.3
       startAt: 6s
     - binary: ip
       node: !Ref node03
-      arguments:
-          - route
-          - add
-          - 10.10.0.2
-          - via
-          - 10.10.1.3
+      arguments: route add 10.10.0.2 via 10.10.1.3
       startAt: 6s
     - binary: ip
       node: !Ref node01
-      arguments:
-          - route
+      arguments: route
       startAt: 8s
     - binary: ping
       node: !Ref node01
-      arguments:
-          - -c 1
-          - 10.10.1.2
+      arguments: -c 1 10.10.1.2
       startAt: 12s
