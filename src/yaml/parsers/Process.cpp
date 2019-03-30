@@ -26,11 +26,15 @@ bool convert<qm::yaml::dto::Process>::decode(const Node &node,
     processYamlDTO.NodeReference = nodeReferenceNode.as<qm::yaml::dto::YamlReference>();
 
     if (argumentsNode.IsDefined()) {
-        if (!argumentsNode.IsSequence()) {
-            throw qm::ParseException("'arguments' should be an array", SOURCE);
-        }
+        if (argumentsNode.IsScalar()) {
+            processYamlDTO.Arguments.push_back(argumentsNode.as<std::string>());
+        } else {
+            if (!argumentsNode.IsSequence()) {
+                throw qm::ParseException("'arguments' should be an array", SOURCE);
+            }
 
-        processYamlDTO.Arguments = argumentsNode.as<std::vector<std::string>>();
+            processYamlDTO.Arguments = argumentsNode.as<std::vector<std::string>>();
+        }
     }
 
     if (startAtNode.IsDefined()) {
