@@ -41,7 +41,7 @@ add_library(qm
         src/services/SimpleNs3NodeCreator.cpp
         include/qm/services/mpi/MpiNS3NodeCreator.hpp src/services/mpi/MpiNS3NodeCreator.cpp
         include/qm/services/mpi/ISystemIdMarkerStrategy.hpp include/qm/services/SimpleNs3NodeCreator.hpp
-        include/qm/services/mpi/MclSystemIdMarkerStrategy.hpp src/services/mpi/MclSystemIdMarkerStrategy.cpp include/qm/services/mpi/ManualSystemIdMarkerStrategy.hpp src/services/mpi/ManualSystemIdMarkerStrategy.cpp src/services/mpi/MpiApplicationInstaller.cpp include/qm/algorithm/graph/Vertex.hpp include/qm/algorithm/graph/Edge.hpp src/algorithm/graph/Vertex.cpp src/algorithm/graph/Edge.cpp)
+        include/qm/services/mpi/MclSystemIdMarkerStrategy.hpp src/services/mpi/MclSystemIdMarkerStrategy.cpp include/qm/services/mpi/ManualSystemIdMarkerStrategy.hpp src/services/mpi/ManualSystemIdMarkerStrategy.cpp src/services/mpi/MpiApplicationInstaller.cpp include/qm/algorithm/graph/Vertex.hpp include/qm/algorithm/graph/Edge.hpp src/algorithm/graph/Vertex.cpp src/algorithm/graph/Edge.cpp include/qm/algorithm/matrix/Matrix.hpp src/algorithm/matrix/Matrix.cpp)
 
 set_property(TARGET qm PROPERTY CXX_STANDARD 17)
 set_property(TARGET qm PROPERTY CXX_STANDARD_REQUIRED ON)
