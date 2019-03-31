@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <utility>
 
 #include <ns3/application-container.h>
@@ -5,25 +7,20 @@
 #include <ns3/nstime.h>
 
 #include <qm/services/dce/CommandBuilder.hpp>
+#include <qm/models/Process.hpp>
 
 namespace qm::services::dce {
+
+void CommandBuilder::Execute() {
+    Execute(ns3::Time(0));
+}
 
 void CommandBuilder::Execute(ns3::Time at) {
     validateCommand();
 
-    ns3::DceApplicationHelper process;
-    ns3::ApplicationContainer apps;
-    process.SetBinary(m_binary);
-    process.SetStackSize(m_stackSize);
-    process.ResetArguments();
-    process.ParseArguments(m_arguments);
-    apps = process.Install(m_node);
-    apps.Start(std::move(at));
-}
-
-CommandBuilder &CommandBuilder::SetNode(const ns3::Ptr<ns3::Node> &node) {
-    m_node = node;
-    return *this;
+    m_appInstaller->Install(std::make_shared<qm::models::Process>(
+      m_node, m_binary, m_stackSize, m_arguments, std::move(at)
+    ));
 }
 
 CommandBuilder &CommandBuilder::SetBinary(std::string binary) {
@@ -37,7 +34,8 @@ CommandBuilder &CommandBuilder::SetStackSize(uint32_t stackSize) {
 }
 
 CommandBuilder &CommandBuilder::SetArguments(std::string arguments) {
-    m_arguments = std::move(arguments);
+    m_arguments.clear();
+    m_arguments.push_back(std::move(arguments));
     return *this;
 }
 
@@ -49,5 +47,10 @@ void CommandBuilder::validateCommand() const {
     if (m_node == nullptr) {
         throw std::logic_error("Node on which command will be executed is not specified");
     }
+}
+
+CommandBuilder &CommandBuilder::SetNode(const std::shared_ptr<qm::models::Node> &node) {
+    m_node = node;
+    return *this;
 }
 }
