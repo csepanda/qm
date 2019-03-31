@@ -5,6 +5,7 @@
 #include "Simulation.hpp"
 #include "TimeSequence.h"
 #include "NetworkConfigurator.hpp"
+#include "ApplicationInstaller.hpp"
 
 namespace qm::services {
 class SimulationProducer {
@@ -17,7 +18,8 @@ public:
     );
 
 private:
-    std::unique_ptr<qm::services::INs3NodeCreator> produceNodeCreator();
+    std::unique_ptr<INs3NodeCreator> produceNodeCreator();
+    std::shared_ptr<ApplicationInstaller> produceApplicationInstaller(std::shared_ptr<TimeSequence> &timer);
 };
 }
 

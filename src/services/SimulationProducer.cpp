@@ -1,18 +1,18 @@
 #include <memory>
-
 #include <utility>
 
 #include <ns3/dce-module.h>
 #include <ns3/mpi-interface.h>
+#include <qm/exceptions.hpp>
 #include <qm/services/SimulationProducer.hpp>
 #include <qm/services/NetworkConfigurator.hpp>
 #include <qm/services/ApplicationInstaller.hpp>
 #include <qm/services/FilesInstaller.hpp>
 #include <qm/services/SimpleNs3NodeCreator.hpp>
 #include <qm/services/mpi/MpiNS3NodeCreator.hpp>
-#include <qm/exceptions.hpp>
 #include <qm/services/mpi/ManualSystemIdMarkerStrategy.hpp>
 #include <qm/services/mpi/MclSystemIdMarkerStrategy.hpp>
+#include <qm/services/mpi/MpiApplicationInstaller.hpp>
 
 namespace qm::services {
 Simulation SimulationProducer::Create(
@@ -20,20 +20,20 @@ Simulation SimulationProducer::Create(
   std::vector<std::shared_ptr<qm::models::Process>> applications
 ) {
     auto timer = std::make_shared<TimeSequence>();
+    timer->NextSeconds();
+
     auto dceManagerHelper = std::make_shared<ns3::DceManagerHelper>();
     auto networkStack = m_cfg.GetNetworkStack();
-
-    timer->NextSeconds();
+    auto applicationInstaller = produceApplicationInstaller(timer);
 
     NetworkConfigurator{
       networkStack,
       produceNodeCreator(),
-      timer,
+      applicationInstaller,
       dceManagerHelper
     }.Configure(network);
 
-    ApplicationInstaller{timer}
-      .Install(applications);
+    applicationInstaller->Install(applications);
 
     FilesInstaller{}
       .Install(network.GetNodes());
@@ -84,6 +84,19 @@ std::unique_ptr<qm::services::INs3NodeCreator> SimulationProducer::produceNodeCr
     }
 
     return std::make_unique<mpi::MpiNS3NodeCreator>(systemId, systemCount, std::move(markerStrategyProducer));
+}
+
+std::shared_ptr<ApplicationInstaller>
+SimulationProducer::produceApplicationInstaller(std::shared_ptr<TimeSequence> &timer) {
+    if (!m_cfg.IsMpiEnabled()) {
+        return std::make_shared<ApplicationInstaller>(timer);
+    }
+
+    if (!ns3::MpiInterface::IsEnabled()) {
+        throw qm::InitializationException("MPI Interface should be enabled, but it wasn't", "SimulationProducer");
+    }
+
+    return std::make_shared<mpi::MpiApplicationInstaller>(timer);
 }
 }
 
