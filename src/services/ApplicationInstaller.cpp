@@ -1,6 +1,5 @@
 #include <qm/services/ApplicationInstaller.hpp>
 #include <ns3/dce-application-helper.h>
-#include <ns3/mpi-interface.h>
 
 namespace qm::services {
 
@@ -8,11 +7,6 @@ ApplicationInstaller::ApplicationInstaller(std::shared_ptr<TimeSequence> timer) 
 }
 
 void ApplicationInstaller::Install(const std::shared_ptr<models::Process> &process) {
-    if (ns3::MpiInterface::IsEnabled() &&
-        ns3::MpiInterface::GetSystemId() != process->GetNode()->GetSystemId()) { // TODO refactor
-        return;
-    }
-
     ns3::DceApplicationHelper applicationHelper{};
 
     applicationHelper.SetBinary(process->GetBinary());
