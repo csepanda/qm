@@ -1,11 +1,12 @@
 #include <utility>
 
+#include <utility>
+
 #include <ns3/core-module.h>
 #include <ns3/dce-module.h>
 #include <qm/services/IpConfigurator.hpp>
 #include <qm/services/dce/CommandBuilder.hpp>
 #include <qm/services/dce/LinuxStackIPConfigurator.hpp>
-#include <ns3/mpi-interface.h>
 
 namespace qm::services::dce {
 
@@ -15,63 +16,52 @@ static const std::string SOCKET_FACTORY = "ns3::LinuxSocketFdFactory";
 
 static const std::string GetSimulatedNetDeviceName(uint32_t ifIndex);
 
-static void RunIp(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &str);
-
-static void
-AddAddress(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &name, const std::string &address);
-
-static void LinkSet(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &deviceName);
-
 void LinuxStackIpConfigurator::Configure(const qm::models::Network &network) {
     m_dceManager->SetNetworkStack(SOCKET_FACTORY, LIBRARY_ATTRIBUTE, ns3::StringValue(LIB_LINUX));
 
     for (const auto &node : network.GetNodes()) {
-        const auto &ns3Node = node->GetNS3Node();
         const auto &ipConfigs = node->GetIpConfigs();
-
-        if (ns3::MpiInterface::IsEnabled() &&
-            ns3::MpiInterface::GetSystemId() != ns3Node->GetSystemId()) { // TODO refactor
-            continue;
-        }
 
         for (const auto &ipConfig : ipConfigs) {
             const auto &address = ipConfig->Address->GetNetworkStr();
             const auto ifIndex = ipConfig->NS3NetDevice->GetIfIndex();
             const auto devName = GetSimulatedNetDeviceName(ifIndex);
 
-            AddAddress(ns3Node, m_timer->NextSeconds(), devName, address);
-            LinkSet(ns3Node, m_timer->NextSeconds(), devName);
+            AddAddress(node, devName, address);
+            LinkSet(node, devName);
         }
     }
 }
 
 LinuxStackIpConfigurator::LinuxStackIpConfigurator(
-  std::shared_ptr<qm::services::TimeSequence> &timer,
+  std::shared_ptr<qm::services::ApplicationInstaller> &applicationInstaller,
   std::shared_ptr<ns3::DceManagerHelper> &dceManager
 )
-  : m_timer{timer},
+  : IpConfigurator(),
+    m_appInstaller{applicationInstaller},
     m_dceManager{dceManager} {}
 
-static void RunIp(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &str) {
-    CommandBuilder{node}
+void LinuxStackIpConfigurator::RunIp(const std::shared_ptr<qm::models::Node> &node, const std::string &str) {
+    CommandBuilder{m_appInstaller}
+      .SetNode(node)
       .SetBinary("ip")
       .SetArguments(str)
-      .Execute(std::move(at));
+      .Execute();
 }
 
-static void
-AddAddress(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &name, const std::string &address) {
+void LinuxStackIpConfigurator::AddAddress(
+  const std::shared_ptr<qm::models::Node> &node, const std::string &name, const std::string &address) {
     std::ostringstream oss;
     oss << "-f inet addr add " << address << " dev " << name;
 
-    RunIp(node, std::move(at), oss.str());
+    RunIp(node, oss.str());
 }
 
-static void LinkSet(const ns3::Ptr<ns3::Node> &node, ns3::Time at, const std::string &deviceName) {
+void LinuxStackIpConfigurator::LinkSet(const std::shared_ptr<qm::models::Node> &node, const std::string &deviceName) {
     std::ostringstream oss;
     oss << "link set " << deviceName << " up arp off";
 
-    RunIp(node, std::move(at), oss.str());
+    RunIp(node, oss.str());
 }
 
 static const std::string GetSimulatedNetDeviceName(const uint32_t ifIndex) {
