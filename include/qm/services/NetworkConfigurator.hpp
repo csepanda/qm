@@ -3,6 +3,7 @@
 
 #include "IpConfigurator.hpp"
 #include "INs3NodeCreator.hpp"
+#include "ApplicationInstaller.hpp"
 
 namespace qm::services {
 class NetworkConfigurator {
@@ -16,7 +17,7 @@ public:
     NetworkConfigurator(
       qm::models::NetworkStack &,
       std::unique_ptr<INs3NodeCreator> nodeCreator,
-      std::shared_ptr<TimeSequence>,
+      std::shared_ptr<ApplicationInstaller>,
       std::shared_ptr<ns3::DceManagerHelper>
     );
 

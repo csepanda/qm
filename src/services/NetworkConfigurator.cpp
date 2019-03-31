@@ -1,19 +1,20 @@
 #include <utility>
 
+#include <ns3/point-to-point-helper.h>
 
 #include <qm/services/dce/LinuxStackIPConfigurator.hpp>
 #include <qm/services/NetworkConfigurator.hpp>
 #include <qm/exceptions.hpp>
-#include <ns3/point-to-point-helper.h>
 #include <qm/services/SimpleNs3NodeCreator.hpp>
 #include <qm/services/mpi/ManualSystemIdMarkerStrategy.hpp>
+#include <qm/services/ApplicationInstaller.hpp>
 
 namespace qm::services {
 
 NetworkConfigurator::NetworkConfigurator(
   qm::models::NetworkStack &networkStack,
   std::unique_ptr<INs3NodeCreator> nodeCreator,
-  std::shared_ptr<TimeSequence> timer,
+  std::shared_ptr<qm::services::ApplicationInstaller> appInstaller,
   std::shared_ptr<ns3::DceManagerHelper> dceManager
 ) {
     switch (networkStack) {
@@ -21,7 +22,7 @@ NetworkConfigurator::NetworkConfigurator(
             m_ipConfigurator = std::make_unique<Ns3StackIpConfigurator>();
             break;
         case models::NetworkStack::LinuxKernel:
-            m_ipConfigurator = std::make_unique<qm::services::dce::LinuxStackIpConfigurator>(timer, dceManager);
+            m_ipConfigurator = std::make_unique<qm::services::dce::LinuxStackIpConfigurator>(appInstaller, dceManager);
             break;
     }
 
