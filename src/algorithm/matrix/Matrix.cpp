@@ -1,5 +1,6 @@
-#include <qm/algorithm/matrix/Matrix.hpp>
+#include <cmath>
 #include <stdexcept>
+#include <qm/algorithm/matrix/Matrix.hpp>
 
 namespace qm::algorithm::matrix {
 
@@ -102,6 +103,23 @@ unsigned int Matrix::GetRowsCount() const {
 
 unsigned int Matrix::GetColumnsCount() const {
     return m_columnsCount;
+}
+
+inline static double epsilon = 0.0000000001;
+bool Matrix::operator==(const Matrix &other) const {
+    if (this->m_columnsCount != other.m_columnsCount || this->m_rowsCount != other.m_rowsCount) {
+        return false;
+    }
+
+    for (uint32_t i = 0; i < m_rowsCount; i++) {
+        for (uint32_t j = 0; j < m_columnsCount; j++) {
+            if (fabs(m_data[i][j] - other.m_data[i][j]) > epsilon) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
 }

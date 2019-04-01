@@ -29,6 +29,8 @@ public:
 
     Matrix operator^(int power) const;
 
+    bool operator==(const Matrix &) const;
+
 private:
     void zeroReset(unsigned int m, unsigned int n);
 };
