@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 set(tests
-        src/parsers/ip_from_string.cpp src/parsers/ip_from_yaml.cpp src/parsers/p2p_from_yaml.cpp src/parsers/resolve_context.cpp src/parsers/ipconfig_yaml.cpp src/yaml/parsers/Node.cpp src/parsers/network_from_yaml.cpp src/yaml/parsers/Process.cpp src/parsers/simulationConfiguration_from_yaml.cpp src/yaml/parsers/NS3Types.cpp src/services/utils/FileModeBuilder.cpp src/yaml/parsers/File.cpp src/algorithm/matrix/MatrixTests.cpp src/algorithm/matrix/NormalizationTests.cpp)
+        src/parsers/ip_from_string.cpp src/parsers/ip_from_yaml.cpp src/parsers/p2p_from_yaml.cpp src/parsers/resolve_context.cpp src/parsers/ipconfig_yaml.cpp src/yaml/parsers/Node.cpp src/parsers/network_from_yaml.cpp src/yaml/parsers/Process.cpp src/parsers/simulationConfiguration_from_yaml.cpp src/yaml/parsers/NS3Types.cpp src/services/utils/FileModeBuilder.cpp src/yaml/parsers/File.cpp src/algorithm/matrix/MatrixTests.cpp src/algorithm/matrix/Normalization.cpp)
 
 add_subdirectory(lib/Catch2)
 add_executable(qm_test test_base.cpp ${tests})

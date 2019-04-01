@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <qm/algorithm/matrix/NormalizationTests.hpp>
+#include <qm/algorithm/matrix/Normalization.hpp>
 
 using namespace qm::algorithm::matrix;
 

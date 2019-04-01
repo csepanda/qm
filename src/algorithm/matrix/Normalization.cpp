@@ -1,5 +1,5 @@
 #include <cmath>
-#include <qm/algorithm/matrix/NormalizationTests.hpp>
+#include <qm/algorithm/matrix/Normalization.hpp>
 
 namespace qm::algorithm::matrix {
 
