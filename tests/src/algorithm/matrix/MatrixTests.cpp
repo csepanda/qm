@@ -54,11 +54,7 @@ TEST_CASE("matrix multiplication test", "[algo]") {
 
     Matrix actual = a * b;
 
-    for (auto i = 0; i < 3; i++) {
-        for (auto j = 0; j < 3; j++) {
-            REQUIRE(expected.Get(i, j) == actual.Get(i, j));
-        }
-    }
+    REQUIRE(expected == actual);
 }
 
 TEST_CASE("matrix power test // square", "[algo]") {
@@ -77,11 +73,7 @@ TEST_CASE("matrix power test // square", "[algo]") {
     Matrix actual = input ^ 2;
 
 
-    for (auto i = 0; i < 3; i++) {
-        for (auto j = 0; j < 3; j++) {
-            REQUIRE(expected.Get(i, j) == actual.Get(i, j));
-        }
-    }
+    REQUIRE(expected == actual);
 }
 
 TEST_CASE("matrix power test // qube", "[algo]") {
@@ -97,9 +89,5 @@ TEST_CASE("matrix power test // qube", "[algo]") {
 
     Matrix actual = input ^ 3;
 
-    for (auto i = 0; i < actual.GetRowsCount(); i++) {
-        for (auto j = 0; j < actual.GetColumnsCount(); j++) {
-            REQUIRE(expected.Get(i, j) == actual.Get(i, j));
-        }
-    }
+    REQUIRE(expected == actual);
 }
