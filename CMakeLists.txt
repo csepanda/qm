@@ -50,7 +50,7 @@ add_library(qm
         include/qm/algorithm/graph/MarkovClustering.hpp
         include/qm/algorithm/graph/Graph.hpp include/qm/algorithm/graph/Graph.tpp
         include/qm/algorithm/graph/Cluster.hpp include/qm/algorithm/graph/Cluster.tpp
-        include/qm/algorithm/graph/MarkovClustering.tpp)
+        include/qm/algorithm/graph/MarkovClustering.tpp include/qm/services/convertors/NetworkToGraph.hpp src/services/convertors/NetworkToGraph.cpp)
 
 set_property(TARGET qm PROPERTY CXX_STANDARD 17)
 set_property(TARGET qm PROPERTY CXX_STANDARD_REQUIRED ON)
