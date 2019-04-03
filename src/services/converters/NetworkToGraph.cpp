@@ -1,6 +1,6 @@
 #include <memory>
 #include <vector>
-#include <qm/services/convertors/NetworkToGraph.hpp>
+#include <qm/services/converters/NetworkToGraph.hpp>
 
 namespace qm::services::converters {
 NetworkGraph ConvertNetworkToGraph(const qm::models::Network &network) {
@@ -35,7 +35,7 @@ NetworkGraph ConvertNetworkToGraph(const qm::models::Network &network) {
                 std::weak_ptr<NetworkVertex> endPtr = endVertex;
 
                 const auto weight = GetWeightFor(connection);
-                const auto edge = std::make_shared<NetworkEdge>(weight, weight, startPtr, endPtr);
+                const auto edge = std::make_shared<NetworkEdge>(weight, connection, startPtr, endPtr);
 
                 startVertex->AddEdge(edge);
                 endVertex->AddEdge(edge);
