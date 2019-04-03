@@ -19,9 +19,9 @@ class Edge {
 public:
     Edge(
       int weight,
-      std::shared_ptr<TEdge> &backingEdge,
-      std::weak_ptr<Vertex<TNode, TEdge>> &startVertex,
-      std::weak_ptr<Vertex<TNode, TEdge>> &endVertex
+      const std::shared_ptr<TEdge> &backingEdge,
+      const std::weak_ptr<Vertex<TNode, TEdge>> &startVertex,
+      const std::weak_ptr<Vertex<TNode, TEdge>> &endVertex
     );
 
     const int GetWeight() const;

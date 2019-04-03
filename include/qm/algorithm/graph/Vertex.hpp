@@ -17,9 +17,9 @@ class Vertex {
     std::shared_ptr<TNode> m_backingNode;
     std::vector<std::shared_ptr<Edge<TNode, TEdge>>> m_edges{};
 public:
-    Vertex(int, std::shared_ptr<TNode> &);
+    Vertex(int, const std::shared_ptr<TNode> &);
 
-    Vertex(int, std::shared_ptr<TNode> &, std::vector<std::shared_ptr<Edge<TNode, TEdge>>> &);
+    Vertex(int, const std::shared_ptr<TNode> &, const std::vector<std::shared_ptr<Edge<TNode, TEdge>>> &);
 
     const int GetWeight() const;
 

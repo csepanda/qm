@@ -1,15 +1,16 @@
+#ifndef QM_ALGORITHM_GRAPH_EDGE_TPP
+#define QM_ALGORITHM_GRAPH_EDGE_TPP
+
 #include <memory>
 #include <vector>
-
-#include "Vertex.hpp"
 
 namespace qm::algorithm::graph {
 template<typename TNode, typename TEdge>
 Edge<TNode, TEdge>::Edge(
   int weight,
-  std::shared_ptr<TEdge> &backingEdge,
-  std::weak_ptr<Vertex<TNode, TEdge>> &startVertex,
-  std::weak_ptr<Vertex<TNode, TEdge>> &endVertex
+  const std::shared_ptr<TEdge> &backingEdge,
+  const std::weak_ptr<Vertex<TNode, TEdge>> &startVertex,
+  const std::weak_ptr<Vertex<TNode, TEdge>> &endVertex
 )
   : m_weight{weight},
     m_backingEdge{backingEdge},
@@ -38,3 +39,5 @@ const std::weak_ptr<Vertex<TNode, TEdge>> &Edge<TNode, TEdge>::GetEndVertex() co
 };
 
 }
+
+#endif

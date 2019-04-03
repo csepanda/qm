@@ -6,7 +6,7 @@
 
 namespace qm::algorithm::graph {
 template<typename TNode, typename TEdge>
-Vertex<TNode, TEdge>::Vertex(int weight, std::shared_ptr<TNode> &backingNode)
+Vertex<TNode, TEdge>::Vertex(int weight, const std::shared_ptr<TNode> &backingNode)
   : m_weight{weight},
     m_backingNode{backingNode} {
 }
@@ -14,8 +14,8 @@ Vertex<TNode, TEdge>::Vertex(int weight, std::shared_ptr<TNode> &backingNode)
 template<typename TNode, typename TEdge>
 Vertex<TNode, TEdge>::Vertex(
   int weight,
-  std::shared_ptr<TNode> &backingNode,
-  std::vector<std::shared_ptr<Edge<TNode, TEdge>>> &edges
+  const std::shared_ptr<TNode> &backingNode,
+  const std::vector<std::shared_ptr<Edge<TNode, TEdge>>> &edges
 )
   : m_weight{weight},
     m_backingNode{backingNode},
