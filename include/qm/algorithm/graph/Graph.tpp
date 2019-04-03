@@ -1,4 +1,8 @@
-#include <qm/algorithm/graph/Graph.hpp>
+#include <map>
+#include <memory>
+#include <vector>
+#include <qm/algorithm/graph/Vertex.hpp>
+#include <qm/algorithm/graph/Edge.hpp>
 
 namespace qm::algorithm::graph {
 template<typename TNode, typename TEdge>
@@ -30,7 +34,7 @@ const std::vector<std::shared_ptr<Edge<TNode, TEdge>>> &Graph<TNode, TEdge>::Get
 
 template<typename TNode, typename TEdge>
 const uint32_t Graph<TNode, TEdge>::GetVertexId(const std::shared_ptr<Vertex<TNode, TEdge>> &vertex) const {
-    return m_verticesIds[vertex];
+    return m_verticesIds.at(vertex);
 }
 
 template<typename TNode, typename TEdge>

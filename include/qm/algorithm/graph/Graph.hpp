@@ -4,14 +4,21 @@
 #include <map>
 #include <memory>
 #include <vector>
-#include "Vertex.hpp"
+#include <qm/algorithm/graph/Vertex.hpp>
+#include <qm/algorithm/graph/Edge.hpp>
 
 namespace qm::algorithm::graph {
+template<typename TNode, typename TEdge>
+class Edge;
+
+template<typename TNode, typename TEdge>
+class Vertex;
+
 template<typename TNode, typename TEdge>
 class Graph {
     const std::vector<std::shared_ptr<Vertex<TNode, TEdge>>> m_vertices;
     const std::vector<std::shared_ptr<Edge<TNode, TEdge>>> m_edges;
-    const std::map<std::shared_ptr<Vertex<TNode, TEdge>>, uint32_t> m_verticesIds;
+    std::map<std::shared_ptr<Vertex<TNode, TEdge>>, uint32_t> m_verticesIds;
 public:
     Graph(
       std::vector<std::shared_ptr<Vertex<TNode, TEdge>>> vertices,
@@ -27,5 +34,7 @@ public:
     const std::shared_ptr<Vertex<TNode, TEdge>> &GetVertexById(const uint32_t id) const;
 };
 }
+
+#include "Graph.tpp"
 
 #endif //QM_ALGORITHM_GRAPH_GRAPH_HPP

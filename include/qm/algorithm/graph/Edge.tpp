@@ -1,7 +1,9 @@
-#include <qm/algorithm/graph/Edge.hpp>
+#include <memory>
+#include <vector>
+
+#include "Vertex.hpp"
 
 namespace qm::algorithm::graph {
-
 template<typename TNode, typename TEdge>
 Edge<TNode, TEdge>::Edge(
   int weight,
@@ -33,6 +35,6 @@ const std::weak_ptr<Vertex<TNode, TEdge>> &Edge<TNode, TEdge>::GetStartVertex() 
 template<typename TNode, typename TEdge>
 const std::weak_ptr<Vertex<TNode, TEdge>> &Edge<TNode, TEdge>::GetEndVertex() const {
     return m_end;
-}
+};
 
 }

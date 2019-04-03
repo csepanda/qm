@@ -4,10 +4,11 @@
 #include <memory>
 #include <vector>
 
-template<typename TNode, typename TEdge>
-class Vertex;
+#include "Vertex.hpp"
 
 namespace qm::algorithm::graph {
+template<typename TNode, typename TEdge>
+class Vertex;
 
 template<typename TNode, typename TEdge>
 class Edge {
@@ -32,5 +33,7 @@ public:
     const std::weak_ptr<Vertex<TNode, TEdge>> &GetEndVertex() const;
 };
 }
+
+#include "Edge.tpp"
 
 #endif //QM_ALGORITHM_GRAPH_EDGE_HPP

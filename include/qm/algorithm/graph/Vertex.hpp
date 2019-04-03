@@ -4,10 +4,12 @@
 #include <memory>
 #include <vector>
 
-template<typename TNode, typename TEdge>
-class Edge;
+#include "Edge.hpp"
+
 
 namespace qm::algorithm::graph {
+template<typename TNode, typename TEdge>
+class Edge;
 
 template<typename TNode, typename TEdge>
 class Vertex {
@@ -29,5 +31,7 @@ public:
 };
 
 }
+
+#include "Vertex.tpp"
 
 #endif //QM_ALGORITHM_GRAPH_VERTEX_HPP

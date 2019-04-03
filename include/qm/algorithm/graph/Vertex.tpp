@@ -1,7 +1,10 @@
-#include <qm/algorithm/graph/Vertex.hpp>
+#include <memory>
+#include <vector>
+
+#include "Edge.hpp"
+
 
 namespace qm::algorithm::graph {
-
 template<typename TNode, typename TEdge>
 Vertex<TNode, TEdge>::Vertex(int weight, std::shared_ptr<TNode> &backingNode)
   : m_weight{weight},
@@ -38,4 +41,5 @@ template<typename TNode, typename TEdge>
 void Vertex<TNode, TEdge>::AddEdge(const std::shared_ptr<Edge<TNode, TEdge>> &edge) {
     m_edges.push_back(edge);
 }
-};
+
+}

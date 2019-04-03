@@ -21,4 +21,6 @@ public:
 };
 }
 
+#include "Cluster.tpp"
+
 #endif //QM_ALGORITHM_GRAPH_CLUSTER_HPP
