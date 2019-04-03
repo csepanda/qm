@@ -2,7 +2,7 @@
 #include <vector>
 #include <qm/services/convertors/NetworkToGraph.hpp>
 
-namespace qm::services::convertors {
+namespace qm::services::converters {
 NetworkGraph ConvertNetworkToGraph(const qm::models::Network &network) {
     std::vector<std::shared_ptr<NetworkVertex>> vertices{};
     std::vector<std::shared_ptr<NetworkEdge>> edges{};

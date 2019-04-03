@@ -5,7 +5,7 @@
 #include <qm/models/Node.hpp>
 #include <qm/models/Network.hpp>
 
-namespace qm::services::convertors {
+namespace qm::services::converters {
 
 typedef qm::algorithm::graph::Vertex<qm::models::Node, qm::models::Connection> NetworkVertex;
 typedef qm::algorithm::graph::Edge<qm::models::Node, qm::models::Connection> NetworkEdge;
