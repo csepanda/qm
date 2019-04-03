@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include <catch2/catch.hpp>
-#include <qm/algorithm/graph/MarkovChainClustering.hpp>
+#include <qm/algorithm/graph/MarkovClustering.hpp>
 #include <qm/algorithm/graph/Vertex.hpp>
 #include <qm/algorithm/graph/Edge.hpp>
 #include <iostream>
@@ -74,7 +74,7 @@ static void printClusters(vector<Cluster<int, int>> clusters) {
 
 static void runTestCase(TestCase testCase) {
     const auto inputGraph = buildGraph(testCase.Input);
-    const auto actual = MarkovChainClustering(inputGraph, 2, 2);
+    const auto actual = MarkovClustering(inputGraph, 2, 2);
 
     REQUIRE(actual.size() == testCase.Expected.size());
     for (auto i = 0; i < actual.size(); i++) {
@@ -92,7 +92,7 @@ static void runTestCase(TestCase testCase) {
     }
 }
 
-TEST_CASE("MarkovChainClustering verification", "[algo][graph-clustering]") {
+TEST_CASE("MarkovClustering verification", "[algo][graph-clustering]") {
     vector<TestCase> testCases = {
       { // only one node
         {{0}},

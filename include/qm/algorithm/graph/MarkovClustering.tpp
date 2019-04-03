@@ -1,6 +1,8 @@
+#ifndef QM_ALGORITHM_GRAPH_MARKOVCHAINCLUSTERING_TPP
+#define QM_ALGORITHM_GRAPH_MARKOVCHAINCLUSTERING_TPP
 #include <qm/algorithm/matrix/Matrix.hpp>
 #include <qm/algorithm/matrix/Normalization.hpp>
-#include <qm/algorithm/graph/MarkovChainClustering.hpp>
+#include <qm/algorithm/graph/MarkovClustering.hpp>
 
 namespace qm::algorithm::graph {
 
@@ -73,8 +75,8 @@ constexpr auto MAX_ITERATION_COUNT = 1000 * 1000;
 
 // http://www.cs.ucsb.edu/~xyan/classes/CS595D-2009winter/MCL_Presentation2.pdf
 template<typename TNode, typename TEdge>
-const std::vector<Cluster<TNode, TEdge>> MarkovChainClustering(
-  const Graph<TNode, TEdge> &graph,
+const std::vector<Cluster<TNode, TEdge>> MarkovClustering(
+  const Graph <TNode, TEdge> &graph,
   uint32_t powerParam,
   uint32_t inflationParam
 ) {
@@ -113,3 +115,4 @@ const std::vector<Cluster<TNode, TEdge>> MarkovChainClustering(
 }
 
 }
+#endif
