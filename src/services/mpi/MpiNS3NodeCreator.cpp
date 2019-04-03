@@ -17,7 +17,7 @@ void MpiNS3NodeCreator::Create(qm::models::Network &network) {
 
     auto &nodes = network.GetNodes();
     for (uint32_t i = 0; i < nodes.size(); ++i) {
-        const auto systemId = markerStrategy->GetSystemIdFor(i);
+        const auto systemId = markerStrategy->GetSystemIdFor(nodes[i]->GetId());
 
         nodes[i]->SetNS3Node(ns3::CreateObject<ns3::Node>(systemId));
     }

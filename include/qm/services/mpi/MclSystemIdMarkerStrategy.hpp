@@ -6,10 +6,11 @@
 
 namespace qm::services::mpi {
 class MclSystemIdMarkerStrategy : public ISystemIdMarkerStrategy {
+    std::map<const std::string, uint32_t> m_systemIds;
 public:
     MclSystemIdMarkerStrategy(const models::Network &network, uint32_t systemSize);
 
-    uint32_t GetSystemIdFor(uint64_t nodeIndex) override;
+    uint32_t GetSystemIdFor(const std::string &nodeId) override;
 };
 
 class MclSystemIdMarkerStrategyProducer : public ISystemIdMarkerStrategyProducer {

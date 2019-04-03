@@ -9,7 +9,7 @@ class ManualSystemIdMarkerStrategy : public ISystemIdMarkerStrategy {
 public:
     ManualSystemIdMarkerStrategy(const models::Network &network, uint32_t systemSize);
 
-    uint32_t GetSystemIdFor(uint64_t nodeIndex) override;
+    uint32_t GetSystemIdFor(const std::string &nodeId) override;
 };
 
 class ManualSystemIdMarkerStrategyProducer : public ISystemIdMarkerStrategyProducer {

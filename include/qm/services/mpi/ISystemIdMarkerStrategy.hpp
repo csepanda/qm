@@ -17,7 +17,7 @@ public:
         m_systemSize{systemSize} {
     }
 
-    virtual uint32_t GetSystemIdFor(uint64_t nodeIndex) = 0;
+    virtual uint32_t GetSystemIdFor(const std::string &nodeId) = 0;
 };
 
 class ISystemIdMarkerStrategyProducer {
