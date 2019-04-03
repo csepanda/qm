@@ -58,15 +58,3 @@ stackSize: 1048576
     REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::Process>(), qm::ParseException);
     REQUIRE_THROWS_WITH(yaml.as<qm::yaml::dto::Process>(), "'node' is required for Process");
 }
-
-TEST_CASE("parse application from invalid yaml - invalid arguments", "[parsers][yaml]") {
-    const YAML::Node yaml = YAML::Load(R"(
-binary: ping
-node: !Ref node01
-arguments: 127.0.0.1
-stackSize: 1048576
-)");
-
-    REQUIRE_THROWS_AS(yaml.as<qm::yaml::dto::Process>(), qm::ParseException);
-    REQUIRE_THROWS_WITH(yaml.as<qm::yaml::dto::Process>(), "'arguments' should be an array");
-}
