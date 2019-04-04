@@ -2,11 +2,19 @@
 #define QM_YAML_DTO_FILE_HPP
 
 #include <qm/models/File.hpp>
+#include <qm/models/ConfigurationFiles/BgpConfig.hpp>
 #include "Index.hpp"
 
 namespace qm::yaml::dto {
 enum class RegularFileSourceType {
-    Text
+    Text,
+    ZebraConfig,
+    BgpConfig
+};
+
+struct BgpConfigDTO {
+    uint16_t As;
+    std::vector<models::configurations::BgpNeighbor> Neighbors;
 };
 
 struct File : public BaseYamlDTO<std::unique_ptr<qm::models::File>> {
@@ -15,6 +23,8 @@ struct File : public BaseYamlDTO<std::unique_ptr<qm::models::File>> {
 
     RegularFileSourceType RegularSourceType {};
     std::string TextContent {};
+
+    BgpConfigDTO bgp;
 
     std::unique_ptr<qm::models::File> GetModel() const override;
 
