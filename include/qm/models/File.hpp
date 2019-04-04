@@ -45,7 +45,7 @@ enum class ConfigurationFileType {
 
 class ConfigurationFile : public RegularFile {
 public:
-    ConfigurationFile(const std::string &path);
+    explicit ConfigurationFile(const std::string &path);
 
     virtual ConfigurationFileType GetType() const = 0;
 };
