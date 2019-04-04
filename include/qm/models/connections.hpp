@@ -40,8 +40,6 @@ private:
     ns3::TimeValue m_delay{};
     std::vector<std::shared_ptr<Node>> m_nodes{};
 public:
-    std::vector<std::shared_ptr<Node>> Nodes;
-
     PointToPointConnection() = default;
 
     void setMtu(uint16_t t_mtu);
