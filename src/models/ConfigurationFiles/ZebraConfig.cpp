@@ -15,4 +15,8 @@ std::unique_ptr<std::istream> ZebraConfig::GetStream() const {
 ConfigurationFileType ZebraConfig::GetType() const {
     return ConfigurationFileType::Zebra;
 }
+
+ZebraConfig::ZebraConfig(const std::string &path) : ConfigurationFile(path) {
+
+}
 }

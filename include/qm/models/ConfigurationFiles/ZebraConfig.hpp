@@ -6,6 +6,8 @@
 namespace qm::models::configurations {
 class ZebraConfig : public ConfigurationFile {
 public:
+    explicit ZebraConfig(const std::string &path);
+
     virtual std::unique_ptr<std::istream> GetStream() const override;
 
     virtual ConfigurationFileType GetType() const override;
