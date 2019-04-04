@@ -12,7 +12,7 @@ TEST_CASE("ConvertNetworkToGraph - One Node network", "[services][converters]") 
     qm::models::Network network{nodes, connections};
 
     const auto actual = services::converters::ConvertNetworkToGraph(network);
-    const auto vertices = actual.GetVertices();
+    const auto &vertices = actual.GetVertices();
 
     REQUIRE(vertices.size() == 1);
     REQUIRE(vertices[0]->GetBackingNode() == nodes[0]);
@@ -25,7 +25,7 @@ TEST_CASE("ConvertNetworkToGraph - Two Node network", "[services][converters]") 
     };
 
     shared_ptr<models::PointToPointConnection> p2p = make_shared<models::PointToPointConnection>();
-    p2p->Nodes = nodes;
+    p2p->GetNodes() = nodes;
 
     vector<shared_ptr<models::Connection>> connections{p2p};
 

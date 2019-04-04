@@ -21,8 +21,8 @@ NetworkGraph ConvertNetworkToGraph(const qm::models::Network &network) {
             case qm::models::ConnectionType::P2P: {
                 const auto p2pConnection = std::dynamic_pointer_cast<qm::models::PointToPointConnection>(connection);
 
-                const auto &startNode = p2pConnection->Nodes[0];
-                const auto &endNode = p2pConnection->Nodes[1];
+                const auto &startNode = p2pConnection->GetNodes()[0];
+                const auto &endNode = p2pConnection->GetNodes()[1];
 
                 if (startNode == nullptr || endNode == nullptr) {
                     throw std::logic_error("P2P connection's node should be set. ID: " + connection->GetId());
