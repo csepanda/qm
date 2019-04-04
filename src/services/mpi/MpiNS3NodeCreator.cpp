@@ -16,10 +16,10 @@ void MpiNS3NodeCreator::Create(qm::models::Network &network) {
     const auto markerStrategy = m_markerStrategyProducer->Create(network, m_systemSize);
 
     auto &nodes = network.GetNodes();
-    for (uint32_t i = 0; i < nodes.size(); ++i) {
-        const auto systemId = markerStrategy->GetSystemIdFor(nodes[i]->GetId());
+    for (const auto &node : nodes) {
+        const auto systemId = markerStrategy->GetSystemIdFor(node->GetId());
 
-        nodes[i]->SetNS3Node(ns3::CreateObject<ns3::Node>(systemId));
+        node->SetNS3Node(ns3::CreateObject<ns3::Node>(systemId));
     }
 }
 }

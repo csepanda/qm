@@ -5,13 +5,17 @@
 namespace qm::services::mpi {
 
 uint32_t MclSystemIdMarkerStrategy::GetSystemIdFor(const std::string &nodeId) {
-    return m_systemIds.at(nodeId) % m_systemSize;
+    const auto sid = m_systemIds.at(nodeId) % m_systemSize;
+
+    std::cout << nodeId << " -> " << sid << std::endl;
+    return sid;
 }
 
 constexpr unsigned int POWER_PARAMETER = 2;
 constexpr unsigned int INFLATION_PARAMETER = 2;
 MclSystemIdMarkerStrategy::MclSystemIdMarkerStrategy(const models::Network &network, uint32_t systemSize)
   : ISystemIdMarkerStrategy(network, systemSize) {
+
     const auto graph = qm::services::converters::ConvertNetworkToGraph(network);
     const auto clusters = qm::algorithm::graph::MarkovClustering(graph, POWER_PARAMETER, INFLATION_PARAMETER);
 
