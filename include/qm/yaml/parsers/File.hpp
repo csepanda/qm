@@ -13,6 +13,16 @@ struct convert<qm::models::FileType> {
 };
 
 template<>
+struct convert<qm::yaml::dto::RegularFileType> {
+    static bool decode(const Node &, qm::yaml::dto::RegularFileType &);
+};
+
+template<>
+struct convert<qm::yaml::dto::BgpNeighbor> {
+    static bool decode(const Node &, qm::yaml::dto::BgpNeighbor &);
+};
+
+template<>
 struct convert<qm::yaml::dto::File> {
     static Node encode(const qm::yaml::dto::File &);
 

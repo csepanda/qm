@@ -14,12 +14,24 @@ std::unique_ptr<qm::models::File> File::GetModel() const {
 
 std::unique_ptr<qm::models::RegularFile> File::getRegularFile() const {
     switch (RegularSourceType) {
-        case RegularFileSourceType::Text:
+        case RegularFileType::Text:
             return std::make_unique<qm::models::TextFile>(Path, TextContent);
-        case RegularFileSourceType::ZebraConfig:
+        case RegularFileType::ZebraConfig:
             return std::make_unique<qm::models::configurations::ZebraConfig>(Path);
-        case RegularFileSourceType::BgpConfig:
-            return std::make_unique<qm::models::configurations::BgpConfig>(Path, bgp.As, bgp.Neighbors);
+        case RegularFileType::BgpConfig: {
+            std::vector<qm::models::configurations::BgpNeighbor> neighbors{};
+
+            for (const auto &neighborDTO : bgp.Neighbors) {
+                neighbors.emplace_back(
+                  neighborDTO.IpAddress,
+                  neighborDTO.As,
+                  neighborDTO.NextHopSelf,
+                  neighborDTO.Activated
+                );
+            }
+
+            return std::make_unique<qm::models::configurations::BgpConfig>(Path, bgp.As, neighbors);
+        }
         default:
             throw std::logic_error("Handler for this regular file's source type is not implemented");
     }

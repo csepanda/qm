@@ -17,7 +17,7 @@ text: |
     }
 
     SECTION("source of regular file is correctly determined by parser") {
-        REQUIRE(actual.RegularSourceType == qm::yaml::dto::RegularFileSourceType::Text);
+        REQUIRE(actual.RegularSourceType == qm::yaml::dto::RegularFileType::Text);
     }
 
     SECTION("path is parsed correctly") {

@@ -6,22 +6,29 @@
 #include "Index.hpp"
 
 namespace qm::yaml::dto {
-enum class RegularFileSourceType {
+enum class RegularFileType {
     Text,
     ZebraConfig,
     BgpConfig
 };
 
+struct BgpNeighbor {
+    std::string IpAddress;
+    uint16_t As;
+    bool NextHopSelf;
+    bool Activated;
+};
+
 struct BgpConfigDTO {
     uint16_t As;
-    std::vector<models::configurations::BgpNeighbor> Neighbors;
+    std::vector<BgpNeighbor> Neighbors;
 };
 
 struct File : public BaseYamlDTO<std::unique_ptr<qm::models::File>> {
     qm::models::FileType Type {};
     std::string Path {};
 
-    RegularFileSourceType RegularSourceType {};
+    RegularFileType RegularSourceType {};
     std::string TextContent {};
 
     BgpConfigDTO bgp;
