@@ -10,7 +10,7 @@ struct BgpNeighbor {
     const bool NextHopSelf;
     const bool Activated;
 
-    BgpNeighbor(std::string &IpAddress, uint16_t As, bool nextHopSelf = true, bool activate = true);
+    BgpNeighbor(const std::string &IpAddress, uint16_t As, bool nextHopSelf = true, bool activate = true);
 };
 
 class BgpConfig : public ConfigurationFile {
