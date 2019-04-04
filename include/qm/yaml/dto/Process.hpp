@@ -14,7 +14,7 @@
 namespace qm::yaml::dto {
 struct Process : public BaseYamlDTO<std::shared_ptr<qm::models::Process>> {
     std::string Binary;
-    std::vector <std::string> Arguments;
+    std::vector <std::string> Arguments{};
     uint32_t StackSize;
     ns3::Time StartAt;
     YamlReference NodeReference;
