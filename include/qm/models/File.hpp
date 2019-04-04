@@ -37,6 +37,19 @@ public:
 
     virtual std::unique_ptr<std::istream> GetStream() const override;
 };
+
+enum class ConfigurationFileType {
+    Zebra,
+    Bgp
+};
+
+class ConfigurationFile : public RegularFile {
+public:
+    ConfigurationFile(const std::string &path);
+
+    virtual ConfigurationFileType GetType() const = 0;
+};
+
 }
 
 #endif //QM_FILE_HPP

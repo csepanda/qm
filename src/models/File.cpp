@@ -27,4 +27,5 @@ std::unique_ptr<std::istream> TextFile::GetStream() const {
     return std::unique_ptr<std::istream>(new std::stringstream {m_text});
 }
 
+ConfigurationFile::ConfigurationFile(const std::string &path) : RegularFile(path) {}
 }
