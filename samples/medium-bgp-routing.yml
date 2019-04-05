@@ -1,177 +1,177 @@
 simulationConfiguration:
     networkStack: linux
-    stopTime: 600s
+    stopTime: 1000s
 network:
     nodes:
         - id: node01
           ipConfig:
               - connection: !Ref connection_01
-                address: 10.0.0.12/24
+                address: 10.0.1.12/24
               - connection: !Ref connection_02
-                address: 10.0.0.13/24
+                address: 10.0.2.13/24
               - connection: !Ref connection_03
-                address: 10.0.0.14/24
+                address: 10.0.3.14/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 1,
                   neighbors: [
-                    {as: 2, address: 10.0.0.21},
-                    {as: 3, address: 10.0.0.31},
-                    {as: 4, address: 10.0.0.41}
+                    {as: 2, address: 10.0.1.21},
+                    {as: 3, address: 10.0.2.31},
+                    {as: 4, address: 10.0.3.41}
                   ]
                 }
         - id: node02
           ipConfig:
               - connection: !Ref connection_01
-                address: 10.0.0.21/24
+                address: 10.0.1.21/24
               - connection: !Ref connection_04
-                address: 10.0.0.23/24
+                address: 10.0.4.23/24
               - connection: !Ref connection_06
-                address: 10.0.0.24/24
+                address: 10.0.6.24/24
               - connection: !Ref connection_07
-                address: 10.0.1.25/24
+                address: 10.0.7.25/24
               - connection: !Ref connection_08
-                address: 10.0.1.26/24
+                address: 10.0.8.26/24
               - connection: !Ref connection_10
-                address: 10.0.3.28/24
+                address: 10.0.10.28/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 2,
                   neighbors: [
-                    {as: 1, address: 10.0.0.12},
-                    {as: 3, address: 10.0.0.32},
-                    {as: 4, address: 10.0.0.42},
-                    {as: 5, address: 10.0.1.52},
-                    {as: 6, address: 10.0.1.62},
-                    {as: 8, address: 10.0.3.82}
+                    {as: 1, address: 10.0.1.12},
+                    {as: 3, address: 10.0.4.32},
+                    {as: 4, address: 10.0.6.42},
+                    {as: 5, address: 10.0.7.52},
+                    {as: 6, address: 10.0.8.62},
+                    {as: 8, address: 10.0.10.82}
                   ]
                 }
         - id: node03
           ipConfig:
               - connection: !Ref connection_02
-                address: 10.0.0.31/24
+                address: 10.0.2.31/24
               - connection: !Ref connection_04
-                address: 10.0.0.32/24
+                address: 10.0.4.32/24
               - connection: !Ref connection_05
-                address: 10.0.0.34/24
+                address: 10.0.5.34/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 3,
                   neighbors: [
-                    {as: 1, address: 10.0.0.13},
-                    {as: 2, address: 10.0.0.23},
-                    {as: 4, address: 10.0.0.43}
+                    {as: 1, address: 10.0.2.13},
+                    {as: 2, address: 10.0.4.23},
+                    {as: 4, address: 10.0.5.43}
                   ]
                 }
         - id: node04
           ipConfig:
-              - {connection: !Ref connection_03, address: 10.0.0.41/24}
-              - {connection: !Ref connection_06, address: 10.0.0.42/24}
-              - {connection: !Ref connection_05, address: 10.0.0.43/24}
+              - {connection: !Ref connection_03, address: 10.0.3.41/24}
+              - {connection: !Ref connection_05, address: 10.0.5.43/24}
+              - {connection: !Ref connection_06, address: 10.0.6.42/24}
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 4,
                   neighbors: [
-                    {as: 1, address: 10.0.0.14},
-                    {as: 2, address: 10.0.0.24},
-                    {as: 3, address: 10.0.0.34}
+                    {as: 1, address: 10.0.3.14},
+                    {as: 2, address: 10.0.6.24},
+                    {as: 3, address: 10.0.5.34}
                   ]
                 }
         - id: node05
           ipConfig:
               - connection: !Ref connection_07
-                address: 10.0.1.52/24
+                address: 10.0.7.52/24
               - connection: !Ref connection_09
-                address: 10.0.1.56/24
+                address: 10.0.9.56/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 5,
                   neighbors: [
-                    {as: 2, address: 10.0.1.25},
-                    {as: 6, address: 10.0.1.65}
+                    {as: 2, address: 10.0.6.25},
+                    {as: 6, address: 10.0.9.65}
                   ]
                 }
         - id: node06
           ipConfig:
               - connection: !Ref connection_08
-                address: 10.0.1.62/24
+                address: 10.0.8.62/24
               - connection: !Ref connection_09
-                address: 10.0.1.65/24
+                address: 10.0.9.65/24
               - connection: !Ref connection_14
-                address: 10.0.2.67/24
+                address: 10.0.14.67/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 6,
                   neighbors: [
-                    {as: 2, address: 10.0.1.26},
-                    {as: 5, address: 10.0.1.56},
-                    {as: 7, address: 10.0.2.76}
+                    {as: 2, address: 10.0.8.26},
+                    {as: 5, address: 10.0.9.56},
+                    {as: 7, address: 10.0.14.76}
                   ]
                 }
         - id: node07
           ipConfig:
               - connection: !Ref connection_14
-                address: 10.0.2.76/24
+                address: 10.0.14.76/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 7,
                   neighbors: [
-                    {as: 6, address: 10.0.2.67}
+                    {as: 6, address: 10.0.14.67}
                   ]
                 }
         - id: node08
           ipConfig:
               - connection: !Ref connection_10
-                address: 10.0.3.82/24
+                address: 10.0.10.82/24
               - connection: !Ref connection_11
-                address: 10.0.3.80/24
+                address: 10.0.11.80/24
               - connection: !Ref connection_12
-                address: 10.0.3.89/24
+                address: 10.0.12.89/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 8,
                   neighbors: [
-                    {as: 2, address: 10.0.3.28},
-                    {as: 9, address: 10.0.3.98},
-                    {as: 10, address: 10.0.3.108}
+                    {as: 2, address: 10.0.10.28},
+                    {as: 9, address: 10.0.12.98},
+                    {as: 10, address: 10.0.11.108}
                   ]
                 }
         - id: node09
           ipConfig:
               - connection: !Ref connection_12
-                address: 10.0.3.98/24
+                address: 10.0.12.98/24
               - connection: !Ref connection_13
-                address: 10.0.3.90/24
+                address: 10.0.13.90/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 9,
                   neighbors: [
-                    {as: 8, address: 10.0.3.89},
-                    {as: 10, address: 10.0.3.109}
+                    {as: 8, address: 10.0.13.89},
+                    {as: 10, address: 10.0.13.109}
                   ]
                 }
         - id: node10
           ipConfig:
               - connection: !Ref connection_11
-                address: 10.0.3.108/24
+                address: 10.0.11.108/24
               - connection: !Ref connection_13
-                address: 10.0.3.109/24
+                address: 10.0.13.109/24
           files:
               - { path: /usr/local/etc/zebra.conf, type: regular, kind: zebra}
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 10,
                   neighbors: [
-                    {as: 8, address: 10.0.3.80},
-                    {as: 9, address: 10.0.3.90}
+                    {as: 8, address: 10.0.11.80},
+                    {as: 9, address: 10.0.13.90}
                   ]
                 }
     connections:
@@ -260,7 +260,6 @@ network:
           delay: 1ms
           mtu: 1500
 applications:
-    - node01 ping -c 10 10.0.0.21
     - node01 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
     - node01 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
     - node02 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
@@ -281,5 +280,15 @@ applications:
     - node09 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
     - node10 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
     - node10 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
-    - node01 ping -c 10 10.0.3.90
-
+    - binary: iperf
+      node: !Ref node01
+      arguments: -s
+      startAt: 148s
+    - binary: iperf
+      node: !Ref node10
+      arguments: -c 10.0.2.13 -t 500
+      startAt: 150s
+    - binary: iperf
+      node: !Ref node07
+      arguments: -c 10.0.1.12 -t 500
+      startAt: 150s

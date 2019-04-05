@@ -71,9 +71,7 @@ network:
     connections:
         - id: connection_01
           type: P2P
-          targets:
-              - !Ref node01
-              - !Ref node02
+          targets: [!Ref node01, !Ref node02]
           dataRate: 5Mbps
           delay: 1ms
           mtu: 1500

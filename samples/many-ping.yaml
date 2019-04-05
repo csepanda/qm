@@ -1,0 +1,184 @@
+simulationConfiguration:
+    networkStack: linux
+    stopTime: 15000s
+    enableMpi: true
+    systemIdMarkerStrategy: mcl
+network:
+    nodes:
+        - id: node001
+          ipConfig:
+              - connection: !Ref connection_001
+                address: 10.0.1.12/24
+        - id: node002
+          ipConfig:
+              - connection: !Ref connection_001
+                address: 10.0.1.21/24
+              - connection: !Ref connection_002
+                address: 10.0.2.23/24
+        - id: node003
+          ipConfig:
+              - connection: !Ref connection_002
+                address: 10.0.2.32/24
+        - id: node011
+          ipConfig:
+              - connection: !Ref connection_011
+                address: 10.1.1.12/24
+        - id: node012
+          ipConfig:
+              - connection: !Ref connection_011
+                address: 10.0.1.21/24
+              - connection: !Ref connection_012
+                address: 10.1.2.23/24
+        - id: node013
+          ipConfig:
+              - connection: !Ref connection_012
+                address: 10.1.2.32/24
+        - id: node021
+          ipConfig:
+              - connection: !Ref connection_021
+                address: 10.2.1.12/24
+        - id: node022
+          ipConfig:
+              - connection: !Ref connection_021
+                address: 10.2.1.21/24
+              - connection: !Ref connection_022
+                address: 10.2.2.23/24
+        - id: node023
+          ipConfig:
+              - connection: !Ref connection_022
+                address: 10.2.2.32/24
+        - id: node031
+          ipConfig:
+              - connection: !Ref connection_031
+                address: 10.3.1.12/24
+        - id: node032
+          ipConfig:
+              - connection: !Ref connection_031
+                address: 10.3.1.21/24
+              - connection: !Ref connection_032
+                address: 10.3.2.23/24
+        - id: node033
+          ipConfig:
+              - connection: !Ref connection_032
+                address: 10.3.2.32/24
+        - id: node041
+          ipConfig:
+              - connection: !Ref connection_041
+                address: 10.4.1.12/24
+        - id: node042
+          ipConfig:
+              - connection: !Ref connection_041
+                address: 10.4.1.21/24
+              - connection: !Ref connection_042
+                address: 10.4.2.23/24
+        - id: node043
+          ipConfig:
+              - connection: !Ref connection_042
+                address: 10.4.2.32/24
+        - id: node051
+          ipConfig:
+              - connection: !Ref connection_051
+                address: 10.5.1.12/24
+        - id: node052
+          ipConfig:
+              - connection: !Ref connection_051
+                address: 10.5.1.21/24
+              - connection: !Ref connection_052
+                address: 10.5.2.23/24
+        - id: node053
+          ipConfig:
+              - connection: !Ref connection_052
+                address: 10.5.2.32/24
+    connections:
+        - id: connection_001
+          type: P2P
+          targets: [!Ref node001, !Ref node002]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_002
+          type: P2P
+          targets: [!Ref node002, !Ref node003]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_011
+          type: P2P
+          targets: [!Ref node011, !Ref node012]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_012
+          type: P2P
+          targets: [!Ref node012, !Ref node013]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_021
+          type: P2P
+          targets: [!Ref node021, !Ref node022]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_022
+          type: P2P
+          targets: [!Ref node022, !Ref node023]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_031
+          type: P2P
+          targets: [!Ref node031, !Ref node032]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_032
+          type: P2P
+          targets: [!Ref node032, !Ref node033]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_041
+          type: P2P
+          targets: [!Ref node041, !Ref node042]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_042
+          type: P2P
+          targets: [!Ref node042, !Ref node043]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_051
+          type: P2P
+          targets: [!Ref node051, !Ref node052]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_052
+          type: P2P
+          targets: [!Ref node052, !Ref node053]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+applications:
+    - node001 ip route add default via 10.0.1.21 dev sim0
+    - node003 ip route add default via 10.0.2.23 dev sim0
+    - node011 ip route add default via 10.1.1.21 dev sim0
+    - node013 ip route add default via 10.1.2.23 dev sim0
+    - node021 ip route add default via 10.2.1.21 dev sim0
+    - node023 ip route add default via 10.2.2.23 dev sim0
+    - node031 ip route add default via 10.3.1.21 dev sim0
+    - node033 ip route add default via 10.3.2.23 dev sim0
+    - node041 ip route add default via 10.4.1.21 dev sim0
+    - node043 ip route add default via 10.4.2.23 dev sim0
+    - node051 ip route add default via 10.5.1.21 dev sim0
+    - node053 ip route add default via 10.5.2.23 dev sim0
+    - node001 ping -c 10000 10.0.2.32
+    - node011 ping -c 10000 10.1.2.32
+    - node021 ping -c 10000 10.2.2.32
+    - node031 ping -c 10000 10.3.2.32
+    - node041 ping -c 10000 10.4.2.32
+    - node051 ping -c 10000 10.5.2.32
+
