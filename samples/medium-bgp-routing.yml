@@ -43,9 +43,9 @@ network:
                     {as: 1, address: 10.0.0.12},
                     {as: 3, address: 10.0.0.32},
                     {as: 4, address: 10.0.0.42},
-                    {as: 5, address: 10.0.0.52},
-                    {as: 6, address: 10.0.0.62},
-                    {as: 8, address: 10.0.0.82}
+                    {as: 5, address: 10.0.1.52},
+                    {as: 6, address: 10.0.1.62},
+                    {as: 8, address: 10.0.3.82}
                   ]
                 }
         - id: node03
@@ -92,8 +92,8 @@ network:
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 5,
                   neighbors: [
-                    {as: 2, address: 10.0.0.25},
-                    {as: 6, address: 10.0.0.65}
+                    {as: 2, address: 10.0.1.25},
+                    {as: 6, address: 10.0.1.65}
                   ]
                 }
         - id: node06
@@ -109,9 +109,9 @@ network:
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 6,
                   neighbors: [
-                    {as: 2, address: 10.0.0.26},
-                    {as: 5, address: 10.0.0.56},
-                    {as: 7, address: 10.0.0.76}
+                    {as: 2, address: 10.0.1.26},
+                    {as: 5, address: 10.0.1.56},
+                    {as: 7, address: 10.0.2.76}
                   ]
                 }
         - id: node07
@@ -123,7 +123,7 @@ network:
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 7,
                   neighbors: [
-                    {as: 6, address: 10.0.0.67}
+                    {as: 6, address: 10.0.2.67}
                   ]
                 }
         - id: node08
@@ -139,9 +139,9 @@ network:
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 8,
                   neighbors: [
-                    {as: 2, address: 10.0.0.28},
-                    {as: 9, address: 10.0.0.98},
-                    {as: 10, address: 10.0.0.108}
+                    {as: 2, address: 10.0.3.28},
+                    {as: 9, address: 10.0.3.98},
+                    {as: 10, address: 10.0.3.108}
                   ]
                 }
         - id: node09
@@ -155,8 +155,8 @@ network:
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 9,
                   neighbors: [
-                    {as: 8, address: 10.0.0.89},
-                    {as: 10, address: 10.0.0.109}
+                    {as: 8, address: 10.0.3.89},
+                    {as: 10, address: 10.0.3.109}
                   ]
                 }
         - id: node10
@@ -170,8 +170,8 @@ network:
               - {
                   path: /usr/local/etc/bgp.conf, type: regular, kind: bgp, as: 10,
                   neighbors: [
-                    {as: 8, address: 10.0.0.80},
-                    {as: 9, address: 10.0.0.90}
+                    {as: 8, address: 10.0.3.80},
+                    {as: 9, address: 10.0.3.90}
                   ]
                 }
     connections:
