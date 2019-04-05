@@ -261,3 +261,25 @@ network:
           mtu: 1500
 applications:
     - node01 ping -c 10 10.0.0.21
+    - node01 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node01 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node02 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node02 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node03 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node03 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node04 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node04 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node05 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node05 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node06 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node06 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node07 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node07 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node08 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node08 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node09 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node09 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node10 zebra -f /usr/local/etc/zebra.conf -i /zebra.pid
+    - node10 bgpd -f /usr/local/etc/bgp.conf -i /bgp.pid
+    - node01 ping -c 10 10.0.3.90
+
