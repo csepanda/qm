@@ -1,0 +1,168 @@
+simulationConfiguration:
+    networkStack: linux
+    stopTime: 600s
+network:
+    nodes:
+        - id: node01
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.0.0.12/24
+              - connection: !Ref connection_02
+                address: 10.0.0.13/24
+              - connection: !Ref connection_03
+                address: 10.0.0.14/24
+        - id: node02
+          ipConfig:
+              - connection: !Ref connection_01
+                address: 10.0.0.21/24
+              - connection: !Ref connection_04
+                address: 10.0.0.23/24
+              - connection: !Ref connection_06
+                address: 10.0.0.24/24
+              - connection: !Ref connection_07
+                address: 10.0.1.25/24
+              - connection: !Ref connection_08
+                address: 10.0.1.26/24
+              - connection: !Ref connection_10
+                address: 10.0.3.28/24
+        - id: node03
+          ipConfig:
+              - connection: !Ref connection_02
+                address: 10.0.0.31/24
+              - connection: !Ref connection_04
+                address: 10.0.0.32/24
+              - connection: !Ref connection_05
+                address: 10.0.0.34/24
+        - id: node04
+          ipConfig:
+              - connection: !Ref connection_03
+                address: 10.0.0.41/24
+              - connection: !Ref connection_06
+                address: 10.0.0.42/24
+              - connection: !Ref connection_05
+                address: 10.0.0.43/24
+        - id: node05
+          ipConfig:
+              - connection: !Ref connection_07
+                address: 10.0.1.52/24
+              - connection: !Ref connection_09
+                address: 10.0.1.56/24
+        - id: node06
+          ipConfig:
+              - connection: !Ref connection_08
+                address: 10.0.1.62/24
+              - connection: !Ref connection_09
+                address: 10.0.1.65/24
+              - connection: !Ref connection_14
+                address: 10.0.2.67/24
+        - id: node07
+          ipConfig:
+              - connection: !Ref connection_14
+                address: 10.0.2.76/24
+        - id: node08
+          ipConfig:
+              - connection: !Ref connection_10
+                address: 10.0.3.82/24
+              - connection: !Ref connection_11
+                address: 10.0.3.80/24
+              - connection: !Ref connection_12
+                address: 10.0.3.89/24
+        - id: node09
+          ipConfig:
+              - connection: !Ref connection_12
+                address: 10.0.3.98/24
+              - connection: !Ref connection_13
+                address: 10.0.3.90/24
+        - id: node10
+          ipConfig:
+              - connection: !Ref connection_11
+                address: 10.0.3.108/24
+              - connection: !Ref connection_13
+                address: 10.0.3.109/24
+    connections:
+        - id: connection_01
+          type: P2P
+          targets: [!Ref node01, !Ref node02]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_02
+          type: P2P
+          targets: [!Ref node01, !Ref node03]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_03
+          type: P2P
+          targets: [!Ref node01, !Ref node04]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_04
+          type: P2P
+          targets: [!Ref node02, !Ref node03]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_05
+          type: P2P
+          targets: [!Ref node03, !Ref node04]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_06
+          type: P2P
+          targets: [!Ref node02, !Ref node04]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_07
+          type: P2P
+          targets: [!Ref node02, !Ref node05]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_08
+          type: P2P
+          targets: [!Ref node02, !Ref node06]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_09
+          type: P2P
+          targets: [!Ref node05, !Ref node06]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_10
+          type: P2P
+          targets: [!Ref node02, !Ref node08]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_11
+          type: P2P
+          targets: [!Ref node08, !Ref node10]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_12
+          type: P2P
+          targets: [!Ref node08, !Ref node09]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_13
+          type: P2P
+          targets: [!Ref node09, !Ref node10]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+        - id: connection_14
+          type: P2P
+          targets: [!Ref node06, !Ref node07]
+          dataRate: 5Mbps
+          delay: 1ms
+          mtu: 1500
+applications:
+    - node01 ping -c 10 10.0.0.21
