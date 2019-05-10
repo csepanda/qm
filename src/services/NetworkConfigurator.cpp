@@ -62,7 +62,10 @@ void NetworkConfigurator::ConfigureP2PConnection(
     const auto nodes = connection->GetNodes();
 
     if (nodes.size() != 2) {
-        throw InitializationException("P2P connection cannot handle less or greater than 2 nodes", NC_P2P_SOURCE);
+        std::stringstream ss{};
+        ss << "P2P connection (id: '" << connection->GetId() << "') ";
+        ss << "cannot handle less or greater than 2 nodes";
+        throw InitializationException(ss.str(), NC_P2P_SOURCE);
     }
 
     for (const auto &node : nodes) {
@@ -85,6 +88,6 @@ void NetworkConfigurator::ConfigureP2PConnection(
         ipConfig->NS3NetDevice = netDevice;
     }
 
-    // helper.EnablePcapAll("simulation-p2p");
+     // helper.EnablePcapAll("simulation-p2p");
 }
 };
