@@ -6,35 +6,6 @@
 
 namespace qm::algorithm::graph {
 
-template<typename TNode, typename TEdge>
-static matrix::Matrix createAssociatedMatrix(const Graph<TNode, TEdge> &graph) {
-    const auto verticesCount = static_cast<const uint32_t>(graph.GetVertices().size());
-
-    matrix::Matrix matrix(verticesCount, verticesCount);
-
-    for (const std::shared_ptr<Edge<TNode, TEdge>> &edge : graph.GetEdges()) {
-        const auto start = edge->GetStartVertex().lock();
-        const auto end = edge->GetEndVertex().lock();
-
-        const auto startIndex = graph.GetVertexId(start);
-        const auto endIndex = graph.GetVertexId(end);
-
-        matrix.Set(startIndex, endIndex, 1);
-        matrix.Set(endIndex, startIndex, 1);
-
-    }
-
-    return matrix;
-}
-
-static matrix::Matrix addSelfVertexLoops(matrix::Matrix &associatedMatrix) {
-    for (unsigned int i = 0; i < associatedMatrix.GetColumnsCount(); i++) {
-        associatedMatrix.Set(i, i, 1);
-    }
-
-    return associatedMatrix;
-}
-
 static std::vector<std::vector<unsigned int>> cluterizeMatrix(matrix::Matrix &sparseMatrix) {
     std::vector<std::vector<unsigned int>> clustersIndexes{};
 
@@ -80,12 +51,11 @@ const std::vector<Cluster<TNode, TEdge>> MarkovClustering(
   uint32_t powerParam,
   uint32_t inflationParam
 ) {
-    auto associationMatrix = createAssociatedMatrix(graph);
-    associationMatrix = addSelfVertexLoops(associationMatrix);
-    associationMatrix = matrix::NormalizeByColumnSum(associationMatrix);
+    auto adjacencyMatrix = graph.AdjacencyMatrix(true);
+    adjacencyMatrix = matrix::NormalizeByColumnSum(adjacencyMatrix);
 
     uint32_t iterationCount = 0;
-    matrix::Matrix prevMatrix = associationMatrix;
+    matrix::Matrix prevMatrix = adjacencyMatrix;
     do {
         iterationCount++;
 
@@ -93,11 +63,11 @@ const std::vector<Cluster<TNode, TEdge>> MarkovClustering(
             throw std::logic_error("Graph associated matrix is not converged");
         }
 
-        prevMatrix = associationMatrix;
-        associationMatrix = matrix::Inflate(associationMatrix ^ powerParam, inflationParam);
-    } while (!(prevMatrix == associationMatrix)); // iterate until steady state is reached (convergence)
+        prevMatrix = adjacencyMatrix;
+        adjacencyMatrix = matrix::Inflate(adjacencyMatrix ^ powerParam, inflationParam);
+    } while (!(prevMatrix == adjacencyMatrix)); // iterate until steady state is reached (convergence)
 
-    std::vector<std::vector<unsigned int>> clustersIndexes = cluterizeMatrix(associationMatrix);
+    std::vector<std::vector<unsigned int>> clustersIndexes = cluterizeMatrix(adjacencyMatrix);
 
     std::vector<Cluster<TNode, TEdge>> clusters{};
 

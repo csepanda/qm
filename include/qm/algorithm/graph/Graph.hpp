@@ -6,6 +6,7 @@
 #include <vector>
 #include <qm/algorithm/graph/Vertex.hpp>
 #include <qm/algorithm/graph/Edge.hpp>
+#include <qm/algorithm/matrix/Matrix.hpp>
 
 namespace qm::algorithm::graph {
 template<typename TNode, typename TEdge>
@@ -32,6 +33,8 @@ public:
     const uint32_t GetVertexId(const std::shared_ptr<Vertex<TNode, TEdge>> &) const;
 
     const std::shared_ptr<Vertex<TNode, TEdge>> &GetVertexById(const uint32_t id) const;
+
+    matrix::Matrix AdjacencyMatrix(bool selfLoops = false) const;
 };
 }
 
