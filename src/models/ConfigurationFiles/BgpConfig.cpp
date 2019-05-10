@@ -30,6 +30,10 @@ std::unique_ptr<std::istream> BgpConfig::GetStream() const {
     *ss << "hostname bgpd" << std::endl
         << "password zebra" << std::endl
         << "log stdout" << std::endl
+//        << "debug bgp" << std::endl
+//        << "debug bgp fsm" << std::endl
+//        << "debug bgp events" << std::endl
+//        << "debug bgp updates" << std::endl
         << "router bgp " << m_as << std::endl;
 
     auto routerIdAddress = models::IPv4Address();
