@@ -13,6 +13,7 @@
 #include <qm/services/mpi/ManualSystemIdMarkerStrategy.hpp>
 #include <qm/services/mpi/MclSystemIdMarkerStrategy.hpp>
 #include <qm/services/mpi/MpiApplicationInstaller.hpp>
+#include <qm/services/mpi/HacSystemIdMarkerStrategy.hpp>
 
 namespace qm::services {
 Simulation SimulationProducer::Create(
@@ -76,6 +77,9 @@ std::unique_ptr<qm::services::INs3NodeCreator> SimulationProducer::produceNodeCr
             break;
         case models::SystemIdMarkerStrategy::Mlc:
             markerStrategyProducer = std::make_unique<mpi::MclSystemIdMarkerStrategyProducer>();
+            break;
+        case models::SystemIdMarkerStrategy::Hac:
+            markerStrategyProducer = std::make_unique<mpi::HacSystemIdMarkerStrategyProducer>();
             break;
         default:
             throw std::logic_error(
