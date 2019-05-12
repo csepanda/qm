@@ -51,7 +51,7 @@ std::unique_ptr<std::istream> BgpConfig::GetStream() const {
 
     for (const auto &neighbor : m_neighbors) {
         *ss << "neighbor " << neighbor.IpAddress << " remote-as " << neighbor.As << std::endl;
-        *ss << "neighbor " << neighbor.IpAddress << " advertisement-interval " << 5 << std::endl;
+        *ss << "neighbor " << neighbor.IpAddress << " advertisement-interval " << 30 << std::endl;
     }
 
     *ss << "redistribute connected" << std::endl;
