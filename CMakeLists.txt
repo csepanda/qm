@@ -50,7 +50,10 @@ add_library(qm
         include/qm/algorithm/graph/MarkovClustering.hpp
         include/qm/algorithm/graph/Graph.hpp include/qm/algorithm/graph/Graph.tpp
         include/qm/algorithm/graph/Cluster.hpp include/qm/algorithm/graph/Cluster.tpp
-        include/qm/algorithm/graph/MarkovClustering.tpp include/qm/services/converters/NetworkToGraph.hpp src/services/converters/NetworkToGraph.cpp include/qm/models/ConfigurationFiles/ZebraConfig.hpp src/models/ConfigurationFiles/ZebraConfig.cpp include/qm/models/ConfigurationFiles/BgpConfig.hpp src/models/ConfigurationFiles/BgpConfig.cpp)
+        include/qm/algorithm/graph/MarkovClustering.tpp
+        include/qm/services/converters/NetworkToGraph.hpp
+        src/services/converters/NetworkToGraph.cpp include/qm/models/ConfigurationFiles/ZebraConfig.hpp src/models/ConfigurationFiles/ZebraConfig.cpp include/qm/models/ConfigurationFiles/BgpConfig.hpp src/models/ConfigurationFiles/BgpConfig.cpp
+        include/qm/algorithm/graph/HierarchicalClustering.hpp include/qm/algorithm/graph/HierarchicalClustering.tpp)
 
 set_property(TARGET qm PROPERTY CXX_STANDARD 17)
 set_property(TARGET qm PROPERTY CXX_STANDARD_REQUIRED ON)
