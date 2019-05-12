@@ -9,7 +9,8 @@ enum class NetworkStack {
 
 enum class SystemIdMarkerStrategy {
     Manual,
-    Mlc
+    Mlc,
+    Hac
 };
 
 class SimulationConfiguration {

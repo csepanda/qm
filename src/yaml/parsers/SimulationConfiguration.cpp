@@ -40,6 +40,8 @@ bool convert<qm::models::SystemIdMarkerStrategy>::decode(
         strategy = qm::models::SystemIdMarkerStrategy::Manual;
     } else if (str == "mcl") {
         strategy = qm::models::SystemIdMarkerStrategy::Mlc;
+    } else if (str == "hac" || str == "hierarchical clustering") {
+        strategy = qm::models::SystemIdMarkerStrategy::Hac;
     } else {
         return false;
     }
